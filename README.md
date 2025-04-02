@@ -1,2 +1,0 @@
-# ClonifyLabs
-Clonify Labs repo
