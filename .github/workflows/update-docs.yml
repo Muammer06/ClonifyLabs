@@ -1,0 +1,45 @@
+name: Update Documentation
+
+on:
+  push:
+    branches: [ main, master ]
+    paths-ignore:
+      - 'docs/**'
+
+jobs:
+  update-docs:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Get full history for better diffs
+          
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install gitpython markdown
+          
+      - name: Analyze code changes
+        id: analyze
+        run: |
+          python .github/scripts/analyze_changes.py > changes.md
+          
+      - name: Update SRD document
+        run: |
+          python .github/scripts/update_srd.py
+          
+      - name: Commit and push if there are changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add docs/SRD.md
+          git diff --staged --quiet || git commit -m "Update SRD with latest code changes"
+          git push
