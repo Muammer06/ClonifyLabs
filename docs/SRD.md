@@ -1,8 +1,8 @@
 # Yazılım Gereksinimleri Belirtimi (SRD)
 
-> **Belge Türü**: Teknik Dokümantasyon  
-> **Proje**: 3B Tarama Cihazı  
-> **Versiyon:** 1.0  
+> **Belge Türü**: Teknik Dokümantasyon
+> **Proje**: 3B Tarama Cihazı
+> **Versiyon:** 1.1
 > **Tarih:** 18.03.2025
 
 ## Revizyon Geçmişi
@@ -53,21 +53,40 @@
 
 Bu doküman, 3D tarama cihazı yazılımının işlevsel ve işlevsel olmayan gereksinimlerini tanımlamaktadır. Yazılımın amacı, lazer tabanlı yapılandırılmış ışık desenlerini yakalamak, stereo kamera kurulumu kullanarak noktu bulutunu çıkarmak, kamera konumunu belirlemek için marker tabanlı PnP algoritmasını kullanmak ve görüntüleri işleyerek hassas 3D modellerin çıktı olarak oluşturulmasını sağlamaktır.
 
-Üretilecek olan yazılım ve donanım Kickstarter üzerinden farklı paketler (Stereo kamera, Structured Light, Stereo Kamera + Structured Light, Infrared Light, Infrared Light+Stereoe kamera veya hepsi için mono kamera) şeklinde piyasaya sürülecektir. Tasarlanan yazılımın SDK (Software Development Kit) şeklinde açık kaynak olarak yayınlanarak geri dönüşler alarak yazılımın geliştirilmesi hedeflenmektedir.
+Üretilecek olan yazılım ve donanım Kickstarter (Fonlama ile satış) projesinde farklı paketler (Stereo kamera, Structured Light, Stereo Kamera + Structured Light, Infrared Light, Infrared Light+ Stereo kamera veya hepsi için mono kamera) şeklinde piyasaya sürülecektir.
+
+Proje içerisinde elektronik tasarım ve yazılım tasarımı olarak ikiye ayrılmaktadır. Tasarlanan yazılımın SDK (Software Development Kit) şeklinde açık kaynak olarak yayınlanarak geri dönüşler alarak yazılımın geliştirilmesi hedeflenmektedir. Elektronik tasarım ise SDK ile bütünleşik çalışıp kapalı kaynak benimsenmesi sağlanacaktır.
 
 ### 1.2 Kapsam
 
 Bu yazılım aşağıdaki işlevleri sağlayacaktır:
 
 * Lazer tarama sistemi ve kamera ile yüksek çözünürlüklü görüntüler yakalama.
-* İki kamera (stereo kamera) kullanılarak derinlik bilgisi elde edilerek nokta bulutu elde edilecektir.
-* Kamera kalibrasyonun yapılması.
+* İki kamera (stereo kamera) kullanılarak derinlik bilgisi elde edilerek nokta bulutu elde etme.
+* Kamera kalibrasyonun yapılabilmesi.
 * Görüntü işleme algoritmalarını kullanarak 3D nokta bulutları oluşturma.
-* Kamera konumunun işaretçi tabanlı PnP algoritması ile belirlenmesi.
+* Kamera konumlarının işaretçi tabanlı PnP algoritması ile belirlenmesi.
 * Tarama ve veri dışa aktarma işlemleri için etkileşimli bir kullanıcı arayüzü sağlama.
-* Birden fazla çıktı formatını destekleme (STL, OBJ, PLY).
+* Birden fazla çıktı formatını destekleme (PCL, STL, OBJ, PLY).
 * Tarama hızı ve doğruluğunu optimize etme.
 * Elde edilen nokta bulutları üzerinde farklı algoritmalarının denenmesi ve denenilen algoritmaların etkisinin kontrol edilmesi için test arayüzünün oluşturulması, algoritma nokta bulutuna uygulandıktan sonra algoritmanın etkisinin gözle kontrol edilmesi.
+* Python SDK ile kullanıcıların hem ham görüntü verilerini hem de ön işlemden geçmiş en azından PCL olarak işlenmiş verileri alabilmesi hedeflenmektedir.
+
+Bu elektronik sistem aşağıdaki işlevleri sağlayacaktır:
+
+* Birbirinden bağımsız noktada kitler bulunması hedeflenmektedir.
+* Kit ana bilgisayara ya da hesaplama birimine kablolu ya da kablosuz olarak bağlanacaktır.
+* Çeşitli modüller eş zamanlı piyasaya sürülecektir:
+
+  * |          | Kamera           | Kaynak             | Sensör | Haberleşme | FPGA ya da SOM |
+    | -------- | ---------------- | ------------------ | ------- | ----------- | -------------- |
+    | Modül 1 | mono RGB         | IR led pattern     | IMU     | kablolu     | var            |
+    | Modül 2 | mono RGB         | MAVİ pattern      | IMU     | kablosuz    | var            |
+    | Modül 3 | stereo RGB       | IR pattern         | IMU     | kablolu     | yok            |
+    | Modül 4 | stereo Monokrome | Kırmızı pattern | IMU     | kablosuz    | yok            |
+* Bu modül kombinasyonu daha sonra belirlenecektir.
+* Modüller üzerinde bulunabilecek ISP ve dahili FPGA/SOM gibi yapılar araştırılacaktır.
+* Modüller eğer kablosuz tasarlanabiliyorsa batarya modülü de eklenecektir.
 
 ### 1.3 Tanımlar ve Kısaltmalar
 
@@ -77,6 +96,9 @@ Bu yazılım aşağıdaki işlevleri sağlayacaktır:
 * Nokta Bulutu: Tarama yüzeyini temsil eden 3D veri noktalarından oluşan yapı.
 * STL (Stereolithography): CAD ve 3D baskı için yaygın olarak kullanılan bir 3D dosya formatı.
 * Structured Light: Yapılandırılmış ışık, üç boyutlu bir nesnenin şeklini ve derinliğini, nesnenin yüzeyine bir ışık deseni yansıtarak ölçen bir yöntemdir. Desen şeritler, ızgaralar veya noktalar olabilir.
+* Mono kamera: Tekli kamera kurulumu.
+* IMU: Kameraların konum lokasyon takibi yapabilmesi ve birbirlerine göre referanslanabilmesini sağlayacaktır.
+* FPGA ya da SOM: Eğer gerekirse modüller üzerinde dahili işlem birimi ile PCL verilerinin aktarılabilmesi sağlanacaktır.
 
 ### 1.4 Referanslar
 
@@ -86,7 +108,7 @@ Bu yazılım aşağıdaki işlevleri sağlayacaktır:
 * Agile Yazılım Geliştirme İlkeleri
 * Open3D Dokümantasyonu
 * Kickstarter
-* Kullanılacak kamera [https://www.e-consystems.com/usb-cameras/sony-imx900-global-shutter-hdr-monochrome-camera.asp](https://www.e-consystems.com/usb-cameras/sony-imx900-global-shutter-hdr-monochrome-camera.asp)
+* Kullanılacak kamera e-con system'e ait monochroma ve RGB kameralardır.
 
 ### 1.5 Genel Bakış
 
@@ -104,13 +126,13 @@ Doküman aşağıdaki bölümlerden oluşmaktadır:
 
 ### 2.1 Ürün Perspektifi
 
-Yazılım, harici donanımlarla (kameralar, lazer kaynağı) etkileşime giren bağımsız bir uygulama olarak tasarlanacaktır ve kullanıcıya gerçek zamanlı geri bildirim sağlayacaktır.
+Yazılım, harici donanımlarla (kameralar, lazer kaynağı) etkileşime giren bağımsız bir uygulama ve donanım olarak tasarlanacaktır ve kullanıcıya gerçek zamanlı geri bildirim sağlayacaktır.
 
 Yazılım, üç farklı 3D tarama yöntemi için destek sağlayacaktır:
 
 1. Stereo Kamera Yöntemi: İki farklı kameradan alınan görüntüler arasındaki paralaks farkı kullanılarak derinlik bilgisi elde edilir.
-2. Lazer Tabanlı Yapılandırılmış Işık Yöntemi: Bir lazer kaynağı aracılığıyla nesne üzerine belirli desenler yansıtılarak, kameradan bu desenlerin deformasyonu analiz edilir ve 3D model oluşturulur.
-3. Stereo Kamera + Lazer Tabanlı Yapılandırılmış Işık Yöntemi: Stereo kamera ve lazer tabanlı yapılandırılmış ışık yöntemlerinin birleşimi ile daha yüksek doğruluk elde edilir. Stereo kameralar derinlik haritasını çıkarırken, lazer ile detaylı yüzey bilgisi sağlanır.
+2. Lazer Tabanlı Yapılandırılmış Işık Yöntemi: Bir projeksiyon kaynağı aracılığıyla nesne üzerine belirli desenler yansıtılarak, kameradan bu desenlerin deformasyonu analiz edilir ve 3D model oluşturulur.
+3. Stereo Kamera + Lazer Tabanlı Yapılandırılmış Işık Yöntemi: Stereo kamera ve lazer(hem görünür ışık hem IR ışık için) tabanlı yapılandırılmış ışık yöntemlerinin birleşimi ile daha yüksek doğruluk elde edilir. Stereo kameralar derinlik haritasını çıkarırken, lazer ile detaylı yüzey bilgisi sağlanır.
 
 ### 2.3 Ürün İşlevleri
 
@@ -118,6 +140,8 @@ Yazılım, üç farklı 3D tarama yöntemi için destek sağlayacaktır:
 * Lazer Tabanlı Yapılandırılmış Işık İşleme: Algoritmalarla derinlik bilgisi çıkarma.
 * 3D Modelleştirme: Derinlik verisini nokta bulutuna ve mesh yapısına dönüştürme.
 * Kamera Konumu Belirleme: Marker tabanlı PnP algoritması kullanarak kameranın konumunun hesaplanması.
+* Yazılım üzerinden kullanıcının işlevlere sahip olmasını sağlama.
+* Eğer birden fazla kamera modülü bir sisteme takılıysa bunlar arasında kolerasyon kurulması.
 * Dosya Dışa Aktarma: Sonuçları endüstri standardı 3D dosya formatlarında kaydetme.
 * Kullanıcı Arayüzü: Tarama başlatma, durdurma ve dosya yönetimi gibi özellikler sunma.
 
@@ -126,15 +150,16 @@ Yazılım, üç farklı 3D tarama yöntemi için destek sağlayacaktır:
 ### 2.4 Genel Sınırlamalar
 
 * Yazılım sadece uyumlu kamera ve lazer donanımı ile çalışacaktır.
-* Gerçek zamanlı veri işleme için belirli bir sistem konfigürasyonu (örn. minimum i7 işlemci, 32GB RAM) gereklidir.
-* Işık koşulları, tarama kalitesini etkileyebilir. Yetersiz aydınlatma durumlarında tarama doğruluğu azalabilir.
-* Yalnızca Ubuntu 22.04 işletim sistemi üzerinde çalışacaktır.
+* Gerçek zamanlı veri işleme için belirli bir sistem konfigürasyonu (örn. minimum i7 işlemci, 32GB RAM ya da Nvidia CUDA) gereklidir.
+* Işık koşulları, tarama kalitesini etkileyebilir. Yetersiz aydınlatma durumlarında tarama doğruluğu azalabilir. Bu tarz tespitler ile sistem modülleri arasına ek ürünler geliştirilecektir.
+* Başlangıçta yalnızca Ubuntu 22.04 işletim sistemi üzerinde çalışacaktır. Ardından Python/C++ SDK ile diğer sistemlerde de çalışabilir hale getirilecektir.
 
 ### 2.5 Varsayımlar ve Bağımlılıkları
 
 * Tarama işlemi için uyumlu bir kamera ve lazer kaynağı gereklidir.
 * Kamera konumu, marker tabanlı PnP algoritması kullanılarak tespit edilecektir.
 * Görüntü ve 3D işlemleme için OpenCV ve PCL gibi harici kütüphaneler kullanılacaktır.
+* Birden fazla kamera kullanılan durumlarda kameraların birbirlerine göre konumu hassas olarak girilmesi beklenebilir.
 
 ## 3. Özel Gereksinimler
 
@@ -150,8 +175,10 @@ Yazılım, üç farklı 3D tarama yöntemi için destek sağlayacaktır:
 #### 3.1.2 Donanım Arabirimleri
 
 * 2 adet USB 3.0 bağlantı noktası (stereo kamera için)
-* Lazer tarayıcı için harici güç bağlantısı
+* Lazer tarayıcı için harici güç bağlantısı(Şimdilik)
 * Donanım tetikleyici (opsiyonel) ile senkron görüntü alma desteği
+* İleriki modellerde geniş bant üzerinden veri aktarımını sağlayabilmek için ETH, Fiber kablo ya da Wi-Fi düşünülmektedir.
+* Modül üzerinde dahili batarya
 
 #### 3.1.3 Yazılım Arabirimleri
 
@@ -301,7 +328,7 @@ Referans: FG-3, FG-5, FG-8
 
 #### 3.5.1 Performans
 
-Kamera ve yapısal ışıktan elde edilecek nokta bulutları sistem üzerinden donma olmadan akıcı bir şekilde minimum 10 fps’te görüntüleyebilmelidir.
+Kamera ve yapısal ışıktan elde edilecek nokta bulutları sistem üzerinden donma olmadan akıcı bir şekilde minimum 15 fps’te görüntüleyebilmelidir.
 
 #### 3.5.2 Güvenilirlik
 
@@ -309,7 +336,7 @@ Elde edilen nokta bulutlarının kusursuza yakın olması ve taramada elde edile
 
 #### 3.5.3 Kullanılabilirlik
 
-* Kullanıcı arayüzü sade ve sezgisel olacak şekilde tasarlanmıştır. Kullanıcılar, temel eğitimle tüm tarama işlemlerini gerçekleştirebilecektir.
+* Kullanıcı arayüzü sade ve sezgisel olacak şekilde tasarlanmalıdır. Kullanıcılar, temel eğitimle tüm tarama işlemlerini gerçekleştirebilecektir.
 
 #### 3.5.4 Güvenlik
 
@@ -353,7 +380,18 @@ Bu sistemde merkezi bir veritabanı kullanılmayacaktır. Ancak yapılan tarama 
 
 Kamera Pozisyonun Bulunması
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdGIGNmDxJ9pSiBBvsL2aJI3a0FN_HsCjHBghAnt4tqIp9mJewT6v5C9yVNm_Injl4W0f1gjiPYA_mrGa3YgVQSFmVA179BqRpauFWgwDhBhf-CNig7XyHxiYNsJaAwDCYN9UROVw?key=8_wcevyOhLQcmmnmzb0lG6m_)
+```mermaid
+
+flowchart TD
+    A["Kamera Kalibrasyonu - İç parametreler: K, D"] --> B["Kamera Görüntüsü - Gerçek zamanlı video"]
+    B --> C["Görüntü Ön İşleme - Griye çevirme, Gauss bulanıklaştırma, Eşikleme / Canny"]
+    C --> D["Daire Algılama - HoughCircles veya Blob"]
+    D --> E["Dairelerin Merkezi ve Yarıçap Bilgisi"]
+    E --> F["Marker ID Atama - Opsiyonel, Konum, boyut, desen ile"]
+    F --> G["PnP ile Pozisyon Tahmini - 3D - 2D eşleme, solvePnP"]
+    G --> H["Kamera Pozisyonu - R, t ve Takip Güncellemesi"]
+
+```
 
 Genel Yazılım Mimarisi
 
@@ -361,15 +399,51 @@ Genel Yazılım Mimarisi
 
 ### 4.2 Sequence Diyagramları
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXe1jarghDpN5_OLjCjN2cSnTKJh5nQPJA4PrAlqYQagdeRc143PGgzH9R-tm6rp2z-6PfWYmXUvzJN5TW-TWR3hj_62Pk-1egb4UbxBHOifBGFGrPAP2rnBqqvJ2fLwJIeJ1Ci3QQ?key=8_wcevyOhLQcmmnmzb0lG6m_)
+```mermaid
+sequenceDiagram
+    participant Kullanıcı
+    participant UI
+    participant Kamera
+    participant Görüntü İşleyici
+    participant PnP Algoritması
+
+    Kullanıcı ->> UI: Tarama Başlat
+    UI ->> Kamera: Kamera Başlat
+    Kamera ->> Görüntü İşleyici: Görüntü Gönder
+    Görüntü İşleyici ->> PnP Algoritması: İşlem Yap
+    PnP Algoritması ->> Görüntü İşleyici: Pozisyon Hesapla
+    Görüntü İşleyici ->> UI: Veriyi UI'ye Gönder
+    UI ->> Kullanıcı: Model Göster
+```
 
 ### 4.3 Veri Akış Diyagramları
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXet960tvl0EfvHegHWbhtTdxjQxU46YM5Mbgn9Iv1Y7lnfhd1rwPiHQl5f4PE6obdjrKSrQ_YjWjENezPSOHSYMvqcl-Rxvej-SlSq2sJwFvuMYlQR1zVP8B4coWB2gNLHv_lxN?key=8_wcevyOhLQcmmnmzb0lG6m_)
+```mermaid
+graph TD
+    A[Kamera-Ham Görüntü] --> B[Kalibrasyon - Kalibrasyon Verisi]
+    B --> C[Görüntü İşleme - İşlenmiş Görünt]
+    C --> D[Derinlik Hesaplama - Derinlik Verisi]
+    C --> E[Nokta Bulutu]
+    D --> F[Nokta Bulutu]
+    E --> F[3D Model Oluşturucu]
+
+
+```
 
 ### 4.4 Durum Geçişi Diyagramları
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeHOfPTc_SVIdaokUaB104sgKqN8pmNGnYh3qyQ3Jfeppn0FKwgTCNtsNEczVSKPAF7CBNA0U_ZkramjYSv29Q_m74VCDBjgbfHITBPQTbsG-euTJe4Juo_lZ_2fy1yZG8Z0PVB?key=8_wcevyOhLQcmmnmzb0lG6m_)
+```mermaid
+stateDiagram-v2
+    [*] --> Başlangıç
+    Başlangıç --> Kalibrasyon_Yükleniyor
+    Kalibrasyon_Yükleniyor --> Hazır
+    Hazır --> Tarama_Yapılıyor
+    Tarama_Yapılıyor --> İşleniyor
+    İşleniyor --> Kaydedildi
+    İşleniyor --> Hata_Durumu
+    Hata_Durumu --> Tarama_Yapılıyor
+
+```
 
 ## 5. Değişiklik Yönetimi Süreci
 
@@ -403,41 +477,6 @@ Bu yazılım gereksinimleri dokümanında yapılacak her türlü değişiklik, k
 * Yeni versiyonlar yazılım deposunda ve proje belgelerinde açıkça belirtilir.
 
 ## A. Ekler
-
-Ekler, ilave ve yararlı bilgi sağlamak için kullanılabilir. Varsa, belirtim açıkça ekinde yer alan bilgilerin belirtimde ifade edilen gereksinimlerin bir parçası olarak dikkate alınması gerekiyor belirtilmelidir.
-
-Örnek Ekler (ilk) yazılım projesi için kavramsal belgeler, pazarlama materyalleri, müşteri ler ile toplantıların içeriğini vs.içerebilir.
-
-### A.1 Ek 1
-
-## Etkileşimli Diyagramlar
-
-GitHub Pages'de Mermaid diyagramları kullanabilirsiniz. Örnek:
-
-```mermaid
-graph TD
-    A[Kamera Modülü] -->|Görüntü Yakala| B[Görüntü İşleme]
-    B --> C[Nokta Bulutu Oluşturma]
-    C --> D[Mesh Oluşturma]
-    D --> E[3D Model Dışa Aktarma]
-    B --> F[Marker Tespiti]
-    F --> G[PnP ile Kamera Pozisyonu]
-```
-
-### Proje İlerleme Takibi
-
-- **Gereksinimlerin Belirlenmesi**: Tamamlandı (2 Nisan 2025)
-- **Mimari Tasarım**: Devam Ediyor
-- **Prototip Geliştirme**: Planlanan (15 Mayıs 2025)
-
-## Kod Değişikliği Güncellemeleri
-
-<!-- LATEST_CODE_CHANGES -->
-## 2025-04-02 11:30 Tarihli Kod Değişiklikleri
-
-Commit: fc5cc2b - update URL in configuration file to reflect correct GitHub username
-
-### Değiştirilen Dosyalar
 
 
 
