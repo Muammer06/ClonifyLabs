@@ -474,9 +474,9 @@ graph TD
 ## Kod Değişikliği Güncellemeleri
 
 <!-- LATEST_CODE_CHANGES -->
-## 2025-04-02 11:25 Tarihli Kod Değişiklikleri
+## 2025-04-02 11:30 Tarihli Kod Değişiklikleri
 
-Commit: 019e822 - Merge branch 'main' of https://github.com/Muammer06/ClonifyLabs
+Commit: fc5cc2b - update URL in configuration file to reflect correct GitHub username
 
 ### Değiştirilen Dosyalar
 
