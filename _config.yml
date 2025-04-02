@@ -2,7 +2,7 @@
 title: ClonifyLabs
 description: Your project description
 baseurl: "/ClonifyLabs" # the subpath of your site, e.g. /blog
-url: "https://yourusername.github.io" # replace with your GitHub username
+url: "https://muammer06.github.io" # replace with your GitHub username
 
 # Build settings
 markdown: kramdown
