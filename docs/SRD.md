@@ -474,16 +474,12 @@ graph TD
 ## Kod Değişikliği Güncellemeleri
 
 <!-- LATEST_CODE_CHANGES -->
-## 2025-04-02 11:15 Tarihli Kod Değişiklikleri
+## 2025-04-02 11:18 Tarihli Kod Değişiklikleri
 
-Commit: 302a37e - add initial scripts for change analysis and documentation updates
+Commit: 42fc6e6 - Merge branch 'main' of https://github.com/Muammer06/ClonifyLabs
 
 ### Değiştirilen Dosyalar
 
-- `.github/scripts/analyze_changes.py`
-  - Yeni dosya oluşturuldu
-- `.github/scripts/update_srd.py`
-  - Yeni dosya oluşturuldu
 
 
 <!-- END_LATEST_CODE_CHANGES -->
