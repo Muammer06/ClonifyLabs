@@ -478,6 +478,44 @@ Bu yazılım gereksinimleri dokümanında yapılacak her türlü değişiklik, k
 
 ## A. Ekler
 
+<<<<<<< HEAD
+=======
+Ekler, ilave ve yararlı bilgi sağlamak için kullanılabilir. Varsa, belirtim açıkça ekinde yer alan bilgilerin belirtimde ifade edilen gereksinimlerin bir parçası olarak dikkate alınması gerekiyor belirtilmelidir.
+
+Örnek Ekler (ilk) yazılım projesi için kavramsal belgeler, pazarlama materyalleri, müşteri ler ile toplantıların içeriğini vs.içerebilir.
+
+### A.1 Ek 1
+
+## Etkileşimli Diyagramlar
+
+GitHub Pages'de Mermaid diyagramları kullanabilirsiniz. Örnek:
+
+```mermaid
+graph TD
+    A[Kamera Modülü] -->|Görüntü Yakala| B[Görüntü İşleme]
+    B --> C[Nokta Bulutu Oluşturma]
+    C --> D[Mesh Oluşturma]
+    D --> E[3D Model Dışa Aktarma]
+    B --> F[Marker Tespiti]
+    F --> G[PnP ile Kamera Pozisyonu]
+```
+
+### Proje İlerleme Takibi
+
+- **Gereksinimlerin Belirlenmesi**: Tamamlandı (2 Nisan 2025)
+- **Mimari Tasarım**: Devam Ediyor
+- **Prototip Geliştirme**: Planlanan (15 Mayıs 2025)
+
+## Kod Değişikliği Güncellemeleri
+
+<!-- LATEST_CODE_CHANGES -->
+## 2025-04-02 11:55 Tarihli Kod Değişiklikleri
+
+Commit: 43ffc96 - Add System Requirements Document (SRD) and update project progress tracking
+
+### Değiştirilen Dosyalar
+
+>>>>>>> fe91b90435f7fc9f2f1a215cb59b60fa2646f548
 
 
 <!-- END_LATEST_CODE_CHANGES -->
