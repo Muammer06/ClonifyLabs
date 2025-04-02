@@ -1,8 +1,9 @@
-# 
-    3B Tarama Cihazı - Yazılım Gereksinimleri Belirtimi
+# Yazılım Gereksinimleri Belirtimi (SRD)
 
-**Versiyon:** 1.0
-**Tarih:** 18.03.2025
+> **Belge Türü**: Teknik Dokümantasyon  
+> **Proje**: 3B Tarama Cihazı  
+> **Versiyon:** 1.0  
+> **Tarih:** 18.03.2025
 
 ## Revizyon Geçmişi
 
