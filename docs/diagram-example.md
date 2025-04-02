@@ -1,39 +1,48 @@
-# Diyagram Örneği
+---
+layout: page
+title: Diyagram Örnekleri
+nav_order: 3
+---
 
-Mermaid diyagramını aşağıdaki gibi oluşturabilirsiniz:
+# Diyagram Örnekleri
+
+Bu sayfa Mermaid.js kullanılarak oluşturulmuş diyagram örneklerini gösterir.
+
+## Akış Diyagramı
 
 ```mermaid
 graph TD
-    A[Başlangıç] --> B{Karar}
-    B -->|Evet| C[İşlem 1]
-    B -->|Hayır| D[İşlem 2]
-    C --> E[Bitiş]
-    D --> E
+    A[Başla] --> B[Kamera Hazırla]
+    B --> C{Marker Görünür mü?}
+    C -- Evet --> D[PnP ile Konum Hesapla]
+    C -- Hayır --> E[Kullanıcıyı Uyar]
+    D --> F[Taramayı Başlat]
+    E --> B
 ```
 
-## Diğer Diyagram Tipleri
+## Sequence Diyagramı
 
-Akış şeması:
-```mermaid
-flowchart LR
-    A[Giriş] --> B(İşlem)
-    B --> C{Kontrol}
-    C -->|Evet| D[Çıkış]
-    C -->|Hayır| B
-```
-
-Sıralı diyagram:
 ```mermaid
 sequenceDiagram
-    participant Kullanıcı
-    participant Sistem
-    Kullanıcı->>Sistem: İstek gönder
-    Sistem-->>Kullanıcı: Yanıt ver
+    participant K as Kullanıcı
+    participant S as Sistem
+    participant KM as Kamera
+    K->>S: Tarama Başlat
+    S->>KM: Görüntü İste
+    KM-->>S: Görüntü Gönder
+    S->>S: İşle
+    S-->>K: Sonuç Göster
 ```
 
-## İpuçları
+## Durum Diyagramı
 
-1. Diyagramı üç backtick ve "mermaid" kelimesi ile başlatın
-2. Diyagram tipini belirtin (graph, flowchart, sequenceDiagram vb.)
-3. Mermaid sözdizimini kullanarak diyagramınızı oluşturun
-4. GitHub otomatik olarak diyagramı görselleştirecektir
+```mermaid
+stateDiagram-v2
+    [*] --> Hazır
+    Hazır --> Taranıyor: Başlat
+    Taranıyor --> İşleniyor: Tamamlandı
+    İşleniyor --> Kaydedildi: Başarılı
+    İşleniyor --> Hata: Başarısız
+    Hata --> Hazır: Yeniden Dene
+    Kaydedildi --> Hazır: Yeni Tarama
+```

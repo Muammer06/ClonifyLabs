@@ -1,3 +1,30 @@
+---
+layout: home
+title: Ana Sayfa
+nav_order: 1
+---
+
+# ClonifyLabs
+
+ClonifyLabs, yüksek hassasiyetli 3B tarama çözümleri sunan açık kaynaklı bir projedir.
+
+## Dokümantasyon
+
+- [Yazılım Gereksinimleri Belirtimi (SRD)](srd.html)
+- [Diyagram Örnekleri](diagram-example.html)
+
+## Özellikler
+
+- Stereo kamera desteği
+- Yapılandırılmış ışık tarama
+- Marker tabanlı konum tespiti
+- Açık kaynak SDK
+- Çoklu çıktı formatları (STL, OBJ, PLY)
+
+## Başlarken
+
+Projeyi yerel makinenizde çalıştırmak için [GitHub reposunu](https://github.com/yourusername/ClonifyLabs) ziyaret edin.
+
 # ClonifyLabs 3D Tarama Cihazı
 
 ![Versiyon](https://img.shields.io/badge/version-0.1.0-blue)
