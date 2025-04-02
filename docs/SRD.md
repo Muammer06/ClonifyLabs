@@ -426,50 +426,9 @@ graph TD
 
 ### Proje İlerleme Takibi
 
-<div class="progress-tracker">
-  <div class="progress-item" data-status="completed">
-    <div class="progress-title">Gereksinimlerin Belirlenmesi</div>
-    <div class="progress-date">2 Nisan 2025</div>
-  </div>
-  <div class="progress-item" data-status="in-progress">
-    <div class="progress-title">Mimari Tasarım</div>
-    <div class="progress-date">Devam Ediyor</div>
-  </div>
-  <div class="progress-item" data-status="planned">
-    <div class="progress-title">Prototip Geliştirme</div>
-    <div class="progress-date">Planlanan: 15 Mayıs 2025</div>
-  </div>
-</div>
-
-<style>
-.progress-tracker {
-  margin: 20px 0;
-}
-.progress-item {
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-}
-.progress-item[data-status="completed"] {
-  background-color: #d4edda;
-  border-left: 5px solid #28a745;
-}
-.progress-item[data-status="in-progress"] {
-  background-color: #fff3cd;
-  border-left: 5px solid #ffc107;
-}
-.progress-item[data-status="planned"] {
-  background-color: #f8f9fa;
-  border-left: 5px solid #6c757d;
-}
-.progress-title {
-  font-weight: bold;
-}
-.progress-date {
-  font-size: 0.9em;
-  color: #6c757d;
-}
-</style>
+- **Gereksinimlerin Belirlenmesi**: Tamamlandı (2 Nisan 2025)
+- **Mimari Tasarım**: Devam Ediyor
+- **Prototip Geliştirme**: Planlanan (15 Mayıs 2025)
 
 ## Kod Değişikliği Güncellemeleri
 
