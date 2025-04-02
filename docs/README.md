@@ -1,4 +1,3 @@
-
 # Proje Adı
 
 Bu proje, [kısa açıklama].
@@ -10,4 +9,7 @@ Bu proje, [kısa açıklama].
 
 ## Kullanım
 
-`node index.js` komutunu çalıştırın.
+`node index.js` komutunu çalıştırın.d
+
+
+deneme
