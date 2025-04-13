@@ -221,12 +221,31 @@ class CameraApp:
         if self.cap and self.cap.isOpened():
             exposure_time = int(value)
             self.cap.set(cv2.CAP_PROP_EXPOSURE, exposure_time)
+    
+    def on_closing(self):
+        self.running = False
+        if self.cap and self.cap.isOpened():
+            self.cap.release()
+        cv2.destroyAllWindows()
+        self.root.destroy()
 
     def show_video(self):
+        # Initialize variables for FPS calculation
+        prev_frame_time = 0
+        new_frame_time = 0
+        
         while self.running:
             if self.cap and self.cap.isOpened():
                 ret, frame = self.cap.read()
                 if ret:
+                    # Calculate FPS
+                    new_frame_time = time.time()
+                    fps = 1 / (new_frame_time - prev_frame_time)
+                    prev_frame_time = new_frame_time
+                    
+                    # Convert fps to string and round to 2 decimal places
+                    fps_text = f"FPS: {fps:.2f}"
+                    
                     # Display current settings on frame
                     settings_text = f"Format: {self.current_format.strip()} | Resolution: {self.current_resolution} | FPS: {self.current_fps}"
                     cv2.putText(frame, settings_text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 255), 2)
@@ -239,6 +258,9 @@ class CameraApp:
                     props_text = f"Gain: {gain} | Exposure: {exposure_mode} | Exp. Time: {exposure_time}"
                     cv2.putText(frame, props_text, (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 255), 2)
                     
+                    # Display real-time FPS
+                    cv2.putText(frame, fps_text, (10, 90), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 255), 2)
+                    
                     cv2.imshow('Camera', frame)
                 else:
                     # Try to reconnect if connection lost
@@ -250,17 +272,20 @@ class CameraApp:
                 print("Camera not open, trying to open...")
                 self.init_camera()
                 time.sleep(1)
-                
-            if cv2.waitKey(1) == ord('q'):
+            key=cv2.waitKey(1)
+            if key== ord('q'):
                 self.running = False
                 break
+            # Save image on space key press with timestamp
+            if key== ord(' '):
+                timestamp = time.strftime("%Y%m%d_%H%M%S")
+                filename = f"image_{timestamp}.jpg"
+                cv2.imwrite(filename, frame)
+                print(f"Image saved as {filename}")
+        
+        self.on_closing()
 
-    def on_closing(self):
-        self.running = False
-        if self.cap and self.cap.isOpened():
-            self.cap.release()
-        cv2.destroyAllWindows()
-        self.root.destroy()
+
 
 if __name__ == "__main__":
     root = tk.Tk()
