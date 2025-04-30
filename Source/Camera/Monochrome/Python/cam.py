@@ -3,6 +3,7 @@ import tkinter as tk
 from tkinter import Scale, HORIZONTAL, OptionMenu, StringVar, Frame, Label, Radiobutton
 from threading import Thread
 import time
+import numpy as np
 
 class CameraApp:
     def __init__(self, root):
@@ -52,7 +53,16 @@ class CameraApp:
         self.video_thread.start()
         
         # Clean up resources when closing
-        self.root.protocol("WM_DELETE_WINDOW", self.on_closing)
+        self.root.protocol("WM_DELETE_WINDOW", self.on_closing) 
+
+        try:
+            with np.load("calibration_data.npz") as X:
+                self.mtx, self.dist = [X[i] for i in ("mtx", "dist")]
+            print("Kalibrasyon verileri başarıyla yüklendi.")
+        except FileNotFoundError:
+            self.mtx = None
+            self.dist = None
+            print("Kalibrasyon verileri bulunamadı. Bozulma giderme yapılmayacak.")
 
     def create_ui(self):
         # Create frames for better organization
@@ -260,6 +270,18 @@ class CameraApp:
                     
                     # Display real-time FPS
                     cv2.putText(frame, fps_text, (10, 90), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 255), 2)
+
+                    if self.mtx is not None and self.dist is not None:
+                            h,  w = frame.shape[:2]
+                            newcameramtx, roi = cv2.getOptimalNewCameraMatrix(self.mtx, self.dist, (w,h), 1, (w,h))
+                            
+                            # undistort
+                            dst = cv2.undistort(frame, self.mtx, self.dist, None, newcameramtx)
+
+                            # crop the image
+                            x, y, w, h = roi
+                            dst = dst[y:y+h, x:x+w]
+                            cv2.imshow('Undistorted Camera', dst)
                     
                     cv2.imshow('Camera', frame)
                 else:
