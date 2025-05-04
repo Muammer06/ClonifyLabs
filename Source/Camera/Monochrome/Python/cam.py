@@ -219,6 +219,7 @@ class CameraApp:
     def set_auto_exposure(self):
         if self.cap and self.cap.isOpened():
             auto_exposure = self.auto_exposure_var.get()
+            print(f"Auto Exposure set to: {auto_exposure}")
             self.cap.set(cv2.CAP_PROP_AUTO_EXPOSURE, auto_exposure)
             
             # Enable/disable exposure time control based on auto exposure setting
