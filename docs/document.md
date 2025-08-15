@@ -30,17 +30,7 @@ nav_order: 4
     4.1. [Kontrol Katmanı: `MainWindow`](#41-kontrol-katmanı-mainwindow)
     4.2. [Arayüz Katmanı: `ui` Modülleri](#42-arayüz-katmanı-ui-modülleri)
     4.3. [Araç Katmanı: `tools` Modülleri](#43-araç-katmanı-tools-modülleri)
-5.  [**Veri Yönetimi Mimarisi**](#bölüm-5-veri-yönetimi-mimarisi)
-    5.1. [Ana Veri Yapıları: `vtkPolyData`](#51-ana-veri-yapıları-vtkpolydata)
-    5.2. [Durum Yönetimi (State Management)](#52-durum-yönetimi-state-management)
-6.  [**Çekirdek Fonksiyonların Algoritmik Detayları**](#bölüm-6-çekirdek-fonksiyonların-algoritmik-detayları)
-    6.1. [Modül: Tarama Temizleme (`CutTool`)](#61-modül-tarama-temizleme-cuttool)
-    6.2. [Modül: Anatomik Hizalama](#62-modül-anatomik-hizalama)
-    6.3. [Modül: Kesit Bantları ile Deformasyon (Planlanan)](#63-modül-kesit-bantları-ile-deformasyon-planlanan)
-7.  [**Kullanıcı Etkileşim Tasarımı**](#bölüm-7-kullanıcı-etkileşim-tasarımı)
-    7.1. [Etkileşim Stilleri (Interactor Styles)](#71-etkileşim-stilleri-interactor-styles)
-    7.2. [Sinyal/Slot ve Gözlemci (Observer) Mekanizmaları](#72-sinyalslot-ve-gözlemci-observer-mekanizmaları)
-8.  [**Gelecek Geliştirmeler için Mimari Hazırlık**](#bölüm-8-gelecek-geliştirmeler-için-mimari-hazırlık)
+
 
 ---
 
@@ -81,26 +71,6 @@ Yazılım, kodun yönetilebilirliğini ve modülerliğini sağlamak amacıyla, g
 -   **Kontrol/Mantık Katmanı (Controller):** `main.py` dosyasındaki `MainWindow` sınıfıdır. Uygulamanın beyni olarak çalışır. Arayüzden gelen sinyalleri işler, uygulama durumunu (`state`) yönetir ve 3D Araçlar katmanına komutlar gönderir.
 -   **3D Çekirdek ve Araçlar Katmanı (Model):** VTK ve `tools` klasöründeki sınıflardan oluşur. Tüm 3D veri işleme, filtreleme ve karmaşık etkileşim mantığı bu katmanda yer alır. Bu katmandaki araçlar, Kontrol Katmanı'ndan bağımsız, yeniden kullanılabilir bileşenlerdir.
 
-### 2.3. Mimari Şeması ve Veri Akışı
-
-```mermaid
-graph TD
-    subgraph Arayüz Katmanı (UI Layer - PyQt5)
-        A[Kullanıcı Etkileşimi] --> B(Arayüz Bileşenleri);
-        B -- Sinyal Gönderir (Signal) --> C;
-    end
-    subgraph Kontrol & Mantık Katmanı (Controller - main.py)
-        C(Olay Yönetim Fonksiyonları) --> D{Durum Yönetimi};
-        C --> E(Algoritmalar);
-    end
-    subgraph 3D Çekirdek & Araçlar (Model - VTK)
-        F(VTK Pipeline) --> G((3D Sahne));
-        E -- Komut Gönderir --> H(Araç Sınıfları);
-        H -- Sonuç Bildirir (Callback) --> C;
-        E -- Veriyi Günceller --> F;
-    end
-```
-
 ---
 
 ## Bölüm 3: Kullanılan Teknolojiler ve Kütüphaneler
@@ -131,152 +101,230 @@ NumPy, Python'da bilimsel hesaplamalar için temel pakettir. Özellikle çok boy
 - **Vektör Matematiği:** Anatomik hizalama algoritmasında, normal vektörlerin ve eksenlerin hesaplanması için np.cross (çapraz çarpım) ve np.linalg.norm (vektör uzunluğu) gibi fonksiyonlar vazgeçilmezdir.
 -   **VTK Uyumluluğu:** vtk.util.numpy_support modülü, NumPy dizileri ile VTK'nın kendi veri dizileri arasında sıfır-kopya (zero-copy) veya minimum-kopya ile veri alışverişi yapılmasını sağlar. Bu, on binlerce noktanın koordinatlarını Python'da işleyip tekrar VTK'ya verimli bir şekilde geri göndermemize olanak tanır.
 
+
 ---
 
 ## Bölüm 4: Ana Bileşenlerin Tasarımı ve Sorumlulukları
 
-### 4.1. Kontrol Katmanı: `MainWindow` (`main.py`)
-Uygulamanın ana orkestrasyon merkezidir.
--   **Sorumlulukları:**
-    -   Ana pencereyi ve alt arayüz bileşenlerini (`DockWidget`'lar) oluşturmak.
-    -   VTK'nın temel bileşenlerini (`renderer`, `interactor`) başlatmak.
-    -   Tüm uygulama durumunu yönetmek (bkz. Bölüm 5.2).
-    -   Arayüzden gelen sinyalleri (`align_requested`, `toggled` vb.) ilgili fonksiyonlara bağlamak.
-    -   `CutTool` gibi araçları doğru zamanda, doğru veriyle başlatmak ve bu araçlardan gelen sonuçları işlemek.
+### 4.1. Kontrol Katmanı (Controller)
+Uygulamanın ana pencere sınıfı bu rolü üstlenir.
+-   **Sorumluluklar:**
+    -   Uygulamanın genel durumunu (state) yönetmek.
+    -   Arayüzden gelen sinyalleri işleyip Model katmanına komut göndermek.
+    -   Model'den gelen güncellemeleri alıp arayüzün yenilenmesini sağlamak.
+    -   Hangi aracın aktif olduğunu yönetmek ve kullanıcı etkileşim modlarını değiştirmek.
 
-### 4.2. Arayüz Katmanı: `ui` Modülleri
--   **`section_panel.py`:** Kesit bantlarının listesini ve bu bantların parametrelerini (yüzde, yükseklik) kontrol eden arayüzü barındırır. Sadece `main.py`'e sinyal gönderir.
--   **`alignment_widget.py`:** Anatomik hizalama için gereken 3'lü görüntüleme pencerelerini ve referans noktası seçme butonlarını içerir.
+### 4.2. Görünüm Katmanı (View)
+Tüm `PyQt` widget'ları ve pencerelerinden oluşur.
+-   **Sorumluluklar:**
+    -   Görsel elemanları ekranda çizmek.
+    -   Kullanıcı girdilerini (tıklama, sürükleme vb.) sinyallere dönüştürmek.
+    -   Controller'dan gelen veriyle 3D sahneyi ve diğer arayüz elemanlarını güncellemek.
 
-### 4.3. Araç Katmanı: `tools` Modülleri
--   **`cut_tool.py`:** "Tarama Temizleme" özelliğinin mantığını içerir. Kendi özel etkileşim stili olan `CutInteractorStyle`'ı yönetir.
--   **`section_tool.py` (Planlanan):** Etkileşimli kesit bandı aracının temelini oluşturacak olan görünmez `vtkImplicitPlaneWidget2`'yi yönetir.
+### 4.3. Model Katmanı
+Veri yapıları ve bu veriler üzerinde çalışan fonksiyon/sınıf koleksiyonlarından oluşur.
+-   **Sorumluluklar:**
+    -   3D geometriyi `PolyData` olarak saklamak.
+    -   Controller'dan gelen komutlara göre 3D veri üzerinde algoritmik işlemler (kesme, döndürme vb.) gerçekleştirmek.
+    -   İşlem sonucunda oluşan yeni veri durumunu oluşturmak.
 
 ---
 
 ## Bölüm 5: Veri Yönetimi Mimarisi
 
-### 5.1. Ana Veri Yapıları: `vtkPolyData`
-Yazılımdaki tüm 3D geometrik veriler, VTK'nın standart `vtkPolyData` nesnesi içinde saklanır. Veri bütünlüğünü sağlamak için iki ana `vtkPolyData` nesnesi kullanılır:
--   `self.original_polydata`: STL dosyasından ilk yüklendiği andaki temiz ve bozulmamış veriyi tutar. Bu nesne, hizalama gibi kalıcı bir işlem yapılmadığı sürece **asla değiştirilmez**.
--   `self.deformed_polydata`: O anda ekranda gösterilmesi gereken, üzerinde tüm deformasyonların ve modifikasyonların uygulandığı veriyi tutar.
-
-Bu ayrım, veri akışını tek yönlü ve yönetilebilir kılar.
-```mermaid
-graph LR
-    A[<b>original_polydata</b><br/>(Değişmez, Temiz Veri)] -- Her Deformasyon Başlangıcında Kopyalanır --> B{<b>apply_all_deformations()</b><br/>(Algoritma)};
-    B -- Hesaplama Sonucu --> C[<b>deformed_polydata</b><br/>(Geçici, Değişken Veri)];
-    C -- Her Karede Renklendirilir --> D{<b>update_band_colors()</b><br/>(Görselleştirme)};
-    D --> E((<b>Ekranda Görünen Model</b><br/>(vtkActor)));
-```
+### 5.1. Ana Veri Yapısı
+Uygulama içindeki tüm 3D geometrik veriler, VTK'nın `PolyData` nesnesi ile temsil edilir. Bu yapı, bir 3D modeli oluşturan noktaları, bu noktaları birleştiren poligonları ve bu geometrik elemanlara atanmış ek verileri (renk, normal vektörleri vb.) bir arada tutar.
 
 ### 5.2. Durum Yönetimi (State Management)
-Uygulamanın o anki durumunu yönetmek için `MainWindow` içinde çeşitli değişkenler kullanılır:
--   `self.sections_data`: Sahnedeki her bir kesit bandının tüm bilgilerini (tool nesnesi, yüzde, yükseklik, renk) tutan bir Python listesi.
--   `self.active_tool`: O anda hangi aracın (`'cut'`, `'pick'`, `'none'`) aktif olduğunu belirten bir string. Bu, fare etkileşim stilleri arasında doğru geçiş yapılmasını sağlar.
-
----
-### Bölüm 6: Çekirdek Fonksiyonların Algoritmik Detayları
-
-#### 6.1. Modül: Tarama Temizleme (`CutTool`)
-- **Algoritma:** `vtkClipPolyData` ile Gerçek 3D Kesim.
-- **Akış:**
-  1.  `CutInteractorStyle`, kullanıcının 2D ekran üzerinde çizdiği kutunun piksel koordinatlarını yakalar.
-  2.  `perform_cut` fonksiyonu, `vtkCamera`'nın o anki durumunu kullanarak bu 2D kutuyu bir 3D kesim hacmine (frustum) dönüştürür.
-  3.  `vtkClipPolyData` filtresi, bu 3D hacmin **içinde kalan** geometriyi korur, dışındakileri siler. Bu, modelin arkasının da doğru kesilmesini sağlar.
-  4.  İşlem, `QTimer.singleShot` ile bir sonraki olay döngüsüne ertelenerek VTK-PyQt çökme riski ortadan kaldırılır.
-
-#### 6.2. Modül: Anatomik Hizalama
-- **Algoritma:** Koordinat Sistemi Dönüşümü.
-- **Akış:**
-  1.  Kullanıcı iki 3D referans noktası (`P_tip`, `P_apex`) seçer.
-  2.  Vektör matematiği (`normalize`, `np.cross`) kullanılarak bu iki noktadan yeni bir ortonormal koordinat sistemi (yeni X, Y, Z eksenleri) oluşturulur.
-  3.  Bu yeni eksenlerden bir 4x4 dönüşüm matrisi (`vtkMatrix4x4`) oluşturulur.
-  4.  `vtkTransform` ile model önce `P_tip` noktası orijine gelecek şekilde taşınır, ardından dönüşüm matrisinin tersi (`Inverse`) ile döndürülür.
-  5.  `vtkTransformPolyDataFilter`, bu nihai dönüşümü modele uygular.
-
-#### 6.3. Modül: Kesit Bantları ile Deformasyon (Planlanan)
-- **Algoritma:** Yönelimden Bağımsız Vertex Boyama ve Radyal Deformasyon.
-- **Akış:**
-  1.  **Görselleştirme (`update_band_colors`):**
-      -   Tüm model noktaları varsayılan renge boyanır.
-      -   Her bir bant için, tüm model noktaları tekrar taranır.
-      -   Bir noktanın, bandın düzlemine olan **dik mesafesi** `vtk.vtkPlane.Evaluate()` ile hesaplanır.
-      -   Eğer bu mesafe bandın yarı-yüksekliğinden küçükse, o noktanın rengi bandın rengiyle güncellenir.
-  2.  **Deformasyon (`apply_all_deformations`):**
-      -   Tüm bantlar, ana eksen (genellikle ilk bandın normali) üzerindeki izdüşümlerine göre sıralanır.
-      -   Her bir model noktası için, hangi iki bant arasında kaldığı ve bu bantlara olan göreceli uzaklığı (ağırlık) hesaplanır.
-      -   Bu ağırlık kullanılarak, iki bandın yüzde değerleri arasında **lineer interpolasyon** yapılır ve noktaya etki edecek nihai deformasyon yüzdesi bulunur.
-      -   Nokta, modelin merkezi eksenine göre **radyal bir vektör** boyunca, bu nihai yüzdeye göre ötelenir.
-
----
-### Bölüm 7: Kullanıcı Etkileşim Tasarımı
-### 7.1. Etkileşim Stilleri (Interactor Styles)**
-
-Yazılım, kullanıcının o anda hangi aracı kullandığına bağlı olarak fare davranışını değiştiren bir durum makinesi (state machine) mantığı kullanır. Bu, VTK'nın vtkInteractorStyle mekanizması üzerine kurulmuştur. Çökmeleri engellemek için, programın başında ihtiyaç duyulan tüm stiller kalıcı olarak oluşturulur ve modlar arasında bu kalıcı nesneler arasında geçiş yapılır.
--   **vtkInteractorStyleTrackballCamera (Varsayılan Mod):** Standart 3D kamera kontrollerini (döndürme, taşıma, yakınlaştırma) sağlar.
-CutInteractorStyle (Kesme Modu): vtkInteractorStyleRubberBand2D'den türetilmiştir. Kamera kontrollerini devre dışı bırakır ve kullanıcının ekrana 2D bir seçim kutusu çizmesine olanak tanır.
--   **PointPickerInteractorStyle (Nokta Seçim Modu):** Sadece sol tıklama olayını dinler ve tıklanan noktayı ana programa bildirir. Diğer tüm kamera etkileşimlerini engeller.
-### 7.2. Sinyal/Slot ve Gözlemci (Observer) Mekanizmaları
-Yazılımın katmanları arasındaki iletişim iki temel mekanizma ile sağlanır:
-PyQt Sinyal/Slot: Arayüz (ui) ve Kontrol (main.py) katmanları arasındaki iletişim için kullanılır. Örneğin, SectionPanel'deki bir buton tıklandığında add_section_requested sinyali yayılır. MainWindow bu sinyali add_new_section isimli slot'una (fonksiyonuna) bağlamıştır. Bu, arayüzün mantıktan tamamen habersiz olmasını sağlar.
--   **VTK Gözlemci/Komut (Observer/Command):** 3D Çekirdek (VTK) ve Kontrol (main.py) katmanları arasındaki iletişim için kullanılır. Örneğin, CutInteractorStyle bir LeftButtonReleaseEvent yakaladığında, bu olayı bir "gözlemci" aracılığıyla MainWindow'daki perform_cut fonksiyonuna bildirir. Bu, 3D dünyasında olan bir olayın, ana program mantığını tetiklemesini sağlar.
-Bu iki mekanizmanın bir arada kullanılması, karmaşık etkileşimlerin yönetildiği sağlam ve modüler bir mimari oluşturur.
-
-
-
-### Bölüm 8: Gelecek Geliştirmeler için Mimari Hazırlık
-Mevcut mimari, gelecekte eklenecek yeni özellikler için sağlam bir temel sunmaktadır.
-### 8.1. Yapay Zeka Entegrasyonu
--   **Otomatik Hizalama:** Kullanıcının manuel olarak işaretlediği anatomik noktalar (olecranon tip, apex vb.) üzerinde eğitilmiş bir Konvolüsyonel Sinir Ağı (CNN) modeli, gelecekte bu noktaları 3D model üzerinde otomatik olarak tespit edebilir.
--   **Optimum Baskı Parametreleri:** Bir makine öğrenmesi modeli, belirli bir geometri için en uygun 3D baskı parametrelerini (katman kalınlığı, dolgu oranı vb.) otomatik olarak önerebilir.
-### 8.2. Sonlu Elemanlar Analizi (FEA) ile Basınç Haritalama
-Amaç: Tasarlanan soketin, hastanın güdüğüne uygulayacağı basınçları simüle etmek.
--   **Mimari Entegrasyonu:**
--  Deforme edilmiş deformed_polydata nesnesi, FEniCS gibi bir Python tabanlı FEA kütüphanesine girdi olarak verilir.
--   FEA çözücüsü, modelin yüzeyindeki her bir nokta için bir basınç (stres) değeri hesaplar.
--   Bu basınç değerleri, vtkPolyData'ya bir "scalar" dizisi olarak eklenir ve model üzerinde bir renk haritasıyla görselleştirilir.
-### 8.3. Geri Al/İleri Al (Undo/Redo) Mekanizması
--   **Mimari Entegrasyonu:** "Komut (Command)" tasarım deseni uygulanacaktır. Her geri alınabilir işlem (bant taşıma, kesme vb.), execute() ve unexecute() metotlarına sahip ayrı bir sınıf olarak tasarlanacaktır. MainWindow, bir undo_stack ve redo_stack tutarak bu komut nesnelerini yönetecektir.
-### 8.4. Proje Kaydetme ve Yükleme
--   **Mimari Entegrasyonu:** MainWindow'daki tüm durum (state) bilgisi (orijinal STL dosyasının yolu, sections_data listesindeki her bandın tüm parametreleri vb.) tek bir Python sözlüğüne toplanacaktır. Python'un json kütüphanesi, bu sözlüğü insan tarafından okunabilir bir metin dosyasına (.qcad_proj) yazmak için kullanılacaktır.
-
-
-## Bölüm 9: Modül Bazlı Teknik Açıklamalar
-
-### 9.1.  Hazırlık ve Veri Yönetimi (Correct Scan)
-**Amaç:** Ham 3D taramayı temiz, işlenebilir bir dijital modele dönüştürmek.  
-**Araçlar ve Teknik Karşılıklar:**
-- **Çoklu Tarama Yönetimi:** Hasta bazlı klasör yapısı + metadata (JSON)  
-- **Tarama Temizleme:** `vtkClipPolyData` + kamera frustum hacmi  
-- **Delik Doldurma:** `vtkFillHolesFilter`  
-- **Distal Kilit Konumlandırma:** `vtkPointPicker` ile 3D nokta seçimi
+Uygulamanın kararlılığı ve geri alma (Undo) gibi özelliklerin çalışabilmesi için merkezi ve reaktif bir durum yönetimi benimsenmiştir. Controller, uygulamanın tüm geçmişini ve mevcut durumunu yönetir.
+-   **Orijinal Veri:** Yüklenen 3D modelin değiştirilmemiş bir kopyası her zaman saklanır.
+-   **Aktif Veri:** Ekranda gösterilen ve üzerinde anlık olarak çalışılan model verisi.
+-   **İşlem Yığını (Undo/Redo Stack):** Kullanıcının yaptığı her geri alınabilir değişiklik, bir işlem olarak yığına eklenir. Geri alma istendiğinde, yığından son işlem çıkarılır ve önceki duruma dönülür. Bu yapı, veri tutarlılığını garanti eder.
 
 ---
 
-### 9.2.  Anatomik Hizalama (Define Axes)
-**Amaç:** Modeli standart referans eksenlerine oturtmak.  
-**Araçlar ve Teknik Karşılıklar:**
-- **Çoklu Pencere ile Referans Noktası Belirleme:** Posterior/Sagittal/Transversal görünümler  
-- **Otomatik Eksen Oluşturma:** `perform_alignment`, vektör matematiği, `vtkTransformPolyDataFilter`  
-- **Karşılaştırma:** Birden fazla `vtkActor` + `SetOpacity(0.5)`
+## Bölüm 6: Çekirdek Fonksiyonların Mantıksal Akışı
+
+### 6.1. Fonksiyon: Tarama Temizleme
+-   **Amaç:** Kullanıcının 2D bir seçimle 3D modelin istenmeyen kısımlarını silmesi.
+-   **Mantıksal Akış:**
+    1.  Kullanıcı, 2D ekranda bir alan seçer.
+    2.  Sistem, bu 2D alanı 3D uzayda bir seçim hacmine (frustum) dönüştürür.
+    3.  Bu hacmin içinde veya dışında kalan tüm 3D geometri, modelden çıkarılır.
+    4.  Modelin temizlenmiş hali, yeni "Aktif Veri" olarak ayarlanır.
+
+### 6.2. Fonksiyon: Anatomik Hizalama
+-   **Amaç:** Modeli, standart bir anatomik koordinat sistemine göre yeniden yönlendirmek.
+-   **Mantıksal Akış:**
+    1.  Kullanıcı, model üzerinde stratejik anatomik referans noktaları işaretler.
+    2.  Sistem, bu noktalardan yola çıkarak yeni bir koordinat sistemi (yeni X, Y, Z eksenleri) hesaplar.
+    3.  Modelin mevcut koordinat sisteminden bu yeni sisteme geçişini sağlayacak bir rotasyon matrisi oluşturulur.
+    4.  Tüm model, bu matris kullanılarak döndürülür ve hizalanmış olur.
+
+### 6.3. Fonksiyon: Hacimsel Deformasyon
+-   **Amaç:** Modelin belirli bölgelerinde, ölçüleri hassas bir şekilde artırıp azaltmak (rektifikasyon).
+-   **Mantıksal Akış:**
+    1.  Kullanıcı, model üzerinde çalışmak istediği bir bölgeyi ve etki alanını tanımlar (örn: bir "kesit bandı" ile).
+    2.  Sistem, bu etki alanındaki tüm 3D noktaları belirler.
+    3.  Kullanıcı bir deformasyon değeri (+/- mm) girdiğinde, sistem bu bölgedeki noktaları, bölgenin merkezinden uzağa veya merkeze doğru, belirlenen miktar kadar kaydırır.
+    4.  Bu kaydırma işlemi, yumuşak ve organik bir geçiş sağlamak için etki alanının kenarlarına doğru azalır.
 
 ---
 
-### 9.3. Modifikasyon
-**Amaç:** Model üzerinde lokal ve global değişiklikler yapmak.  
-**Araçlar ve Teknik Karşılıklar:**
-- **Global Deformasyon:** `apply_all_deformations` → tüm modeli tek oranda ölçekleme  
-- **Bölgesel Deformasyon:** `vtkImplicitPlaneWidget2` + vertex boyama  
-- **Serbest Form Modelleme:** `vtkPointPicker` + `vtkSmoothPolyDataFilter`  
-- **Bölgesel Kilitleme:** Vertex ağırlık sistemi (weight=0 → etkilenmez)  
-- **Soket Kenarı Tasarımı:** `vtkSplineWidget` / `vtkContourWidget` + `vtkClipPolyData`
+## Bölüm 7: Kullanıcı Etkileşim Tasarımı
+
+### 7.1. Modüler Etkileşim Stilleri
+Uygulama, farklı görevler için farklı fare ve klavye davranışları gerektirir. Bu, monolitik bir yapı yerine, "Etkileşim Stilleri" adı verilen değiştirilebilir modüllerle yönetilir.
+-   **Kamera Stili:** Varsayılan mod. Sahneyi döndürme, kaydırma.
+-   **Seçim Stili:** Temizleme aracı aktifken, 2D alan seçimi yapmayı sağlar.
+-   **İşaretleme Stili:** Hizalama aracı aktifken, model üzerinde 3D nokta seçmeyi sağlar.
+Controller, kullanıcının seçtiği araca göre bu stiller arasında dinamik olarak geçiş yapar.
+
+### 7.2. İletişim Desenleri
+-   **Sinyal/Slot (View -> Controller):** Arayüzden gelen kullanıcı eylemlerini Controller'a bildirmek için kullanılır. Bu, arayüzün iş mantığından tamamen habersiz olmasını sağlar.
+-   **Gözlemci Deseni (Model/VTK -> Controller):** 3D sahnedeki olayları (fare tıklaması vb.) yakalamak için kullanılır. Controller, 3D motorundaki olayları "dinler" ve bunlara tepki verir.
 
 ---
 
-### 9.4.  Üretim ve Son Kontrol
-**Amaç:** Üretime hazır nihai soket modelini oluşturmak.  
-**Araçlar ve Teknik Karşılıklar:**
-- **Soket Oluşturma:** `vtkLinearExtrusionFilter` ile kalınlık verme  
-- **Otomatik Kenar Yuvarlatma:** `vtkWindowedSincPolyDataFilter` ile yumuşatma  
-- **Dışa Aktarma:** `vtkSTLWriter` + `reportlab` ile PDF rapor
+## Bölüm 8: Gelecek Geliştirmeler için Mimari Hazırlık
+Mevcut MVC mimarisi, gelecekte eklenecek yeni özellikler için sağlam ve genişletilebilir bir temel sunmaktadır.
+-   **Yapay Zeka Entegrasyonu:** Eğitilmiş bir model, "Model" katmanına yeni bir algoritma olarak kolayca eklenebilir ve Controller tarafından çağrılabilir. Örneğin, anatomik noktaları otomatik bulan bir yapay zeka modülü.
+-   **Basınç Analizi (FEA):** Bir sonlu elemanlar analizi çözücüsü, yine "Model" katmanında, deforme edilmiş bir geometriyi girdi olarak alıp bir basınç haritası üreten bir fonksiyon olarak entegre edilebilir.
+-   **Proje Kaydetme/Yükleme:** Controller, "Durum Yönetimi" bölümünde tanımlanan tüm durumu (aktif veri, bant parametreleri vb.) tek bir dosyaya serileştirip (serialize) daha sonra bu dosyadan durumu geri yükleyebilir. Mimari bu özelliğe tamamen hazırdır.
+
+## 9. Modifikasyon Araçları Mimarisi (Rectification Tools Architecture)
+Bu bölüm, protez soketinin dijital olarak şekillendirildiği, klinik olarak en önemli adımları içeren araç setinin mimarisini tanımlar. Bu araçlar, kullanıcının adım adım ilerlediği bir iş akışı (`workflow`) içinde sunulur. Tüm modifikasyon araçları, merkezi bir `ModificationEngine` tarafından yönetilir ve aynı temel prensipleri paylaşır:
+-   **Tahribatsız İşlem:** Tüm modifikasyonlar, `active_poly_data` üzerinde yapılır ve `HistoryStack`'e kaydedilir.
+-   **Merkezi Kontrol:** `MainWindow` (Controller), hangi aracın aktif olduğunu, aracın parametrelerini (fırça boyutu, azaltma yüzdesi vb.) ve Arayüz ile Araçlar (Model) katmanı arasındaki veri akışını yönetir.
+-   **Modüler Araç Tasarımı:** Her bir modifikasyon aracı (`Réduction`, `Lissage` vb.), `tools` klasöründe kendi sınıfına sahip olacak şekilde tasarlanacaktır.
+
+---
+
+### 9.1. Araç 1: Réduction (Hacim Azaltma)
+
+-   **Amaç:** Protez soketinin genel hacmini küçülterek veya belirli bölgelerde lokal baskı oluşturarak daha sıkı bir uyum (fit) sağlamak.
+-   **Arayüz Bileşenleri (View):**
+    -   "Global Azaltma" ve "Lokal Azaltma" modlarını seçmek için `QRadioButton` veya `QPushButton` grubu.
+    -   Global azaltma için yüzde (%) değerinin girileceği bir `QSlider` veya `QSpinBox`.
+    -   Lokal azaltma için fırça boyutunu ve etki gücünü ayarlayan `QSlider`'lar.
+-   **Kontrol Mantığı (`MainWindow`):**
+    -   `current_mode`'u `'REDUCTION_GLOBAL'` veya `'REDUCTION_LOCAL'` olarak ayarlar.
+    -   Slider'lardan gelen yüzde veya fırça parametrelerini yakalar.
+    -   Global modda "Uygula" butonuna basıldığında veya lokal modda fare sürüklenirken `ReductionTool` üzerindeki ilgili metotları çağırır.
+-   **Araç Tasarımı (`tools/ReductionTool.py`):**
+    ```python
+    class ReductionTool:
+        def apply_global_reduction(self, poly_data, percentage):
+            # 1. Modelin ağırlık merkezini (centroid) hesapla.
+            # 2. 'vtkTransform' kullanarak modeli merkeze doğru 'percentage' oranında ölçekle.
+            # 3. Değiştirilmiş poly_data'yı geri döndür.
+            ...
+
+        def apply_local_reduction(self, poly_data, brush_center, radius, strength):
+            # 1. Fırça merkezine 'radius' mesafesindeki noktaları (vertices) bul.
+            # 2. Her bir nokta için, kendi normal vektörü yönünde içeri doğru hareket ettir.
+            # 3. Hareket mesafesi, 'strength' ve merkeze olan uzaklığa göre (falloff) belirlenir.
+            ...
+    ```
+
+---
+
+### 9.2. Araç 2: Creuser / Recharger (Oyma / Ekleme - Sculpting)
+
+-   **Amaç:** Serbest formda, hassas bölgelerdeki (örn: kemik çıkıntıları) basıncı azaltmak için materyal oymak (Creuser) veya zayıf doku alanlarını desteklemek için materyal eklemek (Recharger).
+-   **Arayüz Bileşenleri (View):**
+    -   "Oy" (Dig) ve "Ekle" (Bulge) modları arasında geçiş yapan butonlar.
+    -   Fırça Boyutu ve Etki Gücü için `QSlider`'lar.
+    -   Fare imlecinin model üzerindeki izdüşümünü gösteren anlık bir fırça göstergesi.
+-   **Kontrol Mantığı (`MainWindow`):**
+    -   Aktif fırça modunu (`'DIG'` veya `'BULGE'`) ve fırça parametrelerini `SculptingTool`'a iletir.
+    -   Fare model üzerinde sürüklendiği sürece, `mouseMoveEvent` olayından elde edilen 3D koordinatları anlık olarak `SculptingTool`'a gönderir.
+-   **Araç Tasarımı (`tools/SculptingTool.py`):**
+    ```python
+    class SculptingTool:
+        def deform(self, poly_data, brush_center, radius, strength, mode):
+            # 1. Fırça etki alanındaki noktaları bul.
+            # 2. Her nokta için, normal vektörünü al.
+            # 3. if mode == 'BULGE': Noktayı normal yönünde dışarı taşı.
+            # 4. if mode == 'DIG': Noktayı normal yönünde içeri taşı.
+            # 5. Taşıma miktarını 'strength' ve yumuşak bir geçiş için 'falloff' fonksiyonu ile ayarla.
+            ...
+    ```
+
+---
+
+### 9.3. Araç 3: Lissage (Yumuşatma)
+
+-   **Amaç:** Önceki adımlarda oluşan pürüzlü veya keskin yüzeyleri yumuşatarak daha pürüzsüz ve konforlu bir iç yüzey elde etmek.
+-   **Arayüz Bileşenleri (View):** Fırça Boyutu ve Yumuşatma Miktarı için `QSlider`'lar.
+-   **Kontrol Mantığı (`MainWindow`):** `SculptingTool`'a benzer şekilde, fare hareketlerini `SmoothingTool`'a yönlendirir.
+-   **Araç Tasarımı (`tools/SmoothingTool.py`):**
+    ```python
+    class SmoothingTool:
+        def __init__(self):
+            # VTK'nın yerleşik yumuşatma filtresi kullanılır.
+            self.smoother = vtk.vtkSmoothPolyDataFilter()
+        
+        def smooth_area(self, poly_data, brush_center, radius, iterations):
+            # 1. Fırça alanındaki noktaları belirle.
+            # 2. Yalnızca bu noktaları etkileyecek şekilde 'vtkSmoothPolyDataFilter'ı çalıştır.
+            # 3. 'iterations' (döngü sayısı), arayüzdeki yumuşatma miktarına bağlanır.
+            ...
+    ```
+---
+# Protez Soketi Modifikasyon Araçları
+
+## Épaisseur (Kalınlık)
+**Amaç:**  
+Protez soketinin üretim için gerekli olan duvar kalınlığını ayarlamak. Genellikle tüm sokete tek tip bir kalınlık uygulanır.
+
+**Teknoloji:**  
+- `vtkPolyDataNormals` ile normal vektörleri hesaplanır.  
+- Noktalar, normal yönleri boyunca belirli bir mesafede kaydırılarak yeni bir dış yüzey oluşturulur.  
+- `vtkBooleanOperationPolyDataFilter` ile iç ve dış yüzey birleştirilebilir.
+
+---
+
+## Évasés (Kenar Şekillendirme / Flare)
+**Amaç:**  
+Protez soketinin üst kenarlarını, hastanın uzvuna daha iyi oturacak ve kenar tahrişini önleyecek şekilde içeri veya dışarı doğru şekillendirmek.  
+Görüntüdeki renk çarkı, bölgesel kontrolün önemini vurgular.
+
+**Teknoloji:**  
+- Soketin üst kenarındaki poligon halkaları (edge loops) seçilir.  
+- Bu halkaların noktaları, yüzey normali veya kenar normali boyunca, bölgesel olarak belirlenen miktarlarda hareket ettirilir.  
+- Geçişleri yumuşatmak için `vtkSmoothPolyDataFilter` veya özel deformasyon algoritmaları kullanılabilir.
+
+---
+
+## Prise Distale (Distal Tutuş / Arayüz)
+**Amaç:**  
+Ampute uzvun distal ucu ile protez soketi arasındaki bağlantı noktasını şekillendirmek ve buraya uygun bağlantı elemanlarını (adaptör, kilit mekanizması) dijital olarak yerleştirmek.
+
+**Teknoloji:**  
+- Distal uç bölgesinde özel bir deformasyon ve/veya kesme işlemi yapılır.  
+- Kullanıcı, STL formatında önceden yüklenmiş distal bağlantı elemanı modellerinden birini seçebilir ve bunu soketin distal ucuna yerleştirebilir.  
+- Konumlandırma ve yönlendirme için `vtkTransformWidget` gibi manipülatörler kullanılır.
+
+---
+
+## Alignement (Hizalama)
+**Amaç:**  
+Protez soketinin, tüm protez sisteminin (diz eklemi, ayak, pelvik bölge) anatomik ve biyomekanik olarak doğru hizalanmasını sağlamak.
+
+**Teknoloji:**  
+- `vtkAssembly` veya `vtkProp` ile sanal bir hizalama standı oluşturulur.  
+- Soket, diz eklemi ve ayak gibi bileşenler bu stand üzerinde konumlandırılır.  
+- Kullanıcı, rotasyon (ön-arka, iç-dış) ve translasyon (yükseklik, yanlara kaydırma) ayarlamaları yapabilir.  
+- `vtkTransform` ve `vtkMatrix4x4` bu dönüşümleri yönetir.
+
+---
+
+## Finalisation (Sonlandırma)
+**Amaç:**  
+Tüm modelleme ve rektifikasyon adımları tamamlandıktan sonra, protez kalıbını üretime hazır hale getirmek ve çıktı almak.
+
+**Teknoloji:**
+- **Model Doğrulama:** Son `vtkPolyData` üzerinde topolojik kontroller (delik kontrolü, kesişen üçgenler).  
+- **Dışa Aktarma:** `vtkSTLWriter` ile nihai model STL formatında kaydedilir.  
+- 
