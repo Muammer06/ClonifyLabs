@@ -1,0 +1,8 @@
+site_name: ClonifyLabs Docs
+nav:
+  - Home: index.md
+  - Document: document.md
+  - Document2: document2.md
+  - SRD: SRD.md
+  - srd: srd.md
+  - Diagram Example: diagram-example.md
