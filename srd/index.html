@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Yazılım Gereksinimleri Belirtimi (SRD) - ClonifyLabs Docs</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">ClonifyLabs Docs</a>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#yazlm-gereksinimleri-belirtimi-srd" class="nav-link">Yazılım Gereksinimleri Belirtimi (SRD)</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#revizyon-gecmisi" class="nav-link">Revizyon Geçmişi</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#icindekiler" class="nav-link">İçindekiler</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#1-giris" class="nav-link">1. Giriş</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#2-genel-acklama" class="nav-link">2. Genel Açıklama</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#3-ozel-gereksinimler" class="nav-link">3. Özel Gereksinimler</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#4-analiz-modelleri" class="nav-link">4. Analiz Modelleri</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#5-degisiklik-yonetimi-sureci" class="nav-link">5. Değişiklik Yönetimi Süreci</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#a-ekler" class="nav-link">A. Ekler</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#etkilesimli-diyagramlar" class="nav-link">Etkileşimli Diyagramlar</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#kod-degisikligi-guncellemeleri" class="nav-link">Kod Değişikliği Güncellemeleri</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#2025-04-02-1155-tarihli-kod-degisiklikleri" class="nav-link">2025-04-02 11:55 Tarihli Kod Değişiklikleri</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="yazlm-gereksinimleri-belirtimi-srd">Yazılım Gereksinimleri Belirtimi (SRD)</h1>
+<blockquote>
+<p><strong>Belge Türü</strong>: Teknik Dokümantasyon
+<strong>Proje</strong>: 3B Tarama Cihazı
+<strong>Versiyon:</strong> 1.1
+<strong>Tarih:</strong> 18.03.2025</p>
+</blockquote>
+<h2 id="revizyon-gecmisi">Revizyon Geçmişi</h2>
+<table>
+<thead>
+<tr>
+<th>Tarih</th>
+<th>Açıklama</th>
+<th>Yazar</th>
+<th>Yorumlar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>18.03.2025</td>
+<td>V1.0</td>
+<td>Ahmet Furkan KARAARSLAN</td>
+<td>Doküman başlangıç</td>
+</tr>
+<tr>
+<td>2.04.2025</td>
+<td>V1.1</td>
+<td>Muammer Tiryaki</td>
+<td>Küçük güncellemeler</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="icindekiler">İçindekiler</h2>
+<ul>
+<li><a href="#1-giriş">1. Giriş</a></li>
+<li><a href="#11-amaç">1.1 Amaç</a></li>
+<li><a href="#12-kapsam">1.2 Kapsam</a></li>
+<li><a href="#13-tanımlar-ve-kısaltmalar">1.3 Tanımlar ve Kısaltmalar</a></li>
+<li><a href="#14-referanslar">1.4 Referanslar</a></li>
+<li><a href="#15-genel-bakış">1.5 Genel Bakış</a></li>
+<li><a href="#2-genel-açıklama">2. Genel Açıklama</a></li>
+<li><a href="#21-ürün-perspektifi">2.1 Ürün Perspektifi</a></li>
+<li><a href="#23-ürün-i̇şlevleri">2.3 Ürün İşlevleri</a></li>
+<li><a href="#23-kullanıcı-özellikleri">2.3 Kullanıcı Özellikleri</a></li>
+<li><a href="#24-genel-sınırlamalar">2.4 Genel Sınırlamalar</a></li>
+<li><a href="#25-varsayımlar-ve-bağımlılıkları">2.5 Varsayımlar ve Bağımlılıkları</a></li>
+<li><a href="#3-özel-gereksinimler">3. Özel Gereksinimler</a></li>
+<li><a href="#31-dış-arabirimi-gereksinimleri">3.1 Dış Arabirimi Gereksinimleri</a></li>
+<li><a href="#32-fonksiyonel-gereksinimleri">3.2 Fonksiyonel Gereksinimleri</a></li>
+<li><a href="#33-kullanım-durumları">3.3 Kullanım Durumları</a></li>
+<li><a href="#34-sınıflar--nesneler">3.4 Sınıflar / Nesneler</a></li>
+<li><a href="#35-i̇şlevsel-olmayan-gereksinimler">3.5 İşlevsel Olmayan Gereksinimler</a></li>
+<li><a href="#36-ters-gereksinimleri">3.6 Ters Gereksinimleri</a></li>
+<li><a href="#37-tasarım-kısıtlamaları">3.7 Tasarım Kısıtlamaları</a></li>
+<li><a href="#38-mantıksal-veritabanı-gereksinimleri">3.8 Mantıksal Veritabanı Gereksinimleri</a></li>
+<li><a href="#39-diğer-gereksinimler">3.9 Diğer Gereksinimler</a></li>
+<li><a href="#4-analiz-modelleri">4. Analiz Modelleri</a></li>
+<li><a href="#41-aktivite-diyagramları">4.1 Aktivite Diyagramları</a></li>
+<li><a href="#42-sequence-diyagramları">4.2 Sequence Diyagramları</a></li>
+<li><a href="#43-veri-akış-diyagramları">4.3 Veri Akış Diyagramları</a></li>
+<li><a href="#44-durum-geçişi-diyagramları">4.4 Durum Geçişi Diyagramları</a></li>
+<li><a href="#5-değişiklik-yönetimi-süreci">5. Değişiklik Yönetimi Süreci</a></li>
+<li><a href="#a-ekler">A. Ekler</a></li>
+<li><a href="#a1-ek-1">A.1 Ek 1</a></li>
+</ul>
+<h2 id="1-giris">1. Giriş</h2>
+<h3 id="11-amac">1.1 Amaç</h3>
+<p>Bu doküman, 3D tarama cihazı yazılımının işlevsel ve işlevsel olmayan gereksinimlerini tanımlamaktadır. Yazılımın amacı, lazer tabanlı yapılandırılmış ışık desenlerini yakalamak, stereo kamera kurulumu kullanarak noktu bulutunu çıkarmak, kamera konumunu belirlemek için marker tabanlı PnP algoritmasını kullanmak ve görüntüleri işleyerek hassas 3D modellerin çıktı olarak oluşturulmasını sağlamaktır.</p>
+<p>Üretilecek olan yazılım ve donanım Kickstarter (Fonlama ile satış) projesinde farklı paketler (Stereo kamera, Structured Light, Stereo Kamera + Structured Light, Infrared Light, Infrared Light+ Stereo kamera veya hepsi için mono kamera) şeklinde piyasaya sürülecektir.</p>
+<p>Proje içerisinde elektronik tasarım ve yazılım tasarımı olarak ikiye ayrılmaktadır. Tasarlanan yazılımın SDK (Software Development Kit) şeklinde açık kaynak olarak yayınlanarak geri dönüşler alarak yazılımın geliştirilmesi hedeflenmektedir. Elektronik tasarım ise SDK ile bütünleşik çalışıp kapalı kaynak benimsenmesi sağlanacaktır.</p>
+<h3 id="12-kapsam">1.2 Kapsam</h3>
+<p>Bu yazılım aşağıdaki işlevleri sağlayacaktır:</p>
+<ul>
+<li>Lazer tarama sistemi ve kamera ile yüksek çözünürlüklü görüntüler yakalama.</li>
+<li>İki kamera (stereo kamera) kullanılarak derinlik bilgisi elde edilerek nokta bulutu elde etme.</li>
+<li>Kamera kalibrasyonun yapılabilmesi.</li>
+<li>Görüntü işleme algoritmalarını kullanarak 3D nokta bulutları oluşturma.</li>
+<li>Kamera konumlarının işaretçi tabanlı PnP algoritması ile belirlenmesi.</li>
+<li>Tarama ve veri dışa aktarma işlemleri için etkileşimli bir kullanıcı arayüzü sağlama.</li>
+<li>Birden fazla çıktı formatını destekleme (PCL, STL, OBJ, PLY).</li>
+<li>Tarama hızı ve doğruluğunu optimize etme.</li>
+<li>Elde edilen nokta bulutları üzerinde farklı algoritmalarının denenmesi ve denenilen algoritmaların etkisinin kontrol edilmesi için test arayüzünün oluşturulması, algoritma nokta bulutuna uygulandıktan sonra algoritmanın etkisinin gözle kontrol edilmesi.</li>
+<li>Python SDK ile kullanıcıların hem ham görüntü verilerini hem de ön işlemden geçmiş en azından PCL olarak işlenmiş verileri alabilmesi hedeflenmektedir.</li>
+</ul>
+<p>Bu elektronik sistem aşağıdaki işlevleri sağlayacaktır:</p>
+<ul>
+<li>Birbirinden bağımsız noktada kitler bulunması hedeflenmektedir.</li>
+<li>Kit ana bilgisayara ya da hesaplama birimine kablolu ya da kablosuz olarak bağlanacaktır.</li>
+<li>
+<p>Çeşitli modüller eş zamanlı piyasaya sürülecektir:</p>
+</li>
+<li>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Kamera</th>
+<th>Kaynak</th>
+<th>Sensör</th>
+<th>Haberleşme</th>
+<th>FPGA ya da SOM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Modül 1</td>
+<td>mono RGB</td>
+<td>IR led pattern</td>
+<td>IMU</td>
+<td>kablolu</td>
+<td>var</td>
+</tr>
+<tr>
+<td>Modül 2</td>
+<td>mono RGB</td>
+<td>MAVİ pattern</td>
+<td>IMU</td>
+<td>kablosuz</td>
+<td>var</td>
+</tr>
+<tr>
+<td>Modül 3</td>
+<td>stereo RGB</td>
+<td>IR pattern</td>
+<td>IMU</td>
+<td>kablolu</td>
+<td>yok</td>
+</tr>
+<tr>
+<td>Modül 4</td>
+<td>stereo Monokrome</td>
+<td>Kırmızı pattern</td>
+<td>IMU</td>
+<td>kablosuz</td>
+<td>yok</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>Bu modül kombinasyonu daha sonra belirlenecektir.</li>
+<li>Modüller üzerinde bulunabilecek ISP ve dahili FPGA/SOM gibi yapılar araştırılacaktır.</li>
+<li>Modüller eğer kablosuz tasarlanabiliyorsa batarya modülü de eklenecektir.</li>
+</ul>
+<h3 id="13-tanmlar-ve-ksaltmalar">1.3 Tanımlar ve Kısaltmalar</h3>
+<ul>
+<li>Lazer Tarama: Bir nesneye belirli lazer desenlerinin yansıtılması ve kameradan alınan görüntülerin analiz edilerek 3D model oluşturulması tekniği.</li>
+<li>Stereo Kamera: Derinlik algısı oluşturmak için iki farklı açıdan görüntü yakalayan çift kamera sistemi.</li>
+<li>PnP (Perspective-n-Point): Kameranın 3D uzaydaki konumunu belirlemek için marker tabanlı konumlandırma yöntemi.</li>
+<li>Nokta Bulutu: Tarama yüzeyini temsil eden 3D veri noktalarından oluşan yapı.</li>
+<li>STL (Stereolithography): CAD ve 3D baskı için yaygın olarak kullanılan bir 3D dosya formatı.</li>
+<li>Structured Light: Yapılandırılmış ışık, üç boyutlu bir nesnenin şeklini ve derinliğini, nesnenin yüzeyine bir ışık deseni yansıtarak ölçen bir yöntemdir. Desen şeritler, ızgaralar veya noktalar olabilir.</li>
+<li>Mono kamera: Tekli kamera kurulumu.</li>
+<li>IMU: Kameraların konum lokasyon takibi yapabilmesi ve birbirlerine göre referanslanabilmesini sağlayacaktır.</li>
+<li>FPGA ya da SOM: Eğer gerekirse modüller üzerinde dahili işlem birimi ile PCL verilerinin aktarılabilmesi sağlanacaktır.</li>
+</ul>
+<h3 id="14-referanslar">1.4 Referanslar</h3>
+<ul>
+<li>OpenCV Dokümantasyonu (Görüntü işleme için)</li>
+<li>Kamera Kalibrasyonu <a href="https://docs.opencv.org/4.x/dc/dbb/tutorial_py_calibration.html">https://docs.opencv.org/4.x/dc/dbb/tutorial_py_calibration.html</a></li>
+<li>PCL (Point Cloud Library) Dokümantasyonu</li>
+<li>Agile Yazılım Geliştirme İlkeleri</li>
+<li>Open3D Dokümantasyonu</li>
+<li>Kickstarter</li>
+<li>Kullanılacak kamera e-con system'e ait monochroma ve RGB kameralardır.</li>
+</ul>
+<h3 id="15-genel-baks">1.5 Genel Bakış</h3>
+<p>Bu belge, 3B tarama cihazı yazılımının işlevsel ve işlevsel olmayan tüm gereksinimlerini ayrıntılı biçimde açıklar. Belge, yazılımın amacını, kapsamını, teknik altyapısını, kullanıcı arayüzlerini, donanım ve yazılım arabirimlerini, kullanım senaryolarını, sınıf ve nesne yapısını, performans beklentilerini ve tasarım kısıtlarını içermektedir.</p>
+<p>Doküman aşağıdaki bölümlerden oluşmaktadır:</p>
+<ul>
+<li>Giriş: Projenin amacı, kapsamı, terminolojisi</li>
+<li>Genel Açıklama: Ürünün genel yapısı ve kullanım alanları</li>
+<li>Özel Gereksinimler: Fonksiyonel ve işlevsel olmayan gereksinimler</li>
+<li>Analiz Modelleri: Diyagramlar ve iş akışları</li>
+<li>Değişiklik Yönetimi: Gereksinimlerin nasıl güncelleneceği</li>
+</ul>
+<h2 id="2-genel-acklama">2. Genel Açıklama</h2>
+<h3 id="21-urun-perspektifi">2.1 Ürün Perspektifi</h3>
+<p>Yazılım, harici donanımlarla (kameralar, lazer kaynağı) etkileşime giren bağımsız bir uygulama ve donanım olarak tasarlanacaktır ve kullanıcıya gerçek zamanlı geri bildirim sağlayacaktır.</p>
+<p>Yazılım, üç farklı 3D tarama yöntemi için destek sağlayacaktır:</p>
+<ol>
+<li>Stereo Kamera Yöntemi: İki farklı kameradan alınan görüntüler arasındaki paralaks farkı kullanılarak derinlik bilgisi elde edilir.</li>
+<li>Lazer Tabanlı Yapılandırılmış Işık Yöntemi: Bir projeksiyon kaynağı aracılığıyla nesne üzerine belirli desenler yansıtılarak, kameradan bu desenlerin deformasyonu analiz edilir ve 3D model oluşturulur.</li>
+<li>Stereo Kamera + Lazer Tabanlı Yapılandırılmış Işık Yöntemi: Stereo kamera ve lazer(hem görünür ışık hem IR ışık için) tabanlı yapılandırılmış ışık yöntemlerinin birleşimi ile daha yüksek doğruluk elde edilir. Stereo kameralar derinlik haritasını çıkarırken, lazer ile detaylı yüzey bilgisi sağlanır.</li>
+</ol>
+<h3 id="23-urun-islevleri">2.3 Ürün İşlevleri</h3>
+<ul>
+<li>Görüntü Yakalama: Kameradan ham görüntülerin alınması.</li>
+<li>Lazer Tabanlı Yapılandırılmış Işık İşleme: Algoritmalarla derinlik bilgisi çıkarma.</li>
+<li>3D Modelleştirme: Derinlik verisini nokta bulutuna ve mesh yapısına dönüştürme.</li>
+<li>Kamera Konumu Belirleme: Marker tabanlı PnP algoritması kullanarak kameranın konumunun hesaplanması.</li>
+<li>Yazılım üzerinden kullanıcının işlevlere sahip olmasını sağlama.</li>
+<li>Eğer birden fazla kamera modülü bir sisteme takılıysa bunlar arasında kolerasyon kurulması.</li>
+<li>Dosya Dışa Aktarma: Sonuçları endüstri standardı 3D dosya formatlarında kaydetme.</li>
+<li>Kullanıcı Arayüzü: Tarama başlatma, durdurma ve dosya yönetimi gibi özellikler sunma.</li>
+</ul>
+<h3 id="23-kullanc-ozellikleri">2.3 Kullanıcı Özellikleri</h3>
+<h3 id="24-genel-snrlamalar">2.4 Genel Sınırlamalar</h3>
+<ul>
+<li>Yazılım sadece uyumlu kamera ve lazer donanımı ile çalışacaktır.</li>
+<li>Gerçek zamanlı veri işleme için belirli bir sistem konfigürasyonu (örn. minimum i7 işlemci, 32GB RAM ya da Nvidia CUDA) gereklidir.</li>
+<li>Işık koşulları, tarama kalitesini etkileyebilir. Yetersiz aydınlatma durumlarında tarama doğruluğu azalabilir. Bu tarz tespitler ile sistem modülleri arasına ek ürünler geliştirilecektir.</li>
+<li>Başlangıçta yalnızca Ubuntu 22.04 işletim sistemi üzerinde çalışacaktır. Ardından Python/C++ SDK ile diğer sistemlerde de çalışabilir hale getirilecektir.</li>
+</ul>
+<h3 id="25-varsaymlar-ve-bagmllklar">2.5 Varsayımlar ve Bağımlılıkları</h3>
+<ul>
+<li>Tarama işlemi için uyumlu bir kamera ve lazer kaynağı gereklidir.</li>
+<li>Kamera konumu, marker tabanlı PnP algoritması kullanılarak tespit edilecektir.</li>
+<li>Görüntü ve 3D işlemleme için OpenCV ve PCL gibi harici kütüphaneler kullanılacaktır.</li>
+<li>Birden fazla kamera kullanılan durumlarda kameraların birbirlerine göre konumu hassas olarak girilmesi beklenebilir.</li>
+</ul>
+<h2 id="3-ozel-gereksinimler">3. Özel Gereksinimler</h2>
+<h3 id="31-ds-arabirimi-gereksinimleri">3.1 Dış Arabirimi Gereksinimleri</h3>
+<h4 id="311-kullanc-arayuzleri">3.1.1 Kullanıcı Arayüzleri</h4>
+<ul>
+<li>Ana ekran: Tarama başlatma, durdurma ve ayarları barındırır.</li>
+<li>Önizleme alanı: Gerçek zamanlı görüntü akışı ve oluşturulan 3D modelin önizlemesi gösterilir.</li>
+<li>Ayarlar paneli: Kalibrasyon verileri, çözünürlük ve çıktı formatı gibi ayarlar yapılır.</li>
+<li>Çıktı ekranı: Tarama sonucu 3D modelin kaydedileceği format ve konum seçilir.</li>
+</ul>
+<h4 id="312-donanm-arabirimleri">3.1.2 Donanım Arabirimleri</h4>
+<ul>
+<li>2 adet USB 3.0 bağlantı noktası (stereo kamera için)</li>
+<li>Lazer tarayıcı için harici güç bağlantısı(Şimdilik)</li>
+<li>Donanım tetikleyici (opsiyonel) ile senkron görüntü alma desteği</li>
+<li>İleriki modellerde geniş bant üzerinden veri aktarımını sağlayabilmek için ETH, Fiber kablo ya da Wi-Fi düşünülmektedir.</li>
+<li>Modül üzerinde dahili batarya</li>
+</ul>
+<h4 id="313-yazlm-arabirimleri">3.1.3 Yazılım Arabirimleri</h4>
+<ul>
+<li>OpenCV: Görüntü işleme ve kamera kalibrasyonu için</li>
+<li>PCL: Nokta bulutu oluşturma ve işleme için, 3D görselleştirme ve çıktı alma işlemleri için</li>
+<li>USB kamera SDK’sı (e-con Systems)</li>
+</ul>
+<h4 id="314-iletisim-arabirimleri">3.1.4 İletişim Arabirimleri</h4>
+<ul>
+<li>USB 3.0 üzerinden kamera veri akışı</li>
+</ul>
+<h3 id="32-fonksiyonel-gereksinimleri">3.2 Fonksiyonel Gereksinimleri</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Gereksinim Açıklaması</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FG-1</td>
+<td>Sistem bağlı kameradan görüntü yakalayabilmelidir.</td>
+</tr>
+<tr>
+<td>FG-2</td>
+<td>Yazılım lazer tabanlı yapılandırılmış ışık desenlerini algılayıp analiz edebilmelidir.</td>
+</tr>
+<tr>
+<td>FG-3</td>
+<td>Sistem yakalanan görüntülerden 3D nokta bulutu oluşturabilmelidir.</td>
+</tr>
+<tr>
+<td>FG-4</td>
+<td>Kullanıcı tarama çözünürlüğünü ve parametreleri ayarlayabilmelidir.</td>
+</tr>
+<tr>
+<td>FG-5</td>
+<td>Sistem 3D modelleri STL, OBJ ve PLY formatlarında dışa aktarabilmelidir.</td>
+</tr>
+<tr>
+<td>FG-6</td>
+<td>Kullanıcı arayüzü, tarama başlatma, durdurma ve kaydetme işlemlerine izin vermelidir.</td>
+</tr>
+<tr>
+<td>FG-7</td>
+<td>Kamera konumu, işaret tabanlı PnP algoritması ile tespit edilmelidir.</td>
+</tr>
+<tr>
+<td>FG-8</td>
+<td>Nokta bulutları üzerinde denenilecek olan algoritmalar için öncesi ve sonrası şeklinde görüntüler vermelidir.</td>
+</tr>
+<tr>
+<td>FG-9</td>
+<td>Görüntü hem dinamik olarak hem de kullanıcının isteğine göre “space” tuşuna bastıkça kameradan görüntü alacak şekilde iki seçenekli olmalıdır.</td>
+</tr>
+<tr>
+<td>FG-10</td>
+<td>İşaretçi takibi kaybedildiği zaman kullanıcıyı bilgilendirmek için ekranda uyarı vermeli ve kamera konumu belirlenene kadar tarama durdurulmalıdır.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="321-fonksiyonel-gereksinim-1-goruntu-yakalama-ve-tarama">3.2.1  Fonksiyonel Gereksinim #1: Görüntü Yakalama ve Tarama</h4>
+<p>Giriş: Stereo kamera görüntüleri</p>
+<p>Girişler: Kalibrasyon verileri (K1, D1, K2, D2)
+İşleme: Stereo eşleme algoritması ile derinlik haritası üretimi</p>
+<p>Çıkışlar: 3D nokta bulutu
+Hata işleme: Kalibrasyon eksikse uyarı verilir, düşük eşleşme kalitesi tespit edilirse kullanıcıya bildirim yapılır.</p>
+<h4 id="322-fonksiyonel-gereksinim-2-3d-modelin-olusturulmas-ve-dsa-aktarm">3.2.2 Fonksiyonel Gereksinim #2: 3D Modelin Oluşturulması ve Dışa Aktarımı</h4>
+<ul>
+<li>Giriş: Nokta bulutu, kullanıcı tarafından seçilen parametreler</li>
+<li>İşleme: Noktalar mesh'e dönüştürülür, gerekli dosya formatı oluşturulur</li>
+<li>Çıkışlar: STL, OBJ, PLY formatında dosyalar</li>
+<li>Hata İşleme: Yazma izni olmayan klasör seçilirse kullanıcı uyarılır, boş tarama verisi varsa işlem durdurulur.</li>
+</ul>
+<h3 id="33-kullanm-durumlar">3.3 Kullanım Durumları</h3>
+<h4 id="331-kullanm-durumu-1-nesne-tabanl-3d-tarama">3.3.1 Kullanım Durumu #1: Nesne Tabanlı 3D Tarama</h4>
+<p>Amaç:
+ Gerçek dünya ortamındaki bir nesnenin yüzey geometrisinin yüksek hassasiyetle taranarak bilgisayar ortamında 3B model olarak elde edilmesi.</p>
+<p>Aktörler:
+ Kullanıcı (operatör)</p>
+<p>Ön Koşullar:</p>
+<ul>
+<li>Kamera ve lazer sistemi düzgün çalışıyor olmalı</li>
+<li>Kalibrasyon tamamlanmış olmalı</li>
+<li>Marker’lar sistemin görebileceği şekilde düzgün konumlandırılmış olmalı</li>
+<li>Marker tanımları yazılıma önceden tanıtılmış olmalı</li>
+</ul>
+<p>Senaryo:</p>
+<ol>
+<li>Kullanıcı sistemi başlatır.</li>
+<li>Marker’lar kameralar tarafından algılanır ve PnP algoritması ile pozisyon tespiti yapılır.</li>
+<li>Kamera ve lazer otomatik olarak senkronize çalışmaya başlar.</li>
+<li>Kullanıcı nesneyi sabit konumda yerleştirir.</li>
+<li>Sistem görüntüleri yakalar, işleyip nokta bulutu oluşturur.</li>
+<li>Nokta bulutu 3B modele dönüştürülür.</li>
+<li>Kullanıcı çıktıyı .STL veya .PLY formatında kaydeder.</li>
+</ol>
+<p>Sonuç:
+ Tarama başarıyla tamamlanır ve 3D model elde edilir.</p>
+<h4 id="332-kullanm-durumu-2-medikal-tarama-uzuv-modelleme">3.3.2 Kullanım Durumu #2: Medikal Tarama – Uzuv Modelleme</h4>
+<p>Amaç:
+ Medikal sektöründe kullanılmak üzere insan uzuvlarının hassas şekilde taranarak dijital ortama aktarılması.</p>
+<p>Aktörler:
+ Kullanıcı (teknisyen), hasta</p>
+<p>Ön Koşullar:</p>
+<ul>
+<li>Kişi hareketsiz pozisyonda durmalı</li>
+<li>Kalibrasyon dosyaları önceden hazırlanmış olmalı</li>
+<li>Marker’lar sistem görüş alanında net şekilde sabitlenmiş olmalı</li>
+<li>Ortam ışığı yetersiz değilse ek aydınlatma sağlanmalı</li>
+</ul>
+<p>Senaryo:</p>
+<ol>
+<li>Kullanıcı hastayı tarama alanına yerleştirir.</li>
+<li>Marker'lar algılanır, sistem pozisyonunu doğrular.</li>
+<li>Tarama çözünürlüğü “yüksek” olarak seçilir.</li>
+<li>Sistem birkaç saniyelik görüntü alımı yapar.</li>
+<li>Elde edilen nokta bulutu yüzey yumuşatma ile optimize edilir.</li>
+<li>Model, ortopedik kalıp üretimi için dışa aktarılır.</li>
+</ol>
+<p>Sonuç:
+ Hasta uzvunun dijital modeli alınmış ve üretime hazır hâle getirilmiştir.</p>
+<hr />
+<h4 id="333-kullanm-durumu-3-algoritma-karslastrma-modu-test-arayuzu">3.3.3 Kullanım Durumu #3: Algoritma Karşılaştırma Modu (Test Arayüzü)</h4>
+<p>Amaç:
+ Yeni nokta bulutu filtreleme veya yüzey iyileştirme algoritmalarını test etmek ve etkilerini görsel olarak karşılaştırmak.</p>
+<p>Aktörler:
+ Geliştirici veya araştırmacı kullanıcı</p>
+<p>Ön Koşullar:</p>
+<ul>
+<li>Marker’lar yazılımda tanıtılmış olmalı (eğer canlı tarama yapılacaksa)</li>
+<li>Mevcut veya önceden taranmış nokta bulutu verisi sisteme yüklenebilir olmalı</li>
+</ul>
+<p>Senaryo:</p>
+<ol>
+<li>Kullanıcı mevcut bir nokta bulutunu yazılıma yükler.</li>
+<li>Farklı filtreleme algoritmaları listeden seçilir.</li>
+<li>Yazılım aynı veri üzerinde önce/sonra karşılaştırması yapar.</li>
+<li>Kullanıcı görsel çıktılar üzerinden karar verir.</li>
+</ol>
+<p>Sonuç:
+ Algoritmaların performansı test edilmiş olur, ileri geliştirmeler yapılabilir.</p>
+<h3 id="34-snflar-nesneler">3.4 Sınıflar / Nesneler</h3>
+<h4 id="341-snf-nesne-1-kameramodulu">3.4.1 Sınıf / Nesne  #1: KameraModülü</h4>
+<p>Öznitelikler: ID, çözünürlük, fps, kalibrasyon parametreleri</p>
+<p>İşlevler: GörüntüAl(), KalibrasyonYükle(), VideoAkışıBaşlat()</p>
+<p>Referans: FG-1, FG-7</p>
+<p><Fonksiyonel gereksinimlere ve/veya kullanım durumlarına referans></p>
+<h4 id="342-snf-nesne-2-nokta-bulutu-isleyici">3.4.2 Sınıf / Nesne #2: Nokta Bulutu İşleyici</h4>
+<p>Öznitelikler: Nokta listesi, filtreleme parametreleri</p>
+<p>İşlevler: Oluştur(), Filtrele(), Kaydet()</p>
+<p>Referans: FG-3, FG-5, FG-8</p>
+<h3 id="35-islevsel-olmayan-gereksinimler">3.5 İşlevsel Olmayan Gereksinimler</h3>
+<h4 id="351-performans">3.5.1 Performans</h4>
+<p>Kamera ve yapısal ışıktan elde edilecek nokta bulutları sistem üzerinden donma olmadan akıcı bir şekilde minimum 15 fps’te görüntüleyebilmelidir.</p>
+<h4 id="352-guvenilirlik">3.5.2 Güvenilirlik</h4>
+<p>Elde edilen nokta bulutlarının kusursuza yakın olması ve taramada elde edilen obje ile gerçek dünyadaki objenin aynı boyutta olması hedeflenmektedir.</p>
+<h4 id="353-kullanlabilirlik">3.5.3 Kullanılabilirlik</h4>
+<ul>
+<li>Kullanıcı arayüzü sade ve sezgisel olacak şekilde tasarlanmalıdır. Kullanıcılar, temel eğitimle tüm tarama işlemlerini gerçekleştirebilecektir.</li>
+</ul>
+<h4 id="354-guvenlik">3.5.4 Güvenlik</h4>
+<ul>
+<li>Yazılım, kullanıcı erişim kontrolü sağlamasa da yalnızca yerel sistemde çalışır. Hassas veriler şifreli biçimde saklanmaz.</li>
+</ul>
+<h4 id="355-surdurulebilirlik">3.5.5 Sürdürülebilirlik</h4>
+<ul>
+<li>Yazılım açık kaynak kodlu olarak geliştirilecek, topluluk katkıları ile güncellemeler sürdürülebilecektir.</li>
+</ul>
+<h4 id="356-tasnabilirlik">3.5.6 Taşınabilirlik</h4>
+<ul>
+<li>Kodlar platformdan bağımsız olarak C++ ve Python ile yazılacak, ancak başlangıçta yalnızca Ubuntu 22.04 işletim sisteminde çalışacaktır.</li>
+</ul>
+<h3 id="36-ters-gereksinimleri">3.6 Ters Gereksinimleri</h3>
+<ul>
+<li>Yazılım çevrimdışı çalışacak, bulut bağlantısı olmadan tüm işlevlerini gerçekleştirecektir.</li>
+</ul>
+<h3 id="37-tasarm-kstlamalar">3.7 Tasarım Kısıtlamaları</h3>
+<p>Bu yazılım projesini etkileyen bazı tasarım kısıtlamaları aşağıda belirtilmiştir:</p>
+<ul>
+<li>Donanım Kaynak Sınırlamaları: Cihazın çalışabilmesi için minimum donanım gereksinimleri vardır. Özellikle yüksek çözünürlüklü stereo görüntülerin işlenmesi ve 3D nokta bulutu oluşturma süreçleri yüksek işlem gücü ve bellek gerektirdiğinden, sistemin en az Intel i7 işlemci, 32GB RAM ve SSD depolama alanına sahip olması beklenmektedir.</li>
+<li>Gerçek Zamanlı İşleme Kısıtlaması: Kameralardan gelen veri akışının eş zamanlı olarak işlenebilmesi için işlem gecikmelerinin minimumda tutulması gerekmektedir. Bu durum yazılımın modüler ve hızlı çalışan algoritmalarla geliştirilmesini zorunlu kılar.</li>
+<li>Kamera Uyumluluğu: Yazılım yalnızca belirli USB 3.0 stereo kameralarla (ör. e-con Systems IMX900) uyumlu olacak şekilde geliştirilecektir. Diğer marka/model kameralarla uyumluluk garanti edilmemektedir.</li>
+<li>İşletim Sistemi Uyumluluğu: Yazılım sadece Ubuntu 22.04 LTS işletim sistemi üzerinde test edilip çalıştırılacaktır. Diğer işletim sistemleri için destek sağlanmamaktadır.</li>
+<li>Çevrimdışı Çalışma: Uygulama tamamen çevrimdışı çalışacak şekilde tasarlandığından, bulut tabanlı depolama veya işlem hizmetleri kullanılmayacaktır.</li>
+</ul>
+<h3 id="38-mantksal-veritaban-gereksinimleri">3.8 Mantıksal Veritabanı Gereksinimleri</h3>
+<p>Bu sistemde merkezi bir veritabanı kullanılmayacaktır. Ancak yapılan tarama işlemlerine ait metadata’lar JSON formatında klasörlerde saklanacaktır. Dosya yapısı hiyerarşik olacaktır.</p>
+<h3 id="39-diger-gereksinimler">3.9 Diğer Gereksinimler</h3>
+<ul>
+<li>Yazılım açık kaynak lisans (MIT veya GPL) ile yayınlanacaktır.</li>
+<li>Tüm çıktılar kullanıcı dizinine otomatik olarak kaydedilecek, işlem sonunda otomatik olarak klasör açılacaktır.</li>
+<li>Uygulama terminal çıktıları ile hata mesajları ve debug bilgilerini kullanıcıya gösterecektir.</li>
+</ul>
+<h2 id="4-analiz-modelleri">4. Analiz Modelleri</h2>
+<h3 id="41-aktivite-diyagramlar">4.1 Aktivite Diyagramları</h3>
+<p>Kamera Pozisyonun Bulunması</p>
+<pre><code class="language-mermaid">
+flowchart TD
+    A[&quot;Kamera Kalibrasyonu - İç parametreler: K, D&quot;] --&gt; B[&quot;Kamera Görüntüsü - Gerçek zamanlı video&quot;]
+    B --&gt; C[&quot;Görüntü Ön İşleme - Griye çevirme, Gauss bulanıklaştırma, Eşikleme / Canny&quot;]
+    C --&gt; D[&quot;Daire Algılama - HoughCircles veya Blob&quot;]
+    D --&gt; E[&quot;Dairelerin Merkezi ve Yarıçap Bilgisi&quot;]
+    E --&gt; F[&quot;Marker ID Atama - Opsiyonel, Konum, boyut, desen ile&quot;]
+    F --&gt; G[&quot;PnP ile Pozisyon Tahmini - 3D - 2D eşleme, solvePnP&quot;]
+    G --&gt; H[&quot;Kamera Pozisyonu - R, t ve Takip Güncellemesi&quot;]
+
+</code></pre>
+<p>Genel Yazılım Mimarisi</p>
+<p>…</p>
+<h3 id="42-sequence-diyagramlar">4.2 Sequence Diyagramları</h3>
+<pre><code class="language-mermaid">sequenceDiagram
+    participant Kullanıcı
+    participant UI
+    participant Kamera
+    participant Görüntü İşleyici
+    participant PnP Algoritması
+
+    Kullanıcı -&gt;&gt; UI: Tarama Başlat
+    UI -&gt;&gt; Kamera: Kamera Başlat
+    Kamera -&gt;&gt; Görüntü İşleyici: Görüntü Gönder
+    Görüntü İşleyici -&gt;&gt; PnP Algoritması: İşlem Yap
+    PnP Algoritması -&gt;&gt; Görüntü İşleyici: Pozisyon Hesapla
+    Görüntü İşleyici -&gt;&gt; UI: Veriyi UI'ye Gönder
+    UI -&gt;&gt; Kullanıcı: Model Göster
+</code></pre>
+<h3 id="43-veri-aks-diyagramlar">4.3 Veri Akış Diyagramları</h3>
+<pre><code class="language-mermaid">graph TD
+    A[Kamera-Ham Görüntü] --&gt; B[Kalibrasyon - Kalibrasyon Verisi]
+    B --&gt; C[Görüntü İşleme - İşlenmiş Görünt]
+    C --&gt; D[Derinlik Hesaplama - Derinlik Verisi]
+    C --&gt; E[Nokta Bulutu]
+    D --&gt; F[Nokta Bulutu]
+    E --&gt; F[3D Model Oluşturucu]
+
+
+</code></pre>
+<h3 id="44-durum-gecisi-diyagramlar">4.4 Durum Geçişi Diyagramları</h3>
+<pre><code class="language-mermaid">stateDiagram-v2
+    [*] --&gt; Başlangıç
+    Başlangıç --&gt; Kalibrasyon_Yükleniyor
+    Kalibrasyon_Yükleniyor --&gt; Hazır
+    Hazır --&gt; Tarama_Yapılıyor
+    Tarama_Yapılıyor --&gt; İşleniyor
+    İşleniyor --&gt; Kaydedildi
+    İşleniyor --&gt; Hata_Durumu
+    Hata_Durumu --&gt; Tarama_Yapılıyor
+
+</code></pre>
+<h2 id="5-degisiklik-yonetimi-sureci">5. Değişiklik Yönetimi Süreci</h2>
+<p>Bu yazılım gereksinimleri dokümanında yapılacak her türlü değişiklik, kontrollü ve izlenebilir bir süreç çerçevesinde yürütülecektir. Aşağıda bu sürecin detayları yer almaktadır:</p>
+<h4 id="51-degisiklik-talebi">5.1 Değişiklik Talebi</h4>
+<ul>
+<li>Herhangi bir ekip üyesi, müşteri ya da paydaş sistem gereksinimlerinde değişiklik önerisinde bulunabilir.</li>
+<li>Değişiklik talepleri yazılı olarak ve gerekçesiyle birlikte Değişiklik Talep Formu (veya GitHub Issues üzerinden) ile sunulmalıdır.</li>
+</ul>
+<h4 id="52-degerlendirme-ve-etki-analizi">5.2 Değerlendirme ve Etki Analizi</h4>
+<ul>
+<li>Değişiklik talepleri, proje yöneticisi ve teknik ekip tarafından değerlendirilir.</li>
+<li>Her değişikliğin teknik fizibilitesi, zaman/maliyet etkisi ve mevcut sistem üzerindeki etkisi analiz edilir.</li>
+<li>Gerekirse, müşteriyle tekrar iletişime geçilerek kapsam netleştirilir.</li>
+</ul>
+<h4 id="53-onay-ve-uygulama">5.3 Onay ve Uygulama</h4>
+<ul>
+<li>Uygun bulunan değişiklikler, proje yöneticisi tarafından onaylanarak resmi revizyonlara dahil edilir.</li>
+<li>İlgili yazılım bileşenleri, test planları ve dokümantasyon bu değişikliğe göre güncellenir.</li>
+</ul>
+<h4 id="54-versiyonlama-ve-kayt">5.4 Versiyonlama ve Kayıt</h4>
+<ul>
+<li>Her değişiklik dokümana revizyon numarası, tarih, yazar ve açıklama ile birlikte kaydedilir.</li>
+<li>Değişiklik geçmişi “Revizyon Geçmişi” bölümünde tutulur.</li>
+<li>Git üzerinden sürüm kontrolü sağlanır (örn. v1.1, v1.2-beta gibi).</li>
+</ul>
+<h4 id="55-iletisim-ve-paylasm">5.5 İletişim ve Paylaşım</h4>
+<ul>
+<li>Onaylanan değişiklikler ilgili tüm ekip üyeleriyle paylaşılır.</li>
+<li>Yeni versiyonlar yazılım deposunda ve proje belgelerinde açıkça belirtilir.</li>
+</ul>
+<h2 id="a-ekler">A. Ekler</h2>
+<p>Ekler, ilave ve yararlı bilgi sağlamak için kullanılabilir. Varsa, belirtim açıkça ekinde yer alan bilgilerin belirtimde ifade edilen gereksinimlerin bir parçası olarak dikkate alınması gerekiyor belirtilmelidir.</p>
+<p>Örnek Ekler (ilk) yazılım projesi için kavramsal belgeler, pazarlama materyalleri, müşteri ler ile toplantıların içeriğini vs.içerebilir.</p>
+<h3 id="a1-ek-1">A.1 Ek 1</h3>
+<h2 id="etkilesimli-diyagramlar">Etkileşimli Diyagramlar</h2>
+<p>GitHub Pages'de Mermaid diyagramları kullanabilirsiniz. Örnek:</p>
+<pre><code class="language-mermaid">graph TD
+    A[Kamera Modülü] --&gt;|Görüntü Yakala| B[Görüntü İşleme]
+    B --&gt; C[Nokta Bulutu Oluşturma]
+    C --&gt; D[Mesh Oluşturma]
+    D --&gt; E[3D Model Dışa Aktarma]
+    B --&gt; F[Marker Tespiti]
+    F --&gt; G[PnP ile Kamera Pozisyonu]
+</code></pre>
+<h3 id="proje-ilerleme-takibi">Proje İlerleme Takibi</h3>
+<ul>
+<li><strong>Gereksinimlerin Belirlenmesi</strong>: Tamamlandı (2 Nisan 2025)</li>
+<li><strong>Mimari Tasarım</strong>: Devam Ediyor</li>
+<li><strong>Prototip Geliştirme</strong>: Planlanan (15 Mayıs 2025)</li>
+</ul>
+<h2 id="kod-degisikligi-guncellemeleri">Kod Değişikliği Güncellemeleri</h2>
+<!-- LATEST_CODE_CHANGES -->
+<h2 id="2025-04-02-1155-tarihli-kod-degisiklikleri">2025-04-02 11:55 Tarihli Kod Değişiklikleri</h2>
+<p>Commit: 43ffc96 - Add System Requirements Document (SRD) and update project progress tracking</p>
+<h3 id="degistirilen-dosyalar">Değiştirilen Dosyalar</h3>
+<!-- END_LATEST_CODE_CHANGES --></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
