@@ -8,9 +8,8 @@ nav_order: 4
 
 **Proje Adı**: Medikal Sektörde 3 Boyutlu Tarama ile Kişiye Özel Hızlı Kalıp Üretimi
 **Ürün Adı**: Clonify Labs Modelleme Yazılımı
-**Versiyon**: 2.0 (Planlanan)
-**Tarih**: 08.08.2025
-**Şirket**: Clonify Labs
+**Versiyon**: 0.2
+**Tarih**: 15.08.2025
 
 ## İçindekiler
 
@@ -56,40 +55,39 @@ nav_order: 4
 26. [Sözlük](#26-sözlük)
 ---
 
-# 1. Yönetici Özeti
 
-**APPClonify**, medikal sektörde, özellikle ortopedi ve protez alanında, 3 boyutlu tarama verileri kullanarak kişiye özel protez ve uzuv kalıpları hazırlama, basınca dayalı modifikasyonlar yapma ve kalıp üretimi için tasarlanmış bir masaüstü CAD (Bilgisayar Destekli Tasarım) yazılımıdır. Kullanıcı arayüzü için **PyQt5** ve 3D mesh işlemleri için **VTK**'yı birleştirerek, etkileşimli şekillendirme, yüksek performans ve genişletilebilirlik üzerine odaklanmıştır. Temel farklılaştırıcı özellikleri arasında geri alma yeteneği ile basınç boyama, asenkron ısı haritası/kalıp üretimi ve optimize edilmiş mesh manipülasyon boru hatları bulunmaktadır.
 
-# 2. Giriş
+# 1. Giriş
 
-**APPClonify Modelleme Yazılımı**  medikal sektörde, özellikle ortopedi ve protez alanında, kişiye özel 3 boyutlu kalıp üretimi için tasarlanmış bir yazılımdır. Sağlanan ekran görüntüsü ve videoda, protez kalıp rektifikasyonu (düzeltme/şekillendirme) sürecini gösteren adım adım bir iş akışı (workflow) görülmektedir. Bu iş akışı toplamda 8 ana adımdan oluşmaktadır.
+**ClonifyCad**, medikal sektörde, özellikle ortopedi ve protez alanında, 3 boyutlu tarama verileri kullanarak kişiye özel protez ve uzuv kalıpları hazırlama, basınca dayalı modifikasyonlar yapma ve kalıp üretimi için tasarlanmış bir masaüstü CAD (Bilgisayar Destekli Tasarım) yazılımıdır. Kullanıcı arayüzü için PyQt5 ve 3D mesh işlemleri için VTK'yı birleştirerek, etkileşimli şekillendirme, yüksek performans ve genişletilebilirlik üzerine odaklanmıştır. Yazılım, 3D tarayıcıdan gelen STL, OBJ, PLY gibi veri dosyalarını manipüle edip kişiye özel kalıplar hazırlayarak bu kalıpların STL formatında 3B baskı alınmasını sağlar. Protez kalıp rektifikasyonu (düzeltme/şekillendirme) süreci, adım adım ilerleyen rehberli bir iş akışı (workflow) ile kullanıcıya sunulur.
 
-## 2.1. Dokümanın Amacı
+## 1.1. Dokümanın Amacı
 
-Bu dokümanın temel amacı, **QClonifyCad** yazılımının teknik mimarisini, tasarım kararlarını, temel bileşenlerini ve bu bileşenler arasındaki etkileşimi detaylı bir şekilde açıklamaktır. Bu belge, projenin mevcut ve gelecekteki geliştiricileri için bir referans kaynağı olarak hizmet edecek, kodun sürdürülebilirliğini ve genişletilebilirliğini sağlamak için bir yol haritası sunacaktır.
+Bu dokümanın temel amacı, **ClonifyCad** yazılımının teknik mimarisini, tasarım kararlarını, temel bileşenlerini ve bu bileşenler arasındaki etkileşimi detaylı bir şekilde açıklamaktır. Bu belge, projenin mevcut ve gelecekteki geliştiricileri için bir referans kaynağı olarak hizmet edecek, kodun sürdürülebilirliğini ve genişletilebilirliğini sağlamak için bir yol haritası sunacaktır.
 
-## 2.2. Projenin Kapsamı
+## 1.2. Projenin Kapsamı
 
 Bu doküman, yazılımın aşağıdaki çekirdek işlevselliklerini ve planlanan modüllerini kapsar:
 
-**Mevcut Özellikler:**
--   **STL** formatında 3D model yükleme ve görselleştirme.
--   Çoklu pencerede (multi-view) anatomik hizalama.
--   2D seçimle 3D gürültü temizleme.
-
 **Planlanan Özellikler:**
+-   STL, PLY, OBJ formatlarında 3D model yükleme ve görselleştirme.
+-   2D seçimle 3D gürültü temizleme.
 -   Model yüzeyindeki deliklerin otomatik doldurulması.
 -   Etkileşimli kesit bantları ile radyal deformasyon.
 -   "Bulge/Smooth" fırçaları ile serbest form modelleme.
 -   Geri Al/İleri Al (Undo/Redo) yeteneği.
+-   Çoklu pencerede (multi-view) anatomik hizalama.
+-   Otomatik ölçüm ve analiz araçları.
+-   Baskı için 3D çıktı alma seçenekleri.
 
 **Yazılımın temel hedefleri:**
+-   Hastanın taranmış uzuv verilerini dijital ortamda hassas bir şekilde modellemek.
 -   Protez kalıplarını dijital ortamda hassas bir şekilde modellemek.
 -   Ortopedi uzmanlarının klinik bilgi ve deneyimlerini dijital sürece entegre etmelerini sağlamak.
 -   Kişiye özel, konforlu ve performanslı protezlerin üretimini hızlandırmak ve kolaylaştırmak.
 -   Geleneksel kalıplama yöntemlerinin zorluklarını (yüksek kilolu hasta, çift taraflı amputasyon, tekrarlanan düzeltmeler vb.) dijital çözümlerle aşmak.
 
-## 2.3. Tanımlar ve Kısaltmalar
+## 1.3. Tanımlar ve Kısaltmalar
 
 -   **GUI**: Grafiksel Kullanıcı Arayüzü (Graphical User Interface)
 -   **VTK**: The Visualization Toolkit
@@ -98,52 +96,71 @@ Bu doküman, yazılımın aşağıdaki çekirdek işlevselliklerini ve planlanan
 -   **Pipeline**: Veri akış hattı. VTK'da verinin bir dizi filtreden geçerek işlenmesi.
 -   **Frustum**: Kesik piramit. 3D'de bir kamera görüş alanını tanımlayan geometrik hacim.
 -   **PHI**: (Personal Health Information) Kişisel Sağlık Bilgileri
-## 2.4. Uygulama İş Akışı Adımları (Workflow Steps)
+-   **CAD**: Bilgisayar Destekli Tasarım (Computer-Aided Design)
+-   **CAM**: Bilgisayar Destekli Üretim (Computer-Aided Manufacturing)
+-   **3D**: Üç Boyutlu (Three-Dimensional)
+-   **Dimension Sheet**: Boyut Tablosu
 
-Clonify Labs Modelleme Yazılımı, kişiye özel protez kalıbı tasarımını kolaylaştırmak için aşağıdaki ana adımlardan oluşan rehberli bir iş akışı sunar. Bu adımlar, kullanıcının taranmış model üzerinde sistematik bir şekilde ilerlemesini ve her aşamada gerekli düzeltmeleri ve ayarlamaları yapmasını sağlar.
 
-### Scan
+## 1.4. Uygulama İş Akışı Adımları (Workflow Steps)
 
-*   **Amacı:** Ham 3D tarama verisinin sisteme yüklenmesi ve ön işleme tabi tutulması. Bu, protez tasarım sürecinin başlangıç noktasıdır.
+Clonify Labs Modelleme Yazılımı, planlanan özellikler doğrultusunda, kullanıcıyı adım adım yönlendiren mantıksal bir iş akışı sunar. Bu akış, ham tarama verisinden baskıya hazır 3D modele kadar olan süreci kapsar ve her adımda `Geri Al/İleri Al (Undo/Redo)` yeteneği ile desteklenir.
+
+### Adım 1: Veri Yükleme ve Görselleştirme (Data Loading & Visualization)
+
+*   **Amacı:** Hastadan alınan ham 3D tarama verisinin sisteme aktarılması ve incelenmesi.
 *   **İşlevselliği:**
-    *   **3D Model Yükleme:** Kullanıcının .stl, .ply gibi formatlardaki 3D tarama verilerini yazılıma aktarmasına olanak tanır.
-    *   **Ön Temizleme (Opsiyonel):** Tarama verilerinde bulunan büyük gürültüleri, arka plan nesnelerini veya fazla materyali ("Cut the contralateral leg with the scissors and remove any excess material if necessary") otomatik veya manuel olarak temizleme araçları sunar.
-    *   **Referans Görüntüleme:** Taramanın referans olarak (örn: "Scan with tools (for reference)") gösterilerek sonraki aşamalardaki değişikliklerle karşılaştırılmasına imkan verir.
-*   **İlgili Doküman Bölümleri:** Bu adım, **"8.1. Fonksiyon: Mesh Yükleme"** ve **"8.5. Fonksiyon: Tarama Temizleme"** ile doğrudan ilişkilidir.
+    *   **Model İçe Aktarma:** Kullanıcı, `STL`, `PLY`, veya `OBJ` formatlarındaki 3D modelleri yazılıma yükler.
+    *   **3D Görüntüleme:** Yüklenen model, 3D görüntüleme penceresinde serbestçe döndürülebilir, kaydırılabilir ve yakınlaştırılabilir bir şekilde sunulur. Bu, modelin ilk genel değerlendirmesi için temel oluşturur.
 
-### Tool-free 1/2 & Tool-free 2/2 (Sans outil 1/2 & Sans outil 2/2)
+### Adım 2: Çoklu Tarama Birleştirme (Multi-Scan Registration)(Not Priority)
 
-*   **Amacı:** Tarama verisi üzerinde daha detaylı temizlik ve ilk şekillendirme işlemlerinin, harici bir araç (örn: ölçüm aleti) referansı olmaksızın yapıldığı aşamalar. "Tool-free" ifadesi, tarama sırasında modele entegre bir ölçüm cihazının bulunmadığı veya bu aşamada referans alınmadığı durumları belirtir. Bu iki adım, temizleme ve ön düzeltmenin farklı yönlerini veya ardışık aşamalarını ifade eder.
+*   **Amacı:** Hastanın farklı açılardan veya zamanlarda yapılmış birden fazla 3D taramasını tek, bütünsel bir modelde birleştirmek. Bu, eksik verileri tamamlamak ve daha eksiksiz bir anatomi oluşturmak için gereklidir.
 *   **İşlevselliği:**
-    *   **Detaylı Tarama Temizliği:** Tarama sırasında oluşmuş küçük gürültülerin, artefaktların veya geometrik hataların giderilmesi.
-    *   **Basit Geometrik Düzeltmeler:** Temel düzleştirme, yumuşatma veya istenmeyen çıkıntıları giderme gibi başlangıç seviyesi modelleme işlemlerinin uygulanması.
-    *   Bu aşamalarda, kullanıcının önceki görsellerde görülen kesme/kırpma ve temel fırça araçlarını kullanması beklenir.
-*   **İlgili Doküman Bölümleri:** Başta **"8.5. Fonksiyon: Tarama Temizleme"** olmak üzere, **"15. Mesh İşlemleri (Temsili)"** bölümündeki "Temizleme" ve "Yumuşatma" operasyonlarını kapsar.
+    *   **Otomatik Hizalama (Automated Registration):** Yazılım, ortak geometrik özellikleri veya kullanıcı tarafından belirlenen referans noktalarını kullanarak birden fazla taramayı otomatik olarak hizalar.
+    *   **Manuel İnce Ayar:** Otomatik hizalamanın ardından, kullanıcıya hizalamayı manuel olarak hassas bir şekilde ayarlama imkanı sunulu, gerekirse.
+    *   **Model Birleştirme (Merging):** Hizalanan taramalar, tek ve tutarlı bir 3D model oluşturmak için birleştirilir. Bu birleşik model, sonraki adımlarda kullanılacak olan ana model haline gelir.
 
-### Wings/Regions (Ailes)
+### Adım 3: Tarama Temizleme ve Onarım (Scan Cleaning & Repair)
 
-*   **Amacı:** Protez soketinin veya ilgili anatomik bölgenin spesifik "kanat" veya yüzey alanlarının hassas bir şekilde konumlandırılması ve doğrulanması. Bu adım, protezin uzuv ile olan uyumunu ve bası noktalarını optimize etmek için kritiktir.
+*   **Amacı:** Tarama sürecinden kaynaklanan gürültü, artefakt ve geometrik kusurların giderilmesi.
 *   **İşlevselliği:**
-    *   **Bölgesel Repozisyonlama:** Kullanıcının 3D model üzerindeki farklı renkli, önceden tanımlanmış "kanat" bölgelerine tıklayarak bunların pozisyonunu, oryantasyonunu ve/veya geometrik özelliklerini (örn: eğim) ayarlamasını sağlar. 
-    *   **Görsel Şeffaflık Kontrolü:** Farklı 3D katmanların (örn: "Scan with tool", "Tool-free scan", "Femoral tool") şeffaflık seviyelerinin ayarlanmasına olanak tanır. Bu sayede kullanıcı, iç kemik yapısını veya farklı tarama verilerini eş zamanlı olarak gözlemleyebilir, bu da hassas konumlandırma için önemli bir görsel destektir.
-    *   **Ölçüm Karşılaştırması ve Doğrulama:** Tarama sırasında veya klinikte alınan önemli anatomik ölçümlerin (örn: "isch. -- troch.", "isch. -- ant.") güncel model üzerindeki karşılıklarıyla karşılaştırılmasını sağlar. Bu, sayısal verilerle anatomik uyumun doğrulanmasına yardımcı olur.
-    *   **Onaylama/Sıfırlama:** Yapılan değişiklikleri onaylama ("Confirmer" -> "Confirm") veya "kanat" pozisyonlarını varsayılan ayarlara geri döndürme ("Réinitialiser les ailes" -> "Reset wings/regions") seçenekleri sunar.
-*   **İlgili Doküman Bölümleri:** Yoğunlukla **"8.6. Fonksiyon: Anatomik Hizalama"** ile bağlantılıdır, çünkü bu bölgelerin doğru konumlandırılması genel hizalamayı etkiler. Ayrıca **"9.1. Modüler Etkileşim Stilleri"** ve **"14. Render (Görselleştirme) Hattı"** bölümlerindeki görselleştirme ve etkileşim prensipleriyle de örtüşür.
+    *   **2D Seçimle Gürültü Temizleme:** Kullanıcı, 2D görüntüleme düzleminde istenmeyen alanları (örneğin, tarama masası, destek yapıları, ilgisiz uzuvlar) seçerek 3D modelden kolayca kaldırır.
+    *   **Otomatik Delik Doldurma:** Yazılım, model yüzeyindeki istenmeyen delikleri ve boşlukları akıllı algoritmalarla tespit eder ve otomatik olarak kapatarak su geçirmez (manifold) bir model oluşturur.
 
-### Axes
+### Adım 4: Anatomik Hizalama (Anatomical Alignment)
 
-*   **Amacı:** Protezin nihai mekanik ve anatomik hizalamasını belirleyecek ana referans eksenlerinin tanımlanması. Bu, protezin fonksiyonel performansı ve hastanın yürüyüş dinamiği için temel bir adımdır.
+*   **Amacı:** Modelin, standart bir anatomik referans sistemine göre doğru bir şekilde konumlandırılması ve yönlendirilmesi.
 *   **İşlevselliği:**
-    *   **Anatomik İşaret Noktası Yerleştirme:** Kullanıcının 3D model üzerinde stratejik anatomik referans noktalarını ("Points de repères" -> "Reference points") işaretlemesini sağlar. Bu noktalar genellikle iskiyon (ischion), anterior (ön), posterior (arka) ve dış (external) gibi önemli kemik yapıları veya yüzey noktalarıdır. ("Place the four reference points on the tool-free scan. Use double-click to place a point directly").
-    *   **Eksen Hesaplama:** İşaretlenen bu noktalardan yola çıkarak, yazılım algoritmik olarak uzvun uzun eksenini, ön-arka ve medial-lateral eksenlerini (veya diğer klinik olarak ilgili eksenleri) hesaplar. Farklı görsellerde 3 veya 4 nokta belirleme seçenekleri, farklı hizalama metodolojilerini işaret edebilir.
-    *   **Görselleştirme ve Doğrulama:** Hesaplanan eksenler 3D sahnede görselleştirilerek kullanıcının doğruluğunu teyit etmesi sağlanır.
-*   **İlgili Doküman Bölümleri:** Doğrudan **"8.6. Fonksiyon: Anatomik Hizalama"** bölümünü temsil eder. İşaret noktalarının yönetimi **"10. Çekirdek Alan Modelleri"** altındaki `Landmark` modeliyle de ilgilidir.
+    *   **Çoklu Pencerede Hizalama:** Kullanıcı, farklı açılardan (ön, yan, üst) gösterilen model üzerinde anatomik referans noktaları belirler.
+    *   **Otomatik Yönlendirme:** Belirlenen noktalara göre yazılım, modeli otomatik olarak standart anatomik düzleme (örneğin, uzun ekseni Z eksenine paralel olacak şekilde) hizalar.
+
+### Adım 5: Serbest Form Modelleme ve Deformasyon (Free-form Modeling & Deformation)
+
+*   **Amacı:** Protez kalıbının hasta için en uygun ve konforlu hale getirilmesi amacıyla model üzerinde hassas geometrik değişiklikler yapılması.
+*   **İşlevselliği:**
+    *   **"Bulge/Smooth" Fırçaları:** Kullanıcı, fırça benzeri araçlarla model yüzeyinde sezgisel olarak hacim ekleme (şişirme), çıkarma (aşındırma) ve pürüzsüzleştirme işlemleri yapar. Bu, özellikle basınç noktalarını rahatlatmak veya destek alanları oluşturmak için kullanılır.
+    *   **Etkileşimli Kesit Bantları ile Radyal Deformasyon:** Model üzerine yerleştirilen kesit bantları aracılığıyla, belirli bölgelerde dairesel (radyal) olarak hassas boyutlandırma (genişletme/daraltma) yapılır. Bu, uzvun çevresel ölçülerine tam uyum sağlamak için kritiktir.
+
+### Adım 6: Ölçüm ve Analiz (Measurement & Analysis)
+
+*   **Amacı:** Yapılan modifikasyonların doğruluğunu teyit etmek ve klinik gereksinimlere uygunluğunu kontrol etmek.
+*   **İşlevselliği:**
+    *   **Otomatik Ölçüm Araçları:** Yazılım, model üzerinde uzunluk, çevre, açı ve hacim gibi kritik ölçümleri otomatik olarak yapabilir. Bu, tasarımın sayısal verilerle doğrulanmasını sağlar.
+    *   **Analiz:** İki model arasındaki farkları veya belirli bölgelerdeki değişiklikleri görsel ve sayısal olarak analiz etme imkanı sunar.
+
+### Adım 7: Baskıya Hazırlık ve Çıktı (Print Preparation & Export)
+
+*   **Amacı:** Tamamlanan modelin 3D yazıcıda basılmak üzere hazırlanması.
+*   **İşlevselliği:**
+    *   **Model Sonlandırma:** Modelin baskıya uygunluğu (örneğin, duvar kalınlığı kontrolü) son kez denetlenir.
+    *   **3D Çıktı Alma:** Nihai model, 3D baskı için yaygın olarak kullanılan `STL` veya diğer formatlarda dışa aktarılır.
 
 # 3. Hedefler ve Amaçlar
 
 -   Klinisyenlere/teknisyenlere anatomik mesh'leri hassas bir şekilde düzeltmek için araçlar sağlamak.
 -   Görsel geri bildirim (ısı haritası) ile basınca dayalı ayarlamaları desteklemek.
--   Tekrarlanabilir bir şekilde deplasman tabanlı kalıplar üretmek.
+-   Tekrarlanabilir bir şekilde deplasman tabanlı kalıplar üretmek (örn. aynı basınç haritası ve parametrelerle, deterministik test mesh'leri ve prosedürel kaynaklar kullanılarak her seferinde aynı sonuçların elde edilmesi; örnek için bkz. "Test Stratejisi" ve "Çekirdek Alan Modelleri" bölümleri).
 -   Yoğun geometri operasyonları sırasında duyarlı bir kullanıcı arayüzü sürdürmek.
 -   Gelecekteki araçlar (kesme desenleri, şekillendirme, işaretleme, GPU hızlandırma) için modüler bir arka uç sunmak.
 -   Tekrarlanabilirliği sağlamak (deterministik test mesh'leri, prosedürel kaynaklar).
@@ -151,9 +168,9 @@ Clonify Labs Modelleme Yazılımı, kişiye özel protez kalıbı tasarımını 
 # 4. Paydaşlar
 
 -   Klinik protez teknisyenleri (birincil kullanıcılar).
--   Biyomedikal mühendisler (gelişmiş kişiselleştirme).
+-   Hastane merkezleri.
 -   Dahili geliştiriciler (araç zinciri genişletme).
--   QA/test personeli (doğrulama senaryoları).
+-   QA/test personeli (doğrulama senaryoları).  
 
 # 5. Üst Düzey Mimari
 
@@ -165,30 +182,21 @@ Yazılım, kodun yönetilebilirliğini ve modülerliğini sağlamak amacıyla, g
 
 ## 5.2. Katmanların Detaylı Analizi
 
-| Katman | Klasör(ler) | Sorumluluk |
-|---|---|---|
-| Kullanıcı Arayüzü Sunumu (UI Presentation) | `app/widgets/pages`, `main.py`, `main.qml` | Kullanıcı etkileşimi, servis ve araçları çağırma, sinyallere tepki verme |
-| Servisler | `app/services/` | UI ve arka uç arasında köprü oluşturan senkron mesh operasyonları (**VTKProcessor**) |
-| Arka Uç Araçları (Backend Tools) | `backend/` | Özel alan operasyonları: basınç haritalama, kalıplar, kesme, şekillendirme, işaretleme, kamera, GPU |
-| Modeller / Oturum | `backend/anatomy_model.py`, `app/models/` | Durum kapsayıcıları (basınç sözlükleri, geri alma yığını) |
-| Çekirdek Yardımcı Programlar | `app/core/` | Paylaşılan sabitler, konfigürasyon, loglama yardımcıları |
-| Veri | `data/` | Test/prosedürel örnek mesh'ler |
-| Testler / Scriptler | `root test scriptleri & tests/` | Fonksiyonel ve performans doğrulama |
-| Günlük dizini | `logs/` | Çalışma zamanı günlükleri (denetim/sorun giderme için) |
-
-**Temel Prensipler:**
--   Non-blocking UI için Sinyaller/Slotlar.
--   **VTK polydata**'nın yeniden kullanımı; boru hatlarında gereksiz işlemden kaçınma.
--   Uzun süren operasyonlar için asenkron thread kullanımı.
--   Skaler diziler görsel durumları sağlar (Basınç Değerleri, Kalıp Deplasmanı).
--   Orkestrasyonel UI ile hesaplamalı arka ucun ayrılması.
+| Katman | Sorumluluk | Teknolojiler / Bileşenler |
+| :--- | :--- | :--- |
+| **Sunum (Presentation)** | Kullanıcı etkileşimini yönetir, görsel bileşenleri sunar ve kullanıcı girdilerini alır. | PyQt (Widget'lar, Sinyaller/Slotlar), VTK (3D Render Penceresi) |
+| **Uygulama (Application)** | Arayüzden gelen istekleri işler, iş mantığını koordine eder ve servisleri çağırır. | Ana uygulama sınıfı, olay yöneticileri, UI ve servisler arası köprü. |
+| **Servisler (Services)** | Belirli işlevleri (örn: dosya I/O, mesh işleme) kapsülleyen senkron veya asenkron operasyonları yürütür. | `VTKProcessor`, `AsyncMeshProcessor`, API istemcileri. |
+| **Arka Uç (Backend)** | Yoğun hesaplama gerektiren özel alan operasyonlarını ve algoritmaları içerir. | Basınç haritalama, kalıp oluşturma, hizalama algoritmaları. |
+| **Alan Modelleri (Domain)** | Uygulamanın durumunu ve temel veri yapılarını (örn: mesh, oturum bilgileri, geri alma yığını) temsil eder. | `AnatomySession`, `vtkPolyData`, `PressureDict`. |
+| **Altyapı (Infrastructure)** | Veri depolama, loglama, konfigürasyon ve harici sistemlerle iletişimi yönetir. | Dosya sistemi, veritabanı bağlantıları, loglama kütüphanesi. |
 
 
 # 7. Kullanılan Teknolojiler ve Kütüphaneler
 
-Projenin geliştirilmesinde, açık kaynak kodlu, endüstri standardı, yüksek performanslı ve geniş topluluk desteğine sahip teknolojiler tercih edilmiştir.
+Projenin geliştirilmesinde, açık kaynak kodlu, endüstri standardı, yüksek performanslı ve geniş topluluk desteğine sahip teknolojiler tercih edilecektir.
 
-## 7.1. Ana Programlama Dili: Python 3.x
+## 7.1. Ana Programlama Dili: Python 3.10
 
 **Python**, hızlı prototipleme, temiz sözdizimi ve zengin kütüphane desteği sayesinde projenin ana dili olarak seçilmiştir. Özellikle bilimsel hesaplama ve veri analizi alanlarındaki gücü, medikal veri işleme doğasıyla örtüşmektedir. Python'un "yapıştırıcı dil" özelliği, **VTK** gibi C++ kütüphanelerinin kolayca entegre edilmesini sağlamıştır.
 
@@ -231,6 +239,7 @@ Projenin geliştirilmesinde, açık kaynak kodlu, endüstri standardı, yüksek 
 8.  **Mesh Yüklendi Sinyali:** **VTKProcessor**, yüklendiğini ve `active_poly_data`'yı referans alarak "meshLoaded" sinyali gönderir.
 9.  **İşlem Tamamlandı Sinyali:** Son olarak, "processingFinished" sinyali gönderilir.
 10. **UI Güncelleme:** UI, `update_renderer` metoduyla yeni `active_poly_data`'yı görselleştirmek üzere güncellenir.
+11. **MESH kalitesi arttırma**: Yüklenen mesh verileri, `VTKProcessor` tarafından çeşitli iyileştirme teknikleri (örn: yüzey pürüzsüzleştirme, kenar keskinleştirme) ile işlenir.
 
 ## 8.2. Fonksiyon: Basınç Boyama
 
