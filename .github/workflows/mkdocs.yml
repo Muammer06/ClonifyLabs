@@ -11,14 +11,18 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.x'
-        - name: Set up authenticated git remote
-          run: git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}
+
+      - name: Set up authenticated git remote
+        run: git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}
+
       - name: Install dependencies
         run: pip install mkdocs
+
       - name: Build and Deploy
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
