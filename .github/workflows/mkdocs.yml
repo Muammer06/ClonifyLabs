@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -23,10 +26,13 @@ jobs:
       - name: Install dependencies
         run: pip install mkdocs
 
-      - name: Build and Deploy
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: |
-          git config --global user.email "actions@github.com"
-          git config --global user.name "github-actions[bot]"
-          mkdocs gh-deploy --force --remote-name origin --remote-branch gh-pages --config-file mkdocs.yml --message "Deploy from GitHub Actions"
+      - name: Build MkDocs site
+        run: mkdocs build --clean
+
+      - name: Deploy to gh-pages (peaceiris)
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GH_TOKEN }}
+          publish_dir: ./site
+          publish_branch: gh-pages
+          force_orphan: true
