@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="None">
+        
+        
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <title>ClonifyLabs Docs</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/fontawesome.min.css" rel="stylesheet">
+        <link href="css/brands.min.css" rel="stylesheet">
+        <link href="css/solid.min.css" rel="stylesheet">
+        <link href="css/v4-font-face.min.css" rel="stylesheet">
+        <link href="css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body class="homepage">
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href=".">ClonifyLabs Docs</a>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#yazlm-tasarm-dokuman-clonify-labs" class="nav-link">Yazılım Tasarım Dokümanı: Clonify Labs</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#icindekiler" class="nav-link">İçindekiler</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#1-giris" class="nav-link">1. Giriş</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#11-dokumann-amac" class="nav-link">1.1. Dokümanın Amacı</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#12-projenin-kapsam" class="nav-link">1.2. Projenin Kapsamı</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#13-tanmlar-ve-ksaltmalar" class="nav-link">1.3. Tanımlar ve Kısaltmalar</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#14-uygulama-is-aks-admlar-workflow-steps" class="nav-link">1.4. Uygulama İş Akışı Adımları (Workflow Steps)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#3-hedefler-ve-amaclar" class="nav-link">3. Hedefler ve Amaçlar</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#4-paydaslar" class="nav-link">4. Paydaşlar</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#5-ust-duzey-mimari" class="nav-link">5. Üst Düzey Mimari</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#51-katmanl-mimari-yaklasm" class="nav-link">5.1. Katmanlı Mimari Yaklaşımı</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#52-katmanlarn-detayl-analizi" class="nav-link">5.2. Katmanların Detaylı Analizi</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#7-kullanlan-teknolojiler-ve-kutuphaneler" class="nav-link">7. Kullanılan Teknolojiler ve Kütüphaneler</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#71-ana-programlama-dili-python-310" class="nav-link">7.1. Ana Programlama Dili: Python 3.10</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#72-grafiksel-kullanc-arayuzu-gui-pyqt5" class="nav-link">7.2. Grafiksel Kullanıcı Arayüzü (GUI): PyQt5</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#73-3d-gorsellestirme-ve-isleme-motoru-vtk-the-visualization-toolkit" class="nav-link">7.3. 3D Görselleştirme ve İşleme Motoru: VTK (The Visualization Toolkit)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#74-matematiksel-ve-bilimsel-hesaplama-numpy" class="nav-link">7.4. Matematiksel ve Bilimsel Hesaplama: NumPy</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#8-cekirdek-fonksiyonlarn-mantksal-aks" class="nav-link">8. Çekirdek Fonksiyonların Mantıksal Akışı</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#81-fonksiyon-mesh-yukleme" class="nav-link">8.1. Fonksiyon: Mesh Yükleme</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#82-fonksiyon-basnc-boyama" class="nav-link">8.2. Fonksiyon: Basınç Boyama</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#83-fonksiyon-is-haritas-olusturma-asenkron" class="nav-link">8.3. Fonksiyon: Isı Haritası Oluşturma (Asenkron)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#84-fonksiyon-kalp-olusturma" class="nav-link">8.4. Fonksiyon: Kalıp Oluşturma</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#85-fonksiyon-tarama-temizleme" class="nav-link">8.5. Fonksiyon: Tarama Temizleme</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#86-fonksiyon-anatomik-hizalama" class="nav-link">8.6. Fonksiyon: Anatomik Hizalama</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#87-fonksiyon-hacimsel-deformasyon" class="nav-link">8.7. Fonksiyon: Hacimsel Deformasyon</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#9-kullanc-etkilesim-tasarm" class="nav-link">9. Kullanıcı Etkileşim Tasarımı</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#91-moduler-etkilesim-stilleri" class="nav-link">9.1. Modüler Etkileşim Stilleri</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#15-mesh-islemleri-temsili" class="nav-link">15. Mesh İşlemleri (Temsili)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#16-performans-stratejileri" class="nav-link">16. Performans Stratejileri</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#17-loglama-ve-hata-yonetimi" class="nav-link">17. Loglama ve Hata Yönetimi</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#18-konfigurasyon-ve-ortam" class="nav-link">18. Konfigürasyon ve Ortam</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#19-derleme-ve-bagmllk-yonetimi" class="nav-link">19. Derleme ve Bağımlılık Yönetimi</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#20-kodlama-standartlar" class="nav-link">20. Kodlama Standartları</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#21-test-stratejisi" class="nav-link">21. Test Stratejisi</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#22-kalite-kontrolleri" class="nav-link">22. Kalite Kontrolleri</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#23-guvenlik-ve-gizlilik" class="nav-link">23. Güvenlik ve Gizlilik</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#24-riskler-ve-azaltma-yontemleri" class="nav-link">24. Riskler ve Azaltma Yöntemleri</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#25-gelecek-gelistirmeler-ve-genisletme-noktalar" class="nav-link">25. Gelecek Geliştirmeler ve Genişletme Noktaları</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#26-sozluk" class="nav-link">26. Sözlük</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="yazlm-tasarm-dokuman-clonify-labs">Yazılım Tasarım Dokümanı: Clonify Labs</h1>
+<p><strong>Proje Adı</strong>: Medikal Sektörde 3 Boyutlu Tarama ile Kişiye Özel Hızlı Kalıp Üretimi
+<strong>Ürün Adı</strong>: Clonify Labs Modelleme Yazılımı
+<strong>Versiyon</strong>: 0.2
+<strong>Tarih</strong>: 15.08.2025</p>
+<h2 id="icindekiler">İçindekiler</h2>
+<ol>
+<li><a href="#1-yönetici-özeti">Yönetici Özeti</a></li>
+<li><a href="#2-giriş">Giriş</a><ul>
+<li><a href="#21-dokümanın-amacı">2.1. Dokümanın Amacı</a></li>
+<li><a href="#22-projenin-kapsamı">2.2. Projenin Kapsamı</a></li>
+<li><a href="#23-tanımlar-ve-kısaltmalar">2.3. Tanımlar ve Kısaltmalar</a></li>
+</ul>
+</li>
+<li><a href="#3-hedefler-ve-amaçlar">Hedefler ve Amaçlar</a></li>
+<li><a href="#4-paydaşlar">Paydaşlar</a></li>
+<li><a href="#5-üst-düzey-mimari">Üst Düzey Mimari</a><ul>
+<li><a href="#51-katmanlı-mimari-yaklaşımı">5.1. Katmanlı Mimari Yaklaşımı</a></li>
+<li><a href="#52-katmanların-detaylı-analizi">5.2. Katmanların Detaylı Analizi</a></li>
+</ul>
+</li>
+<li><a href="#6-modül-envanteri-seçilmiş">Modül Envanteri</a></li>
+<li><a href="#7-kullanılan-teknolojiler-ve-kütüphaneler">Kullanılan Teknolojiler ve Kütüphaneler</a></li>
+<li><a href="#8-çekirdek-fonksiyonların-mantıksal-akışı">Çekirdek Fonksiyonların Mantıksal Akışı</a><ul>
+<li><a href="#81-fonksiyon-mesh-yükleme">8.1. Fonksiyon: Mesh Yükleme</a></li>
+<li><a href="#82-fonksiyon-basınç-boyama">8.2. Fonksiyon: Basınç Boyama</a></li>
+<li><a href="#83-fonksiyon-ısı-haritası-oluşturma-asenkron">8.3. Fonksiyon: Isı Haritası Oluşturma (Asenkron)</a></li>
+<li><a href="#84-fonksiyon-kalıp-oluşturma">8.4. Fonksiyon: Kalıp Oluşturma</a></li>
+<li><a href="#85-fonksiyon-tarama-temizleme">8.5. Fonksiyon: Tarama Temizleme</a></li>
+<li><a href="#86-fonksiyon-anatomik-hizalama">8.6. Fonksiyon: Anatomik Hizalama</a></li>
+<li><a href="#87-fonksiyon-hacimsel-deformasyon">8.7. Fonksiyon: Hacimsel Deformasyon</a></li>
+</ul>
+</li>
+<li><a href="#9-kullanıcı-etkileşim-tasarımı">Kullanıcı Etkileşim Tasarımı</a><ul>
+<li><a href="#91-modüler-etkileşim-stilleri">9.1. Modüler Etkileşim Stilleri</a></li>
+<li><a href="#92-iletişim-desenleri">9.2. İletişim Desenleri</a></li>
+</ul>
+</li>
+<li><a href="#10-çekirdek-alan-modelleri">Çekirdek Alan Modelleri</a></li>
+<li><a href="#11-hizmet-katmanı-vtkprocessor">Hizmet Katmanı: VTKProcessor</a></li>
+<li><a href="#12-arka-uç-araçları-backend-tooling">Arka Uç Araçları (Backend Tooling)</a></li>
+<li><a href="#13-asenkron-işleme">Asenkron İşleme</a></li>
+<li><a href="#14-render-görselleştirme-hattı">Render (Görselleştirme) Hattı</a></li>
+<li><a href="#15-mesh-işlemleri-temsili">Mesh İşlemleri (Temsili)</a></li>
+<li><a href="#16-performans-stratejileri">Performans Stratejileri</a></li>
+<li><a href="#17-loglama-ve-hata-yönetimi">Loglama ve Hata Yönetimi</a></li>
+<li><a href="#18-konfigürasyon-ve-ortam">Konfigürasyon ve Ortam</a></li>
+<li><a href="#19-derleme-ve-bağımlılık-yönetimi">Derleme ve Bağımlılık Yönetimi</a></li>
+<li><a href="#20-kodlama-standartları">Kodlama Standartları</a></li>
+<li><a href="#21-test-stratejisi">Test Stratejisi</a></li>
+<li><a href="#22-kalite-kontrolleri">Kalite Kontrolleri</a></li>
+<li><a href="#23-güvenlik-ve-gizlilik">Güvenlik ve Gizlilik</a></li>
+<li><a href="#24-riskler-ve-azaltma-yöntemleri">Riskler ve Azaltma Yöntemleri</a></li>
+<li><a href="#25-gelecek-geliştirmeler-ve-genişletme-noktaları">Gelecek Geliştirmeler ve Genişletme Noktaları</a></li>
+<li><a href="#26-sözlük">Sözlük</a></li>
+</ol>
+<hr />
+<h1 id="1-giris">1. Giriş</h1>
+<p><strong>ClonifyCad</strong>, medikal sektörde, özellikle ortopedi ve protez alanında, 3 boyutlu tarama verileri kullanarak kişiye özel protez ve uzuv kalıpları hazırlama, basınca dayalı modifikasyonlar yapma ve kalıp üretimi için tasarlanmış bir masaüstü CAD (Bilgisayar Destekli Tasarım) yazılımıdır. Kullanıcı arayüzü için PyQt5 ve 3D mesh işlemleri için VTK'yı birleştirerek, etkileşimli şekillendirme, yüksek performans ve genişletilebilirlik üzerine odaklanmıştır. Yazılım, 3D tarayıcıdan gelen STL, OBJ, PLY gibi veri dosyalarını manipüle edip kişiye özel kalıplar hazırlayarak bu kalıpların STL formatında 3B baskı alınmasını sağlar. Protez kalıp rektifikasyonu (düzeltme/şekillendirme) süreci, adım adım ilerleyen rehberli bir iş akışı (workflow) ile kullanıcıya sunulur.</p>
+<h2 id="11-dokumann-amac">1.1. Dokümanın Amacı</h2>
+<p>Bu dokümanın temel amacı, <strong>ClonifyCad</strong> yazılımının teknik mimarisini, tasarım kararlarını, temel bileşenlerini ve bu bileşenler arasındaki etkileşimi detaylı bir şekilde açıklamaktır. Bu belge, projenin mevcut ve gelecekteki geliştiricileri için bir referans kaynağı olarak hizmet edecek, kodun sürdürülebilirliğini ve genişletilebilirliğini sağlamak için bir yol haritası sunacaktır.</p>
+<h2 id="12-projenin-kapsam">1.2. Projenin Kapsamı</h2>
+<p>Bu doküman, yazılımın aşağıdaki çekirdek işlevselliklerini ve planlanan modüllerini kapsar:</p>
+<p><strong>Planlanan Özellikler:</strong>
+-   STL, PLY, OBJ formatlarında 3D model yükleme ve görselleştirme.
+-   2D seçimle 3D gürültü temizleme.
+-   Model yüzeyindeki deliklerin otomatik doldurulması.
+-   Etkileşimli kesit bantları ile radyal deformasyon.
+-   "Bulge/Smooth" fırçaları ile serbest form modelleme.
+-   Geri Al/İleri Al (Undo/Redo) yeteneği.
+-   Çoklu pencerede (multi-view) anatomik hizalama.
+-   Otomatik ölçüm ve analiz araçları.
+-   Baskı için 3D çıktı alma seçenekleri.</p>
+<p><strong>Yazılımın temel hedefleri:</strong>
+-   Hastanın taranmış uzuv verilerini dijital ortamda hassas bir şekilde modellemek.
+-   Protez kalıplarını dijital ortamda hassas bir şekilde modellemek.
+-   Ortopedi uzmanlarının klinik bilgi ve deneyimlerini dijital sürece entegre etmelerini sağlamak.
+-   Kişiye özel, konforlu ve performanslı protezlerin üretimini hızlandırmak ve kolaylaştırmak.
+-   Geleneksel kalıplama yöntemlerinin zorluklarını (yüksek kilolu hasta, çift taraflı amputasyon, tekrarlanan düzeltmeler vb.) dijital çözümlerle aşmak.</p>
+<h2 id="13-tanmlar-ve-ksaltmalar">1.3. Tanımlar ve Kısaltmalar</h2>
+<ul>
+<li><strong>GUI</strong>: Grafiksel Kullanıcı Arayüzü (Graphical User Interface)</li>
+<li><strong>VTK</strong>: The Visualization Toolkit</li>
+<li><strong>STL</strong>: Stereolithography (3D dosya formatı)</li>
+<li><strong>PolyData</strong>: VTK'da poligon ağını (noktalar, hücreler) temsil eden temel veri yapısı.</li>
+<li><strong>Pipeline</strong>: Veri akış hattı. VTK'da verinin bir dizi filtreden geçerek işlenmesi.</li>
+<li><strong>Frustum</strong>: Kesik piramit. 3D'de bir kamera görüş alanını tanımlayan geometrik hacim.</li>
+<li><strong>PHI</strong>: (Personal Health Information) Kişisel Sağlık Bilgileri</li>
+<li><strong>CAD</strong>: Bilgisayar Destekli Tasarım (Computer-Aided Design)</li>
+<li><strong>CAM</strong>: Bilgisayar Destekli Üretim (Computer-Aided Manufacturing)</li>
+<li><strong>3D</strong>: Üç Boyutlu (Three-Dimensional)</li>
+<li><strong>Dimension Sheet</strong>: Boyut Tablosu</li>
+</ul>
+<h2 id="14-uygulama-is-aks-admlar-workflow-steps">1.4. Uygulama İş Akışı Adımları (Workflow Steps)</h2>
+<p>Clonify Labs Modelleme Yazılımı, planlanan özellikler doğrultusunda, kullanıcıyı adım adım yönlendiren mantıksal bir iş akışı sunar. Bu akış, ham tarama verisinden baskıya hazır 3D modele kadar olan süreci kapsar ve her adımda <code>Geri Al/İleri Al (Undo/Redo)</code> yeteneği ile desteklenir.</p>
+<h3 id="adm-1-veri-yukleme-ve-gorsellestirme-data-loading-visualization">Adım 1: Veri Yükleme ve Görselleştirme (Data Loading &amp; Visualization)</h3>
+<ul>
+<li><strong>Amacı:</strong> Hastadan alınan ham 3D tarama verisinin sisteme aktarılması ve incelenmesi.</li>
+<li><strong>İşlevselliği:</strong><ul>
+<li><strong>Model İçe Aktarma:</strong> Kullanıcı, <code>STL</code>, <code>PLY</code>, veya <code>OBJ</code> formatlarındaki 3D modelleri yazılıma yükler.</li>
+<li><strong>3D Görüntüleme:</strong> Yüklenen model, 3D görüntüleme penceresinde serbestçe döndürülebilir, kaydırılabilir ve yakınlaştırılabilir bir şekilde sunulur. Bu, modelin ilk genel değerlendirmesi için temel oluşturur.</li>
+</ul>
+</li>
+</ul>
+<h3 id="adm-2-coklu-tarama-birlestirme-multi-scan-registrationnot-priority">Adım 2: Çoklu Tarama Birleştirme (Multi-Scan Registration)(Not Priority)</h3>
+<ul>
+<li><strong>Amacı:</strong> Hastanın farklı açılardan veya zamanlarda yapılmış birden fazla 3D taramasını tek, bütünsel bir modelde birleştirmek. Bu, eksik verileri tamamlamak ve daha eksiksiz bir anatomi oluşturmak için gereklidir.</li>
+<li><strong>İşlevselliği:</strong><ul>
+<li><strong>Otomatik Hizalama (Automated Registration):</strong> Yazılım, ortak geometrik özellikleri veya kullanıcı tarafından belirlenen referans noktalarını kullanarak birden fazla taramayı otomatik olarak hizalar.</li>
+<li><strong>Manuel İnce Ayar:</strong> Otomatik hizalamanın ardından, kullanıcıya hizalamayı manuel olarak hassas bir şekilde ayarlama imkanı sunulu, gerekirse.</li>
+<li><strong>Model Birleştirme (Merging):</strong> Hizalanan taramalar, tek ve tutarlı bir 3D model oluşturmak için birleştirilir. Bu birleşik model, sonraki adımlarda kullanılacak olan ana model haline gelir.</li>
+</ul>
+</li>
+</ul>
+<h3 id="adm-3-tarama-temizleme-ve-onarm-scan-cleaning-repair">Adım 3: Tarama Temizleme ve Onarım (Scan Cleaning &amp; Repair)</h3>
+<ul>
+<li><strong>Amacı:</strong> Tarama sürecinden kaynaklanan gürültü, artefakt ve geometrik kusurların giderilmesi.</li>
+<li><strong>İşlevselliği:</strong><ul>
+<li><strong>2D Seçimle Gürültü Temizleme:</strong> Kullanıcı, 2D görüntüleme düzleminde istenmeyen alanları (örneğin, tarama masası, destek yapıları, ilgisiz uzuvlar) seçerek 3D modelden kolayca kaldırır.</li>
+<li><strong>Otomatik Delik Doldurma:</strong> Yazılım, model yüzeyindeki istenmeyen delikleri ve boşlukları akıllı algoritmalarla tespit eder ve otomatik olarak kapatarak su geçirmez (manifold) bir model oluşturur.</li>
+</ul>
+</li>
+</ul>
+<h3 id="adm-4-anatomik-hizalama-anatomical-alignment">Adım 4: Anatomik Hizalama (Anatomical Alignment)</h3>
+<ul>
+<li><strong>Amacı:</strong> Modelin, standart bir anatomik referans sistemine göre doğru bir şekilde konumlandırılması ve yönlendirilmesi.</li>
+<li><strong>İşlevselliği:</strong><ul>
+<li><strong>Çoklu Pencerede Hizalama:</strong> Kullanıcı, farklı açılardan (ön, yan, üst) gösterilen model üzerinde anatomik referans noktaları belirler.</li>
+<li><strong>Otomatik Yönlendirme:</strong> Belirlenen noktalara göre yazılım, modeli otomatik olarak standart anatomik düzleme (örneğin, uzun ekseni Z eksenine paralel olacak şekilde) hizalar.</li>
+</ul>
+</li>
+</ul>
+<h3 id="adm-5-serbest-form-modelleme-ve-deformasyon-free-form-modeling-deformation">Adım 5: Serbest Form Modelleme ve Deformasyon (Free-form Modeling &amp; Deformation)</h3>
+<ul>
+<li><strong>Amacı:</strong> Protez kalıbının hasta için en uygun ve konforlu hale getirilmesi amacıyla model üzerinde hassas geometrik değişiklikler yapılması.</li>
+<li><strong>İşlevselliği:</strong><ul>
+<li><strong>"Bulge/Smooth" Fırçaları:</strong> Kullanıcı, fırça benzeri araçlarla model yüzeyinde sezgisel olarak hacim ekleme (şişirme), çıkarma (aşındırma) ve pürüzsüzleştirme işlemleri yapar. Bu, özellikle basınç noktalarını rahatlatmak veya destek alanları oluşturmak için kullanılır.</li>
+<li><strong>Etkileşimli Kesit Bantları ile Radyal Deformasyon:</strong> Model üzerine yerleştirilen kesit bantları aracılığıyla, belirli bölgelerde dairesel (radyal) olarak hassas boyutlandırma (genişletme/daraltma) yapılır. Bu, uzvun çevresel ölçülerine tam uyum sağlamak için kritiktir.</li>
+</ul>
+</li>
+</ul>
+<h3 id="adm-6-olcum-ve-analiz-measurement-analysis">Adım 6: Ölçüm ve Analiz (Measurement &amp; Analysis)</h3>
+<ul>
+<li><strong>Amacı:</strong> Yapılan modifikasyonların doğruluğunu teyit etmek ve klinik gereksinimlere uygunluğunu kontrol etmek.</li>
+<li><strong>İşlevselliği:</strong><ul>
+<li><strong>Otomatik Ölçüm Araçları:</strong> Yazılım, model üzerinde uzunluk, çevre, açı ve hacim gibi kritik ölçümleri otomatik olarak yapabilir. Bu, tasarımın sayısal verilerle doğrulanmasını sağlar.</li>
+<li><strong>Analiz:</strong> İki model arasındaki farkları veya belirli bölgelerdeki değişiklikleri görsel ve sayısal olarak analiz etme imkanı sunar.</li>
+</ul>
+</li>
+</ul>
+<h3 id="adm-7-baskya-hazrlk-ve-ckt-print-preparation-export">Adım 7: Baskıya Hazırlık ve Çıktı (Print Preparation &amp; Export)</h3>
+<ul>
+<li><strong>Amacı:</strong> Tamamlanan modelin 3D yazıcıda basılmak üzere hazırlanması.</li>
+<li><strong>İşlevselliği:</strong><ul>
+<li><strong>Model Sonlandırma:</strong> Modelin baskıya uygunluğu (örneğin, duvar kalınlığı kontrolü) son kez denetlenir.</li>
+<li><strong>3D Çıktı Alma:</strong> Nihai model, 3D baskı için yaygın olarak kullanılan <code>STL</code> veya diğer formatlarda dışa aktarılır.</li>
+</ul>
+</li>
+</ul>
+<h1 id="3-hedefler-ve-amaclar">3. Hedefler ve Amaçlar</h1>
+<ul>
+<li>Klinisyenlere/teknisyenlere anatomik mesh'leri hassas bir şekilde düzeltmek için araçlar sağlamak.</li>
+<li>Görsel geri bildirim (ısı haritası) ile basınca dayalı ayarlamaları desteklemek.</li>
+<li>Tekrarlanabilir bir şekilde deplasman tabanlı kalıplar üretmek (örn. aynı basınç haritası ve parametrelerle, deterministik test mesh'leri ve prosedürel kaynaklar kullanılarak her seferinde aynı sonuçların elde edilmesi; örnek için bkz. "Test Stratejisi" ve "Çekirdek Alan Modelleri" bölümleri).</li>
+<li>Yoğun geometri operasyonları sırasında duyarlı bir kullanıcı arayüzü sürdürmek.</li>
+<li>Gelecekteki araçlar (kesme desenleri, şekillendirme, işaretleme, GPU hızlandırma) için modüler bir arka uç sunmak.</li>
+<li>Tekrarlanabilirliği sağlamak (deterministik test mesh'leri, prosedürel kaynaklar).</li>
+</ul>
+<h1 id="4-paydaslar">4. Paydaşlar</h1>
+<ul>
+<li>Klinik protez teknisyenleri (birincil kullanıcılar).</li>
+<li>Hastane merkezleri.</li>
+<li>Dahili geliştiriciler (araç zinciri genişletme).</li>
+<li>QA/test personeli (doğrulama senaryoları).  </li>
+</ul>
+<h1 id="5-ust-duzey-mimari">5. Üst Düzey Mimari</h1>
+<p>Yazılım, katmanlı mimari yaklaşımını benimseyerek modüler, sürdürülebilir ve genişletilebilir bir yapı sunmaktadır. Bu mimari, görevleri net bir şekilde ayırarak kodun karmaşıklığını azaltır.</p>
+<h2 id="51-katmanl-mimari-yaklasm">5.1. Katmanlı Mimari Yaklaşımı</h2>
+<p>Yazılım, kodun yönetilebilirliğini ve modülerliğini sağlamak amacıyla, görevleri net bir şekilde ayrıştıran üç katmanlı bir mimari üzerine inşa edilmiştir. Bu yapı, Model-View-Controller (MVC) tasarım deseninden güçlü bir şekilde ilham almıştır.</p>
+<h2 id="52-katmanlarn-detayl-analizi">5.2. Katmanların Detaylı Analizi</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Katman</th>
+<th style="text-align: left;">Sorumluluk</th>
+<th style="text-align: left;">Teknolojiler / Bileşenler</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Sunum (Presentation)</strong></td>
+<td style="text-align: left;">Kullanıcı etkileşimini yönetir, görsel bileşenleri sunar ve kullanıcı girdilerini alır.</td>
+<td style="text-align: left;">PyQt (Widget'lar, Sinyaller/Slotlar), VTK (3D Render Penceresi)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Uygulama (Application)</strong></td>
+<td style="text-align: left;">Arayüzden gelen istekleri işler, iş mantığını koordine eder ve servisleri çağırır.</td>
+<td style="text-align: left;">Ana uygulama sınıfı, olay yöneticileri, UI ve servisler arası köprü.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Servisler (Services)</strong></td>
+<td style="text-align: left;">Belirli işlevleri (örn: dosya I/O, mesh işleme) kapsülleyen senkron veya asenkron operasyonları yürütür.</td>
+<td style="text-align: left;"><code>VTKProcessor</code>, <code>AsyncMeshProcessor</code>, API istemcileri.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Arka Uç (Backend)</strong></td>
+<td style="text-align: left;">Yoğun hesaplama gerektiren özel alan operasyonlarını ve algoritmaları içerir.</td>
+<td style="text-align: left;">Basınç haritalama, kalıp oluşturma, hizalama algoritmaları.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Alan Modelleri (Domain)</strong></td>
+<td style="text-align: left;">Uygulamanın durumunu ve temel veri yapılarını (örn: mesh, oturum bilgileri, geri alma yığını) temsil eder.</td>
+<td style="text-align: left;"><code>AnatomySession</code>, <code>vtkPolyData</code>, <code>PressureDict</code>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Altyapı (Infrastructure)</strong></td>
+<td style="text-align: left;">Veri depolama, loglama, konfigürasyon ve harici sistemlerle iletişimi yönetir.</td>
+<td style="text-align: left;">Dosya sistemi, veritabanı bağlantıları, loglama kütüphanesi.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="7-kullanlan-teknolojiler-ve-kutuphaneler">7. Kullanılan Teknolojiler ve Kütüphaneler</h1>
+<p>Projenin geliştirilmesinde, açık kaynak kodlu, endüstri standardı, yüksek performanslı ve geniş topluluk desteğine sahip teknolojiler tercih edilecektir.</p>
+<h2 id="71-ana-programlama-dili-python-310">7.1. Ana Programlama Dili: Python 3.10</h2>
+<p><strong>Python</strong>, hızlı prototipleme, temiz sözdizimi ve zengin kütüphane desteği sayesinde projenin ana dili olarak seçilmiştir. Özellikle bilimsel hesaplama ve veri analizi alanlarındaki gücü, medikal veri işleme doğasıyla örtüşmektedir. Python'un "yapıştırıcı dil" özelliği, <strong>VTK</strong> gibi C++ kütüphanelerinin kolayca entegre edilmesini sağlamıştır.</p>
+<h2 id="72-grafiksel-kullanc-arayuzu-gui-pyqt5">7.2. Grafiksel Kullanıcı Arayüzü (GUI): PyQt5</h2>
+<p><strong>PyQt5</strong>, platformdan bağımsız masaüstü uygulamaları geliştirmek için kullanılan, Qt C++ kütüphanesinin Python versiyonudur.
+-   <strong>Olgunluk ve Kararlılık:</strong> Kararlı ve güvenilir bir arayüz çatısıdır.
+-   <strong>Sinyal ve Slot Mekanizması:</strong> Arayüz elemanları ile program mantığı arasında esnek ve ayrıştırılmış iletişim sağlar.
+-   <strong>Geniş Widget Seti:</strong> Karmaşık ve profesyonel bir kullanıcı arayüzünün hızlıca oluşturulmasına olanak tanır.
+-   <strong>VTK Entegrasyonu:</strong> <code>QVTKRenderWindowInteractor</code> widget'ı sayesinde, <strong>VTK</strong>'nın 3D render pencerelerinin bir Qt uygulaması içine sorunsuz entegrasyonu sağlar.</p>
+<h2 id="73-3d-gorsellestirme-ve-isleme-motoru-vtk-the-visualization-toolkit">7.3. 3D Görselleştirme ve İşleme Motoru: VTK (The Visualization Toolkit)</h2>
+<p><strong>VTK</strong>, bilimsel ve medikal verilerin 3 boyutlu olarak işlenmesi, görselleştirilmesi ve analizi için tasarlanmış, C++ tabanlı, yüksek performanslı bir kütüphanedir. Projenin 3D ile ilgili tüm ağır işlerini <strong>VTK</strong> üstlenir.
+-   <strong>Veri Akış Hattı Mimarisi (Pipeline Architecture):</strong> <code>Source -&gt; Filter -&gt; Mapper -&gt; Actor</code> şeklindeki veri akış modeli, karmaşık 3D veri işleme zincirlerinin modüler ve verimli bir şekilde oluşturulmasını sağlar.
+-   <strong>Zengin Filtre Kütüphanesi:</strong> <code>vtkClipPolyData</code>, <code>vtkTransformPolyDataFilter</code> ve <code>vtkSTLReader</code> gibi yüzlerce hazır algoritma içerir. Gelecekte <code>vtkFillHolesFilter</code>, <code>vtkSmoothPolyDataFilter</code> gibi filtreler de kullanılacaktır.
+-   <strong>Gelişmiş Etkileşim Mekanizmaları:</strong> <code>vtkRenderWindowInteractor</code> ve <code>vtkInteractorStyle</code> alt sınıfları, fare ve klavye ile karmaşık 3D sahne etkileşimleri oluşturmak için güçlü bir altyapı sunar.</p>
+<h2 id="74-matematiksel-ve-bilimsel-hesaplama-numpy">7.4. Matematiksel ve Bilimsel Hesaplama: NumPy</h2>
+<p><strong>NumPy</strong>, Python'da bilimsel hesaplamalar için temel pakettir. Çok boyutlu diziler üzerinde yüksek performanslı matematiksel işlemler için kullanılır.
+-   <strong>Performans:</strong> Büyük veri kümeleri üzerinde hızlı hesaplamalar sağlar.
+-   <strong>Vektör Matematiği:</strong> Anatomik hizalama ve deformasyon algoritmalarında vektör ve matris işlemleri için kullanılır.
+-   <strong>VTK Uyumluluğu:</strong> <code>vtk.util.numpy_support</code> modülü, NumPy dizileri ile VTK veri dizileri arasında verimli veri alışverişi sağlar.</p>
+<h1 id="8-cekirdek-fonksiyonlarn-mantksal-aks">8. Çekirdek Fonksiyonların Mantıksal Akışı</h1>
+<h2 id="81-fonksiyon-mesh-yukleme">8.1. Fonksiyon: Mesh Yükleme</h2>
+<p><strong>Amaç:</strong> Harici bir dosyadan (örn: .stl, .ply) 3D mesh verilerini uygulamaya yüklemek ve görselleştirmek.</p>
+<p><strong>Mantıksal Akış:</strong>
+1.  <strong>UI Talebi:</strong> Kullanıcı, UI sayfasından bir mesh yükleme isteği başlatır (dosya yolu ile).
+2.  <strong>İşlem Başlangıcı Sinyali:</strong> Kontrol Katmanı, UI'a bir "processingStarted" sinyali gönderir.
+3.  <strong>Dosya Okuma:</strong> <strong>VTKProcessor</strong> (Hizmet Katmanı), dosya uzantısına göre uygun VTK okuyucusunu (<code>vtkSTLReader</code>, <code>vtkPLYReader</code>) seçer.
+4.  <strong>Mesh Yükleme:</strong> Okuyucu, 3D mesh verilerini (<strong>vtkPolyData</strong>) belleğe yükler.
+5.  <strong>Orijinal Veri Kopyası:</strong> Yüklenen mesh'in derin bir kopyası <code>original_poly_data</code> olarak saklanır.
+6.  <strong>Aktif Veri Ayarı:</strong> Yüklenen mesh, <code>active_poly_data</code> olarak ayarlanır.
+7.  <strong>Geçmiş Yığınına Ekleme:</strong> Uygulamanın başlangıç durumu, <code>HistoryStack</code>'e ilk "işlem" olarak eklenir.
+8.  <strong>Mesh Yüklendi Sinyali:</strong> <strong>VTKProcessor</strong>, yüklendiğini ve <code>active_poly_data</code>'yı referans alarak "meshLoaded" sinyali gönderir.
+9.  <strong>İşlem Tamamlandı Sinyali:</strong> Son olarak, "processingFinished" sinyali gönderilir.
+10. <strong>UI Güncelleme:</strong> UI, <code>update_renderer</code> metoduyla yeni <code>active_poly_data</code>'yı görselleştirmek üzere güncellenir.
+11. <strong>MESH kalitesi arttırma</strong>: Yüklenen mesh verileri, <code>VTKProcessor</code> tarafından çeşitli iyileştirme teknikleri (örn: yüzey pürüzsüzleştirme, kenar keskinleştirme) ile işlenir.</p>
+<h2 id="82-fonksiyon-basnc-boyama">8.2. Fonksiyon: Basınç Boyama</h2>
+<p><strong>Amaç:</strong> Kullanıcının 3D mesh üzerinde fare ile çizim yaparak her bir noktaya (vertex) bir basınç değeri atamasını sağlamak ve bunu görselleştirmek (ısı haritası).</p>
+<p><strong>Mantıksal Akış:</strong>
+1.  <strong>Fırça Seçimi:</strong> Kullanıcı UI'dan bir fırça (boyut, sertlik, güç) seçer.
+2.  <strong>Uzamsal Sorgu Başlatma:</strong> <code>vtkStaticPointLocator</code> nesnesi (hızlı uzamsal sorgular için önceden oluşturulmuş/önbelleğe alınmış) başlatılır.
+3.  <strong>Çizim Başlangıcı:</strong> Kullanıcı fareyi mesh üzerinde sürüklemeye başladığında, geçerli fırça vuruşu için bir tampon (buffer) temizlenir.
+4.  <strong>Fırça Hareketi:</strong> Kullanıcı farenin basılı tutarak mesh üzerinde hareket etmesiyle (<code>mouse_moved</code> olayı), <code>PressureTool</code> şu adımları izler:
+    -   Fırça merkezi çevresindeki noktalar (radius) bir uzamsal sorgu ile bulunur.
+    -   Her etkilenen nokta için, fırça merkezine olan uzaklığa göre bir "ağırlık" (weight) veya etki düşüşü (falloff) hesaplanır.
+    -   Yeni basınç değeri (örn: <code>yeni_basinc = mevcut_basinc + guc * agirlik</code>) hesaplanır ve -100 ile 100 arasında bir değere clamped edilir.
+    -   Noktanın ID'si, eski değeri ve yeni değeri bir vuruş tamponuna (<code>stroke buffer</code>) kaydedilir (bu nokta ilk kez değiştiriliyorsa).
+    -   Basınç değerleri, hafızadaki <code>pressure_dict</code>'te güncellenir.
+    -   Bu değişiklikler, <code>vtkFloatArray</code> olan <code>PressureValues</code> skaler dizisine yansıtılır ve render isteği, UI'da gerçek zamanlı görsel geri bildirim sağlamak için gruplanır (throttled).
+5.  <strong>Çizim Sonu:</strong> Kullanıcı fareyi bıraktığında (<code>mouse_released</code> olayı), tüm vuruş tamponu, geri alma/ileri alma yığınına (<code>HistoryStack</code>) bir "işlem" olarak eklenir.</p>
+<h2 id="83-fonksiyon-is-haritas-olusturma-asenkron">8.3. Fonksiyon: Isı Haritası Oluşturma (Asenkron)</h2>
+<p><strong>Amaç:</strong> <code>pressure_dict</code>'teki basınç değerlerini mesh üzerinde görsel olarak bir ısı haritası olarak göstermek. Performans için asenkron (arka planda) olarak çalışır.</p>
+<p><strong>Mantıksal Akış:</strong>
+1.  <strong>UI İsteği:</strong> Kullanıcı, UI'dan ısı haritası oluşturma talebini tetikler.
+2.  <strong>Asenkron Kuyruk:</strong> Kontrol Katmanı, bu operasyonu <code>AsyncMeshProcessor</code>'a (ayrı bir thread) sıraya alır.
+3.  <strong>Thread Başlatma:</strong> Ayrı bir thread'de (işlemciyi dondurmamak için) <code>AsyncMeshProcessor</code> çalışmaya başlar.
+4.  <strong>Skaler Dizi Oluşturma/Güncelleme:</strong> Thread, <code>pressure_dict</code>'teki değerleri kullanarak veya güncelleyerek <code>vtkFloatArray</code> tipinde bir <code>PressureValues</code> skaler dizisi oluşturur/günceller.
+5.  <strong>Tamamlanma Sinyali:</strong> İşlem tamamlandığında, thread, sonuç meta verileriyle (örn: değer aralığı) bir <code>processing_complete</code> sinyali gönderir.
+6.  <strong>UI Güncelleme:</strong> Kontrol Katmanı, bu sinyali ana thread'de yakalar. Isı haritasının renk dönüşümü için <code>vtkLookupTable</code> (LUT) yapılandırılır ve bu LUT'ye göre renderer güncellenir.</p>
+<h2 id="84-fonksiyon-kalp-olusturma">8.4. Fonksiyon: Kalıp Oluşturma</h2>
+<p><strong>Amaç:</strong> Mesh'in <code>PressureValues</code>'ına dayalı olarak protez kalıbını (deforme edilmiş mesh) oluşturmak.</p>
+<p><strong>Mantıksal Akış:</strong>
+1.  <strong>Isı Haritası Garantisi:</strong> İşlem başlamadan önce <code>PressureValues</code>'ın doğru bir şekilde hesaplanmış ve meshe atanmış olduğundan emin olunur.
+2.  <strong>Deplasman Skaleri Hesaplama:</strong> Her bir nokta için bir deplasman skaleri (<code>displacement_scalar</code>) hesaplanır. Bu genellikle atanmış basınç değerinin (<code>pressure_value</code>) bir <code>warp_scale</code> faktörü ile çarpılmasıyla elde edilir (örn: <code>displacement_scalar = -pressure_value * warp_scale</code>). Negatif değerler, materyalin dışarı doğru itilmesi anlamına gelir.
+3.  <strong>Geometri Deformasyonu:</strong>
+    -   Modeldeki her bir noktanın normal vektörü alınır.
+    -   Noktanın yeni konumu, <code>yeni_konum = mevcut_konum + deplasman_skaleri * normal_vektör</code> formülüyle hesaplanır.
+    -   Bu, <code>vtkWarpVector</code> filtresi veya manuel nokta deplasmanı algoritmaları kullanılarak gerçekleştirilebilir.
+4.  <strong>MoldDisplacement Kaydı:</strong> Hesaplanan deplasman değerleri, daha sonra tekrarlanabilirlik ve analiz için <code>MoldDisplacement</code> adında yeni bir skaler dizi olarak meshe atanabilir.
+5.  <strong>Güncelleme:</strong> Deforme olmuş <strong>PolyData</strong>, <code>active_poly_data</code> olarak ayarlanır ve <code>HistoryStack</code>'e eklenir. Render güncellenir.
+6.  <strong>Meta Veri:</strong> Oluşturulan kalıbın ölçeği, minimum/maksimum deplasman gibi meta veriler, daha sonra raporlama veya analiz için kaydedilir.</p>
+<h2 id="85-fonksiyon-tarama-temizleme">8.5. Fonksiyon: Tarama Temizleme</h2>
+<p><strong>Amaç:</strong> Kullanıcının 2D bir seçimle 3D modelin istenmeyen kısımlarını (örn: tarama gürültüsü, gereksiz arka plan) silmesi.</p>
+<p><strong>Mantıksal Akış:</strong>
+1.  <strong>Giriş:</strong> Kullanıcı, 3D görüntüleme penceresinde 2D bir dikdörtgen veya serbest form bir alan çizer (fare sürüklemesi ile).
+2.  <strong>2D -&gt; 3D Dönüşüm:</strong> Sistem (VTK Picker ve Frustum sınıfları), bu 2D seçim alanını, 3D uzayda bir seçim hacmine (frustum veya bounding box) dönüştürür. Bu hacim, kameranın bakış açısı ve derinliği dikkate alınarak oluşturulur.
+3.  <strong>Kesme İşlemi:</strong> Seçilen 3D hacmin içinde veya dışında kalan (kullanıcının seçimine bağlı olarak) tüm 3D geometri (<strong>PolyData</strong>'nın noktaları ve hücreleri), <code>vtkClipPolyData</code> veya benzeri bir filtre kullanılarak modelden çıkarılır.
+4.  <strong>Güncelleme:</strong> Temizlenmiş <strong>PolyData</strong> nesnesi, yeni "Aktif Veri" olarak ayarlanır ve <code>HistoryStack</code>'e yeni bir işlem olarak eklenir. Arayüz güncellenir.</p>
+<h2 id="86-fonksiyon-anatomik-hizalama">8.6. Fonksiyon: Anatomik Hizalama</h2>
+<p><strong>Amaç:</strong> 3D modeli (örneğin, ampute uzuv taraması), standart bir anatomik koordinat sistemine göre yeniden yönlendirmek (örn: uzvun uzun eksenini Z eksenine, ön-arka yönünü Y eksenine hizalamak).</p>
+<p><strong>Mantıksal Akış:</strong>
+1.  <strong>Giriş:</strong> Kullanıcı, model üzerinde stratejik anatomik referans noktalarını işaretler (örn: büyük trokanter, lateral/medial epikondil, distal uç). Bu noktalar, 3D uzayda <code>vtkPointPicker</code> gibi araçlarla seçilir ve koordinatları saklanır.
+2.  <strong>Koordinat Sistemi Hesaplama:</strong> Sistem (<strong>NumPy</strong> ve lineer cebir fonksiyonları kullanarak), işaretlenen bu noktalardan yola çıkarak yeni bir anatomik koordinat sistemi (yeni X, Y, Z eksenleri) hesaplar. Örneğin, uzvun uzun ekseni iki nokta arasındaki vektörden, ön-arka ekseni ise diğer noktaların konumlarına göre belirlenir.
+3.  <strong>Dönüşüm Matrisi Oluşturma:</strong> Modelin mevcut koordinat sistemi ile yeni hesaplanan anatomik koordinat sistemi arasında geçişi sağlayacak bir dönüşüm (rotasyon ve translasyon) matrisi (<code>vtkTransform</code>) oluşturulur.
+4.  <strong>Model Hizalama:</strong> <code>vtkTransformPolyDataFilter</code> kullanılarak, tüm <strong>PolyData</strong> bu matris ile döndürülür ve hizalanmış olur.
+5.  <strong>Güncelleme:</strong> Hizalanmış <strong>PolyData</strong> nesnesi "Aktif Veri" olarak kaydedilir ve <code>HistoryStack</code> güncellenir.</p>
+<h2 id="87-fonksiyon-hacimsel-deformasyon">8.7. Fonksiyon: Hacimsel Deformasyon</h2>
+<p><strong>Amaç:</strong> Protez soketinin belirli bölgelerinde (örn: yük taşıyan alanlar, hassas kemik bölgeleri) ölçüleri hassas bir şekilde artırmak (hacim ekleme) veya azaltmak (hacim çıkarma/sıkıştırma).</p>
+<p><strong>Mantıksal Akış:</strong>
+1.  <strong>Giriş:</strong> Kullanıcı, model üzerinde deforme etmek istediği bir bölgeyi (örn: kesit bantları ile, veya manuel fırça ile) ve uygulanacak deformasyon miktarını (+/- mm) tanımlar.
+2.  <strong>Nokta Seçimi ve Etki Alanı:</strong> Sistem, tanımlanan bölge içindeki tüm 3D noktaları belirler. Bir fırça kullanılıyorsa, fırça merkezine olan uzaklığa göre bir "etki düşüşü" (falloff) fonksiyonu hesaplanır.
+3.  <strong>Deformasyon Uygulama:</strong>
+    -   Her bir seçili nokta için, noktanın yüzey normal vektörü hesaplanır.
+    -   Nokta, belirlenen deformasyon miktarı ve falloff fonksiyonuna göre (yüzey normali boyunca) içe (azaltma) veya dışa (artırma) doğru hareket ettirilir.
+    -   Bu işlem, <strong>PolyData</strong>'nın nokta koordinatlarını doğrudan değiştirerek gerçekleştirilir.
+4.  <strong>Güncelleme:</strong> Deforme olmuş <strong>PolyData</strong> nesnesi "Aktif Veri" olarak ayarlanır ve <code>HistoryStack</code>'e eklenir.</p>
+<h1 id="9-kullanc-etkilesim-tasarm">9. Kullanıcı Etkileşim Tasarımı</h1>
+<h2 id="91-moduler-etkilesim-stilleri">9.1. Modüler Etkileşim Stilleri</h2>
+<p>Uygulama, farklı görevler için farklı fare ve klavye davranışları gerektirir. Bu, <strong>VTK</strong>'nın <code>vtkInteractorStyle</code> sınıfından türetilen "Etkileşim Stilleri" adı verilen değiştirilebilir modüllerle yönetilir. <code>MainWindow</code> (Controller), kullanıcının seçtiği araca göre bu stiller arasında dinamik olarak geçiş yapar.</p>
+<ul>
+<li><strong>Kamera Stili (Varsayılan):</strong> Varsayılan mod. Kullanıcının 3D sahneyi serbestçe döndürme, kaydırma ve yakınlaştırma işlemlerini (fare tekerleği, sol/orta/sağ tıklama ve sürükleme ile) sağlar. (Örn: <code>vtkInteractorStyleTrackballCamera</code>).</li>
+<li><strong>Seçim Stili:</strong> Tarama Temizleme aracı aktifken, kullanıcının 2D bir dikdörtgen veya serbest form seçim alanı çizmesini sağlar. Bu 2D seçim, 3D uzayda geometriyi kesmek veya filtrelemek için kullanılır. (Örn: <code>vtkInteractorStyleRubberBand2D</code> veya özel bir interaktör stili).</li>
+<li><strong>İşaretleme Stili:</strong> Anatomik Hizalama aracı aktifken, kullanıcının model üzerinde belirli 3D noktaları (örn: kemik işaretleri) tıklayarak seçmesini sağlar. Seçilen noktalar, daha sonra dönüşüm matrisleri hesaplamak için kullanılır. (Örn: <code>vtkInteractorStyleTrackballCamera</code> ile birlikte <code>vtkPointPicker</code> kullanılarak özelleştirilmiş bir stil).</li>
+<li><strong>Fırça/Heykel Stili:</strong> Oyma/Ekleme veya Yumuşatma araçları aktifken, kullanıcının fareyi model üzerinde sürükleyerek lokal deformasyonlar veya yumuşatmalar yapmasını sağlar. Fırça imleci ve etki alanı görselleştirilir. (Özel bir <code>vtkInteractorStyle</code> alt sınıfı).</li>
+</ul>
+<h1 id="15-mesh-islemleri-temsili">15. Mesh İşlemleri (Temsili)</h1>
+<p><strong>Clonify Labs</strong>, protez kalıplarını hazırlamak ve düzeltmek için çeşitli temel mesh işleme operasyonlarını kullanır. Bu operasyonlar <strong>VTK</strong> kütüphanesinin gücünü kullanır.</p>
+<table>
+<thead>
+<tr>
+<th>Operasyon</th>
+<th>Tekniği / VTK Filtresi</th>
+<th>Açıklama</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Temizleme (Clean)</td>
+<td><code>vtkCleanPolyData</code></td>
+<td>Mesh'teki fazladan (duplicate) noktaları birleştirmek, küçük açıklıkları kapatmak ve genel topolojik temizlik yapmak için kullanılır. Tarama verilerindeki hataları gidermede önemlidir.</td>
+</tr>
+<tr>
+<td>Yumuşatma (Smooth) (Taubin/Laplacian)</td>
+<td><code>vtkSmoothPolyDataFilter</code> veya özelleşmiş filtreler</td>
+<td>Mesh yüzeyindeki pürüzlülüğü azaltır, köşeleri yumuşatır ve daha organik bir görünüm sağlar. Konfor açısından kritik bir adımdır.</td>
+</tr>
+<tr>
+<td>Basitleştirme (Decimate)</td>
+<td><code>vtkDecimatePro</code> ile hedef azaltma oranı</td>
+<td>Mesh'in poligon sayısını azaltır. Dosya boyutunu küçültür ve işlem performansını artırır, ancak modelin detay seviyesini düşürebilir.</td>
+</tr>
+<tr>
+<td>Alt Bölümlere Ayırma (Subdivide)</td>
+<td><code>vtkLoopSubdivisionFilter</code> (ayarlanabilir iterasyonlar)</td>
+<td>Mesh'in poligon sayısını artırır, yüzeylere daha fazla detay ekler ve daha pürüzsüz kıvrımlar sağlar. Özellikle manuel şekillendirme için daha fazla kontrol sağlar.</td>
+</tr>
+<tr>
+<td>Normallerin Yeniden Hesaplanması</td>
+<td><code>vtkPolyDataNormals</code> (modifikasyon sonrası)</td>
+<td>Mesh üzerinde yapılan deformasyonlar sonrası noktaların ve yüzeylerin normal vektörlerini yeniden hesaplar. Doğru görselleştirme ve sonraki işlemler (örn: kalınlık verme) için esastır.</td>
+</tr>
+<tr>
+<td>Çarpıtma (Warp) (Kalıp için)</td>
+<td><code>vtkWarpVector</code> veya manuel nokta deplasmanı</td>
+<td>Kalıp oluşturma sürecinde, belirli bir yönde (genellikle yüzey normali boyunca) ve belirli bir miktar kadar noktaları kaydırarak mesh'i deforme eder. Basınç değerleri bu deplasman miktarını belirleyebilir.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="16-performans-stratejileri">16. Performans Stratejileri</h1>
+<p>Yazılımın yoğun 3D işlemler sırasında bile kullanıcı arayüzünün (UI) duyarlı kalmasını sağlamak için çeşitli performans optimizasyon stratejileri uygulanmıştır.</p>
+<table>
+<thead>
+<tr>
+<th>Endişe</th>
+<th>Teknik</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UI Donması</td>
+<td>İşlem maliyeti yüksek fonksiyonlar için ayrı iş parçacıkları (<strong>QThread</strong>) ve sinyaller (<strong>PyQt Signal/Slot</strong>) kullanarak arka planda işlem yürütme.</td>
+</tr>
+<tr>
+<td>Aşırı Render Çağrıları</td>
+<td>Hızlı ardışık güncelIemeleri (<code>mouseMoveEvent</code> gibi) tek bir render çağrısında birleştiren gruplama (<code>BatchRenderer</code>) ve kısıtlama (throttling) mekanizmaları.</td>
+</tr>
+<tr>
+<td>Uzamsal Sorgular</td>
+<td><code>vtkStaticPointLocator</code> gibi <strong>VTK</strong>'nın optimize edilmiş uzamsal indeksleme yapılarının yeniden kullanımı. Bu, büyük meshlerdeki noktalara hızlı erişim sağlar (örn: fırça etki alanı sorguları).</td>
+</tr>
+<tr>
+<td>Skaler Dizi Güncellemeleri</td>
+<td>Skaler dizilerin (<code>vtkFloatArray</code>) her değişiklikte yeniden oluşturulması yerine, mevcut dizi verilerinin doğrudan bellekte güncellenmesi (in-place modification).</td>
+</tr>
+<tr>
+<td>Geri Alma Yığını Boyutu</td>
+<td>Tam <strong>PolyData</strong> kopyaları yerine, yalnızca değiştirilen nokta ID'leri ve eski/yeni değerler gibi delta değişikliklerini depolayarak yığın boyutunu optimize etme.</td>
+</tr>
+<tr>
+<td>Büyük Mesh Yumuşatma</td>
+<td>Yumuşatma iterasyonlarının sınırlanması, yoğun mesh'ler için işlem öncesi basitleştirme (decimation) uygulama.</td>
+</tr>
+<tr>
+<td>GPU Kullanımı (isteğe bağlı)</td>
+<td>Mümkün olduğunda <strong>VTK</strong>'nın GPU destekli mapper'larını veya filtrelerini kullanma. GPU mevcut değilse sorunsuz bir şekilde CPU tabanlı yöntemlere geri düşme.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>İzleme:</strong>
+-   Maliyetli operasyonların (örn: mesh işleme) sürelerini kaydetmek için loglama kullanılır.
+-   Önemli performans noktaları için basit zamanlama dekoratörlerinin entegrasyonu potansiyel bir iyileştirmedir.</p>
+<h1 id="17-loglama-ve-hata-yonetimi">17. Loglama ve Hata Yönetimi</h1>
+<p>Uygulamanın çalışma zamanı davranışını izlemek, sorunları teşhis etmek ve kullanıcıya geri bildirim sağlamak için kapsamlı bir loglama ve hata yönetimi stratejisi benimsenmiştir.</p>
+<ul>
+<li><strong>Modül Başına Logger:</strong> <code>print</code> ifadeleri yerine, her Python modülü için ayrı bir <code>logging</code> nesnesi kullanılır. Bu, günlüklerin düzenli olmasını ve filtrelenmesini kolaylaştırır.</li>
+<li><strong>Kullanıcıya Yönelik Durum Sinyalleri:</strong> Kullanıcı arayüzünde görünen durum mesajları için özel sinyaller (<code>logMessage</code>) kullanılır. Bu sinyaller, işlemin başladığını, ilerlemesini, tamamlandığını veya bir hata oluştuğunu kullanıcıya bildirir.</li>
+<li><strong>Desteklenmeyen Dosya Tipleri:</strong> Desteklenmeyen dosya uzantıları veya bozuk mesh dosyaları için yükleme aşamasında erken ret mekanizmaları bulunur. Bu durumlar günlüğe kaydedilir ve kullanıcıya açık bir hata mesajı sunulur.</li>
+<li><strong>Asenkron Hata Yakalama:</strong> Asenkron iş parçacıklarında (örn: <code>AsyncMeshProcessor</code>) meydana gelen istisnalar <code>try</code>/<code>catch</code> blokları içinde yakalanır. Hata detayları günlüğe kaydedilir ve ana thread'e bir hata sinyali gönderilerek UI'ın duyarlı kalması sağlanır.</li>
+<li><strong>Günlük Dosyaları:</strong> Çalışma zamanı günlükleri, <code>logs/</code> dizini altında zaman damgalı dosyalar halinde saklanır. Bu günlükler, sorun giderme ve uygulama denetimleri için kullanılabilir.</li>
+<li><strong>Bağlam İçeriği:</strong> Hata mesajlarına, ilgili mesh dosyasının adı gibi bağlam bilgileri eklenerek sorunların tespiti kolaylaştırılır.</li>
+</ul>
+<h1 id="18-konfigurasyon-ve-ortam">18. Konfigürasyon ve Ortam</h1>
+<p>Yazılımın kurulumu ve farklı ortamlarda çalıştırılması için konfigürasyon ve bağımlılık yönetimi stratejileri belirlenmiştir.</p>
+<ul>
+<li><strong>Python 3.11 Hedefi:</strong> Proje, Python 3.11 veya daha yeni versiyonlarını hedef alarak en güncel dil özelliklerinden ve performans iyileştirmelerinden faydalanır.</li>
+<li><strong>Bağımlılık Yönetimi:</strong> Tüm Python bağımlılıkları (<strong>PyQt5</strong>, <strong>VTK</strong>, <strong>NumPy</strong> vb.) <code>pyproject.toml</code> veya <code>requirements.txt</code> dosyaları aracılığıyla yönetilir. Bu, projenin farklı geliştirme veya dağıtım ortamlarında bağımlılıkların kolayca kurulmasını sağlar.</li>
+<li><strong>Çalışma Zamanı Dizini Yapısı:</strong><ul>
+<li><code>logs/</code>: Çalışma zamanı günlüklerinin depolandığı yazılabilir bir dizindir. Uygulama ilk çalıştığında otomatik olarak oluşturulur.</li>
+<li><code>data/</code>: Test mesh'leri ve prosedürel örnek mesh'ler gibi statik verilerin saklandığı dizindir.</li>
+</ul>
+</li>
+<li><strong>İsteğe Bağlı Ortam Değişkenleri:</strong> Gelecekte, uygulamanın davranışını etkileyebilecek (örn: debug modu, varsayılan dosya yolları) ortam değişkenleri için merkezi bir konfigürasyon (<code>app/core/config.py</code>) veya dışarıdan yüklenen bir <code>.env</code> dosyası kullanılabilir ve bu dokümanda belgelenmelidir.</li>
+</ul>
+<h1 id="19-derleme-ve-bagmllk-yonetimi">19. Derleme ve Bağımlılık Yönetimi</h1>
+<p>Yazılımın geliştirme ve dağıtım süreçlerinde bağımlılıkların yönetimi ve derleme (build) adımları belirlenmiştir.</p>
+<ul>
+<li><strong>Kurulum Yöntemi:</strong> Geliştirme ortamında, proje <code>pip install -e .</code> komutuyla kurulabilir (eğer <code>pyproject.toml</code> projenin tanımını içeriyorsa). Bu, projenin kaynak koduna doğrudan bağlı olarak düzenlenebilir bir kurulum sağlar.</li>
+<li><strong>Sürüm Sabitleme:</strong> Özellikle <strong>VTK</strong> gibi kritik kütüphanelerin belirli sürümleri sabitlenir (<code>requirements.txt</code> dosyasında <code>vtk==X.Y.Z</code> gibi). Bu, farklı <strong>VTK</strong> versiyonlarının yol açabileceği uyumluluk sorunlarını veya çalışma zamanı davranış farklılıklarını önler.</li>
+<li><strong>Sürekli Entegrasyon (CI - Gelecek):</strong> Gelecekte bir CI/CD boru hattı kurulması planlanmaktadır. Bu hat, kod kalitesini ve kararlılığını sağlamak için şu adımları otomatik olarak çalıştıracaktır:<ul>
+<li>Linting ve Stil Kontrolleri: Kodun PEP8 gibi stil rehberlerine uygunluğunu kontrol eder.</li>
+<li>Çekirdek Testler: Temel işlevselliğin doğru çalıştığından emin olmak için birim ve entegrasyon testlerini çalıştırır.</li>
+<li>Performans Smoke Testleri: Kritik operasyonlarda performans düşüşleri olup olmadığını kontrol etmek için seçilmiş performans testlerini çalıştırır.</li>
+</ul>
+</li>
+<li><strong>Paketleme (Dağıtım için):</strong> Son kullanıcı dağıtımları için, PyInstaller gibi araçlar kullanılarak Python uygulaması tek bir yürütülebilir dosyaya (executable) paketlenebilir. Bu, bağımlılıkları yönetme yükünü son kullanıcıdan alır.</li>
+<li><strong>Başlatma Betikleri:</strong> Platformlar arası uyumluluk sağlamak için isteğe bağlı başlatma betikleri (launcher scripts) sağlanabilir.</li>
+</ul>
+<h1 id="20-kodlama-standartlar">20. Kodlama Standartları</h1>
+<p>Kodun okunabilirliğini, sürdürülebilirliğini ve ekip içinde tutarlılığı sağlamak için belirli kodlama standartları benimsenmiştir.</p>
+<ul>
+<li><strong>PEP8 Uyumluluğu:</strong> Python kodunun büyük ölçüde PEP8 stil rehberine uygun olması hedeflenir. Ancak, özellikle <strong>VTK</strong> boru hatlarının okunabilirliğini artırmak amacıyla, bazı durumlarda daha uzun ve birleşik fonksiyonlara pratik tolerans gösterilebilir.</li>
+<li><strong>Tip İpuçları (Type Hints):</strong> Tüm genel (public) arayüzlerde ve mümkün olduğunca diğer yerlerde tip ipuçları (type hints) kullanılır. Bu, kodun anlaşılırlığını artırır ve statik analiz araçlarıyla potansiyel hataların erken tespitine yardımcı olur.</li>
+<li><strong>Doküman Dizileri (Docstrings):</strong> Her fonksiyon, sınıf ve önemli metot için kısa bir özet satırı içeren docstring'ler yazılır. Parametreler ve dönüş değerleri hakkında detaylı bilgi sağlanır.</li>
+<li><strong>Skaler Dizi Adlandırması:</strong> <code>PressureValues</code>, <code>MoldDisplacement</code> gibi skaler diziler için tutarlı ve açıklayıcı adlandırma standartları kullanılır.</li>
+<li><strong>Harici Kütüphanelerden Kaçınma:</strong> Zorunlu olmadıkça yeni harici Python kütüphaneleri eklemekten kaçınılır. Yeni bir bağımlılık eklenmeden önce dikkatlice değerlendirilir.</li>
+<li><strong>Loglama Kullanımı:</strong> Kod içinde <code>print()</code> ifadeleri yerine, hata ayıklama ve izleme için merkezi loglama (<code>logging</code> modülü) tercih edilir. İstisnalar sessizce yutulmaz; uygun hata logları kaydedilir.</li>
+</ul>
+<h1 id="21-test-stratejisi">21. Test Stratejisi</h1>
+<p>Yazılımın doğruluğunu, güvenilirliğini ve performansını sağlamak için kapsamlı bir test stratejisi uygulanmaktadır.</p>
+<p><strong>Mevcut Test Betikleri:</strong> Projenin test klasöründe (<code>tests/</code>) bulunan mevcut test betikleri, uygulamanın çeşitli özelliklerini doğrulamak için kullanılır:
+-   <code>test_pressure_mapping.py</code>: Basınç boyama, ısı haritası oluşturma ve UI entegrasyonunun temel işlevselliğini doğrular.
+-   <code>test_enhanced_pressure_mapping.py</code>: Gelişmiş basınç boyama özelliklerini test eder.
+-   <code>test_split_view_pressure_mapping.py</code>: Çoklu görünümdeki basınç boyama ve görselleştirme davranışını test eder.
+-   <code>test_mesh_subdivision.py</code>: Mesh alt bölümlere ayırma (subdivision) doğruluğunu test eder.
+-   <code>test_page3_performance.py</code>: UI'ın belirli sayfalardaki performansını ve tepki süresini test eder.
+-   <code>test_gpu_performance.py</code>: GPU hızlandırma yollarının performansını test eder.
+-   <code>test_landmarks.py</code>: İşaret noktası yerleştirme mantığını doğrular.
+-   <code>test_orientation_definition.py</code>: Anatomik yönelim hesaplama boru hattını test eder.
+-   <code>test_page4_cutting_patterns.py</code>: Kesme deseni oluşturma davranışını test eder.
+-   <code>MOLD_GENERATION_SUCCESS.py</code> gibi betikler, kalıp oluşturma iş akışlarının başarıyla tamamlandığını gösterir.</p>
+<p><strong>Test Desenleri:</strong>
+-   <strong>Prosedürel Geometri:</strong> Testlerde, dış dosyalar yerine genellikle küp, küre gibi basit prosedürel geometriler veya programatik olarak oluşturulmuş mesh'ler kullanılır. Bu, testlerin bağımsızlığını ve tekrarlanabilirliğini artırır.
+-   <strong>Onaylamalar (Assertions):</strong> Nokta sayıları, skaler değer aralıkları, fonksiyonların çökmeden çalışması gibi konular üzerinde net onaylamalar (<code>assert</code>) kullanılır.
+-   <strong>Geri Al/İleri Al Doğrulaması:</strong> Modifikasyonlar sonrası <code>HistoryStack</code>'in doğru çalıştığından ve geri alma/ileri alma işlemlerinin veriyi tutarlı bir şekilde önceki/sonraki durumlara döndürdüğünden emin olmak için özel testler bulunur.
+-   <strong>Kalıp Deplasmanı Tutarlılığı:</strong> Kalıp oluşturma işleminde minimum/maksimum deplasman değerlerinin ve genel geometri tutarlılığının korunup korunmadığı test edilir.
+-   <strong>Performans Eşiği Kontrolü:</strong> Belirli operasyonların belirtilen performans eşiklerini aşmadığını doğrulamak için zamanlama testleri kullanılır.</p>
+<p><strong>Test Kategorileri:</strong>
+-   <strong>Birim Testleri:</strong> Her bir fonksiyon veya küçük sınıfın izole edilmiş bir şekilde doğru çalıştığını doğrular.
+-   <strong>Entegrasyon Testleri:</strong> Farklı modüllerin veya katmanların birbiriyle doğru etkileşim kurduğunu doğrular.
+-   <strong>Sistem Testleri:</strong> Tüm uygulamanın uçtan uca senaryolarda beklendiği gibi çalıştığını doğrular.
+-   <strong>Performans Testleri:</strong> Belirli operasyonların ve genel uygulamanın tepki süresi ve kaynak kullanımı hedeflerini karşıladığını doğrular.
+-   <strong>Regresyon Testleri:</strong> Yeni kod eklendikten veya mevcut kod değiştirildikten sonra, daha önce çalışan özelliklerin hala doğru çalıştığını garanti eder.</p>
+<h1 id="22-kalite-kontrolleri">22. Kalite Kontrolleri</h1>
+<p>Yazılımın yüksek kalitesini sürekli olarak sağlamak için çeşitli kalite kontrol mekanizmaları belirlenmiştir.</p>
+<table>
+<thead>
+<tr>
+<th>Kontrol Noktası</th>
+<th>Amaç</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Linting/Stil Kontrolü</td>
+<td>Kodun okunabilirliğini ve stil standartlarına (örn. PEP8) uygunluğunu sürdürmek.</td>
+</tr>
+<tr>
+<td>Tip Kontrolü (isteğe bağlı)</td>
+<td>Arayüz tutarsızlıklarını ve tip hatalarını tespit etmek için Python'ın tip ipuçları ile statik analiz araçları kullanmak.</td>
+</tr>
+<tr>
+<td>Birim Testleri</td>
+<td>Her bir küçük kod biriminin (fonksiyon, metod) doğru çalıştığından emin olmak.</td>
+</tr>
+<tr>
+<td>Performans Smoke Testleri</td>
+<td>Boyama ve kalıp oluşturma boru hatları gibi kritik işlevlerde performans gerilemelerinin olmadığını doğrulamak.</td>
+</tr>
+<tr>
+<td>Loglama Varlığı</td>
+<td>Temel operasyonların izlenebilirlik için doğru günlük mesajları ürettiğini ve bu günlüklerin yeterli izleme bilgisi içerdiğini doğrulamak.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="23-guvenlik-ve-gizlilik">23. Güvenlik ve Gizlilik</h1>
+<p>Medikal bir yazılım olarak, güvenlik ve gizlilik <strong>Clonify Labs</strong> için kritik öneme sahiptir. Kişisel Sağlık Bilgilerinin (<strong>PHI</strong>) korunması en üst düzeyde önceliklidir.</p>
+<ul>
+<li><strong>PHI Saklama:</strong> Yazılım, hasta tanımlayıcı bilgilerini veya kişisel sağlık bilgilerini (<strong>PHI</strong>) doğrudan kalıcı olarak saklamaz. Mesh dosya adları anonimleştirilir veya jenerik bir formatta tutulur.</li>
+<li><strong>Günlük Dosyaları:</strong> Günlük dosyaları, hasta tanımlayıcılarını içermez. Yalnızca teknik sorun giderme için gerekli olan uygulama davranışları ve hata bilgileri kaydedilir.</li>
+<li><strong>Ağ İletişimi:</strong> Mevcut durumda, yazılımın herhangi bir ağ üzerinden doğrudan geometri veya hasta verisi iletimi yapmadığı varsayılır (çevrimdışı masaüstü uygulaması olarak çalışır).</li>
+<li><strong>Gelecek Genişletmeleri:</strong> Eğer gelecekte bulut senkronizasyonu veya çok kullanıcılı işbirliği gibi ağ bağlantılı özellikler eklenirse:<ul>
+<li><strong>Veri Şifreleme:</strong> Saklanan oturum durumları veya iletilen veriler için endüstri standardı şifreleme yöntemleri (örn: AES-256) kullanılacaktır.</li>
+<li><strong>Kimlik Doğrulama ve Yetkilendirme:</strong> Kullanıcı kimlik doğrulaması (örneğin, OAuth, API anahtarları) ve yetkilendirme (rol tabanlı erişim kontrolü) mekanizmaları uygulanacaktır.</li>
+<li><strong>Güvenli Protokoller:</strong> HTTPS/TLS gibi güvenli iletişim protokolleri zorunlu tutulacaktır.</li>
+<li><strong>Gizlilik Politikaları:</strong> <strong>PHI</strong>'nin nasıl işlendiğini, saklandığını ve korunduğunu açıklayan net gizlilik politikaları belirlenecek ve kullanıcılara sunulacaktır.</li>
+</ul>
+</li>
+</ul>
+<h1 id="24-riskler-ve-azaltma-yontemleri">24. Riskler ve Azaltma Yöntemleri</h1>
+<p>Proje boyunca karşılaşılabilecek potansiyel riskler ve bunları azaltmaya yönelik stratejiler belirlenmiştir.</p>
+<table>
+<thead>
+<tr>
+<th>Risk</th>
+<th>Etki</th>
+<th>Azaltma Yöntemi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VTK Sürüm Uyumsuzluğu</td>
+<td>Çalışma zamanı hataları, beklenmeyen davranışlar.</td>
+<td>Bağımlılıkları belirli sürümlere sabitlemek (<code>pip freeze</code> veya <code>requirements.txt</code> ile) ve farklı VTK versiyonlarıyla düzenli test matrisi çalıştırmak.</td>
+</tr>
+<tr>
+<td>Büyük Mesh Bellek Kullanımı</td>
+<td>Uygulama yavaşlaması/donması veya çökmesi.</td>
+<td>Büyük mesh'ler için ön işlemde basitleştirme (decimation) uygulama, gelecekte veri akışını optimize eden "streaming" teknikleri araştırmak.</td>
+</tr>
+<tr>
+<td>UI Donması (Yanıt Vermemesi)</td>
+<td>Kullanıcı deneyiminin kötüleşmesi, üretkenlik kaybı.</td>
+<td>Tüm maliyetli operasyonları (dosya yükleme, karmaşık hesaplamalar) ayrı iş parçacıklarında (<strong>QThread</strong>) yürütme ve sinyallerle iletişim kurma.</td>
+</tr>
+<tr>
+<td>Geri Alma Yığını Büyümesi</td>
+<td>Aşırı bellek tüketimi, performans düşüşü.</td>
+<td>Geçmiş yığınını belirli bir boyutta sınırlama veya tam mesh kopyaları yerine sadece değişiklikleri (delta) sıkıştırarak depolama.</td>
+</tr>
+<tr>
+<td>Skaler Dizi Tutarsızlığı</td>
+<td>Görsel hatalar, hatalı ısı haritaları veya kalıp deformasyonları.</td>
+<td>Skaler dizi güncellemeleri için merkezi ve güvenli bir işlev kullanma, güncellemeleri yalnızca ana iş parçacığında yapma.</td>
+</tr>
+<tr>
+<td>GPU Yolu Ayrışması</td>
+<td>Farklı donanımlarda tekrarlanamayan veya zor teşhis edilen hatalar.</td>
+<td>GPU destekli özellikler için isteğe bağlı kod yolları sağlama ve GPU mevcut olmadığında sorunsuz bir şekilde CPU tabanlı yöntemlere geri dönme. Hem GPU hem de CPU yollarını test etme.</td>
+</tr>
+<tr>
+<td>Kişisel Sağlık Bilgileri (PHI) Sızıntısı</td>
+<td>Yasal sorunlar, hasta güveninin kaybı.</td>
+<td>Hasta verilerini anonimleştirme, günlüklerde PHI bulundurmama, ağ iletimi için şifreleme (gelecekte) ve erişim kontrolleri.</td>
+</tr>
+<tr>
+<td>Aşırı Kullanıcı Geribildirimi/Fırça Darbeleri</td>
+<td>Performans düşüşü, gereksiz işlem yükü.</td>
+<td>Fırça darbelerini veya hızlı olayları gruplandıran ve belirli bir oranda işleyen kısıtlama (throttling) mekanizmaları kullanma.</td>
+</tr>
+<tr>
+<td>Yeni Geliştirici Onboarding Süresi</td>
+<td>Ekip büyümesinde verimlilik kaybı.</td>
+<td>Minimum geliştirici onboarding adımları sağlama, kapsamlı dokümantasyon ve örnekler sunma.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="25-gelecek-gelistirmeler-ve-genisletme-noktalar">25. Gelecek Geliştirmeler ve Genişletme Noktaları</h1>
+<p><strong>APPClonify</strong>'ın mevcut mimarisi, gelecekteki fonksiyonel ve teknolojik genişletmeler için güçlü bir temel sağlamaktadır. Aşağıdaki alanlar, potansiyel gelecek geliştirmeler ve genişletme noktaları olarak tanımlanmıştır:</p>
+<ul>
+<li><strong>Oturum Serileştirme:</strong><ul>
+<li><strong>Strateji:</strong> Mevcut oturum durumunu (basınç verileri, işaret noktaları, modifiye edilmiş mesh ve tüm geçmiş yığını) tek bir dosyada kaydetme ve yükleme yeteneği ekleme. Bu, kullanıcıların projelerine daha sonra devam etmelerini sağlar.</li>
+<li><strong>Teknoloji:</strong> JSON veya XML tabanlı özel bir dosya formatı kullanarak tüm Python ve VTK nesnelerini serileştirme (<code>pickle</code> veya özel serileştirme mantığı gerekebilir).</li>
+</ul>
+</li>
+<li><strong>Parametrik Kalıp Tasarımı:</strong><ul>
+<li><strong>Strateji:</strong> Tek tip kalınlık uygulamanın ötesinde, kullanıcının farklı anatomik bölgeler için katmanlı veya değişken kalınlık profilleri tanımlamasına olanak tanıyan parametrik bir sistem geliştirme.</li>
+<li><strong>Teknoloji:</strong> Özel UI widget'ları ve arka uçta geometriyi katmanlara ayırıp her katmanı ayrı ayrı deforme eden VTK filtreleri.</li>
+</ul>
+</li>
+<li><strong>Kesme Desenleri İçin Gelişmiş Düzleştirme (Unwrapping):</strong><ul>
+<li><strong>Strateji:</strong> Kesilmiş 3D mesh yüzeylerini, fiziksel şablon üretimi veya kumaş kesimi için 2D düzleme doğru bir şekilde açma (unwrapping) yeteneği ekleme.</li>
+<li><strong>Teknoloji:</strong> <code>vtkUnwrapPolyData</code> gibi VTK filtreleri veya özel düzleştirme algoritmaları.</li>
+</ul>
+</li>
+<li><strong>Sonlu Elemanlar Analizi (FEM) Entegrasyonu:</strong><ul>
+<li><strong>Strateji:</strong> Protez soketinin biyomekanik davranışını (örn: basınç noktaları, gerilme) simüle etmek için harici bir FEM çözücüsünü entegre etme.</li>
+<li><strong>Teknoloji:</strong> Harici bir FEM kütüphanesi (örn: FEniCS, PyVista ile entegre), mesh'i FEM için uygun formata dönüştürme ve sonuçları geri <strong>PolyData</strong>'ya map etme.</li>
+</ul>
+</li>
+<li><strong>Çoklu Fırça Ayarları ve Basınç AI Önerileri:</strong><ul>
+<li><strong>Strateji:</strong> Farklı fırça tipleri, boyutları, sertlikleri için önceden tanımlanmış ayarlar sunma. Hasta verilerine (tarama, yaş, cinsiyet) dayanarak belirli bölgeler için yapay zeka tabanlı basınç ayarlama önerileri sunma.</li>
+<li><strong>Teknoloji:</strong> Makine öğrenimi modelleri (örn: <code>scikit-learn</code>, <code>TensorFlow</code>/<code>PyTorch</code>) "Model Katmanı"nda, UI'da önerileri görüntülemek için yeni arayüz elemanları.</li>
+</ul>
+</li>
+<li><strong>Özel Filtreler İçin Eklenti Mekanizması:</strong><ul>
+<li><strong>Strateji:</strong> Geliştiricilerin, yazılıma kolayca yeni 3D işleme filtreleri eklemesine olanak tanıyan bir eklenti (plugin) mimarisi oluşturma.</li>
+<li><strong>Teknoloji:</strong> Belirli bir arayüze (interface) uyan Python sınıflarını dinamik olarak yükleyebilen bir modül yükleyici.</li>
+</ul>
+</li>
+<li><strong>Web Assembly (Uzun Vadeli Taşınabilirlik):</strong><ul>
+<li><strong>Strateji:</strong> Yazılımın bir web tarayıcısı üzerinden çalışabilmesi için (uzun vadeli hedef) Web Assembly (Wasm) teknolojilerini araştırma.</li>
+<li><strong>Teknoloji:</strong> Pyodide, Emscripten gibi araçlar ve VTK.js gibi web tabanlı VTK portları.</li>
+</ul>
+</li>
+<li><strong>Gerçek Zamanlı Biyomekanik Sezgisel Katmanlar:</strong><ul>
+<li><strong>Strateji:</strong> Modelleme sırasında, protezin potansiyel biyomekanik etkilerini (örn: kalça abduksiyon açısı, diz eklemi ekseni) gerçek zamanlı olarak gösteren görsel katmanlar (overlays) sunma.</li>
+<li><strong>Teknoloji:</strong> <code>vtkActor</code>, <code>vtkLineSource</code>, <code>vtkTextActor</code> gibi VTK elemanları ve dinamik hesaplamalar.</li>
+</ul>
+</li>
+</ul>
+<h1 id="26-sozluk">26. Sözlük</h1>
+<table>
+<thead>
+<tr>
+<th>Terim</th>
+<th>Tanım</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Skaler Dizi</td>
+<td>Renklendirme veya deplasman için kullanılan, nokta başına veri dizisi.</td>
+</tr>
+<tr>
+<td>Isı Haritası</td>
+<td><code>PressureValues</code>'ın renkli görselleştirmesi.</td>
+</tr>
+<tr>
+<td>Çarpıtma (Warp)</td>
+<td>Skaler deplasmana dayalı geometri dönüşümü.</td>
+</tr>
+<tr>
+<td>Bulucu (Locator)</td>
+<td>En yakın/belirli yarıçap içindeki sorgular için uzamsal indeks.</td>
+</tr>
+<tr>
+<td>Vuruş (Stroke)</td>
+<td>Tek bir sürekli boyama etkileşimi.</td>
+</tr>
+<tr>
+<td>Kalıp (Mold)</td>
+<td>Fiziksel bir negatif oluşturmak için kullanılan ayarlanmış geometri.</td>
+</tr>
+</tbody>
+</table></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = ".",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="js/base.js"></script>
+        <script src="search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
+
+<!--
+MkDocs version : 1.6.1
+Build Date UTC : 2025-08-17 12:15:57.442398+00:00
+-->

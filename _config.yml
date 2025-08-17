@@ -1,0 +1,21 @@
+remote_theme: just-the-docs/just-the-docs
+title: ClonifyLabs Dokümantasyon
+description: ClonifyLabs projesi için teknik dokümantasyon
+baseurl: "/ClonifyLabs"
+url: ""
+
+# Enable search
+search_enabled: true
+
+# Enable mermaid diagrams
+mermaid:
+  version: "9.1.3"
+  
+# Configure dark mode
+color_scheme: dark
+
+# Configure navigation
+nav_external_links:
+  - title: GitHub Repository
+    url: https://github.com/muammer06/ClonifyLabs
+    hide_icon: false

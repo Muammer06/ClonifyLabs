@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Yazılım Tasarım Dokümanı - ClonifyLabs Docs</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">ClonifyLabs Docs</a>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#yazlm-tasarm-dokuman-clonify-labs" class="nav-link">Yazılım Tasarım Dokümanı: Clonify Labs</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#icindekiler" class="nav-link">İçindekiler</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#bolum-1-giris" class="nav-link">Bölüm 1: Giriş</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#bolum-2-sistem-mimarisi" class="nav-link">Bölüm 2: Sistem Mimarisi</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#bolum-3-kullanlan-teknolojiler-ve-kutuphaneler" class="nav-link">Bölüm 3: Kullanılan Teknolojiler ve Kütüphaneler</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#bolum-4-ana-bilesenlerin-tasarm-ve-sorumluluklar" class="nav-link">Bölüm 4: Ana Bileşenlerin Tasarımı ve Sorumlulukları</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#bolum-5-veri-yonetimi-mimarisi" class="nav-link">Bölüm 5: Veri Yönetimi Mimarisi</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#bolum-6-cekirdek-fonksiyonlarn-mantksal-aks" class="nav-link">Bölüm 6: Çekirdek Fonksiyonların Mantıksal Akışı</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#bolum-7-kullanc-etkilesim-tasarm" class="nav-link">Bölüm 7: Kullanıcı Etkileşim Tasarımı</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#bolum-8-gelecek-gelistirmeler-icin-mimari-hazrlk" class="nav-link">Bölüm 8: Gelecek Geliştirmeler için Mimari Hazırlık</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#9-modifikasyon-araclar-mimarisi-rectification-tools-architecture" class="nav-link">9. Modifikasyon Araçları Mimarisi (Rectification Tools Architecture)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#_1" class="nav-link">```</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#protez-soketi-modifikasyon-araclar" class="nav-link">Protez Soketi Modifikasyon Araçları</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#epaisseur-kalnlk" class="nav-link">Épaisseur (Kalınlık)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#evases-kenar-sekillendirme-flare" class="nav-link">Évasés (Kenar Şekillendirme / Flare)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#prise-distale-distal-tutus-arayuz" class="nav-link">Prise Distale (Distal Tutuş / Arayüz)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#alignement-hizalama" class="nav-link">Alignement (Hizalama)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#finalisation-sonlandrma" class="nav-link">Finalisation (Sonlandırma)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="yazlm-tasarm-dokuman-clonify-labs">Yazılım Tasarım Dokümanı: Clonify Labs</h1>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Proje Adı</th>
+<th style="text-align: left;">Medikal Sektörde 3 Boyutlu Tarama ile Kişiye Özel Hızlı Kalıp Üretimi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Ürün Adı</strong></td>
+<td style="text-align: left;"><strong>Clonify Labs Modelleme Yazılımı</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Versiyon</strong></td>
+<td style="text-align: left;">2.0 (Planlanan)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Tarih</strong></td>
+<td style="text-align: left;">08.08.2025</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Şirket</strong></td>
+<td style="text-align: left;">Clonify Labs</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="icindekiler">İçindekiler</h2>
+<ol>
+<li><a href="#bölüm-1-giriş"><strong>Giriş</strong></a>
+    1.1. <a href="#11-dokümanın-amacı">Dokümanın Amacı</a>
+    1.2. <a href="#12-projenin-kapsamı">Projenin Kapsamı</a>
+    1.3. <a href="#13-tanımlar-ve-kısaltmalar">Tanımlar ve Kısaltmalar</a></li>
+<li><a href="#bölüm-2-sistem-mimarisi"><strong>Sistem Mimarisi</strong></a>
+    2.1. <a href="#21-mimari-yaklaşım-katmanlı-mimari">Mimari Yaklaşım: Katmanlı Mimari</a>
+    2.2. <a href="#22-katmanların-detaylı-analizi">Katmanların Detaylı Analizi</a>
+    2.3. <a href="#23-mimari-şeması-ve-veri-akışı">Mimari Şeması ve Veri Akışı</a></li>
+<li><a href="#bölüm-3-kullanılan-teknolojiler-ve-kütüphaneler"><strong>Kullanılan Teknolojiler ve Kütüphaneler</strong></a></li>
+<li><a href="#bölüm-4-ana-bileşenlerin-tasarımı-ve-sorumlulukları"><strong>Ana Bileşenlerin Tasarımı ve Sorumlulukları</strong></a>
+    4.1. <a href="#41-kontrol-katmanı-mainwindow">Kontrol Katmanı: <code>MainWindow</code></a>
+    4.2. <a href="#42-arayüz-katmanı-ui-modülleri">Arayüz Katmanı: <code>ui</code> Modülleri</a>
+    4.3. <a href="#43-araç-katmanı-tools-modülleri">Araç Katmanı: <code>tools</code> Modülleri</a></li>
+</ol>
+<hr />
+<h2 id="bolum-1-giris">Bölüm 1: Giriş</h2>
+<h3 id="11-dokumann-amac">1.1. Dokümanın Amacı</h3>
+<p>Bu dokümanın temel amacı, QClonifyCad yazılımının teknik mimarisini, tasarım kararlarını, temel bileşenlerini ve bu bileşenler arasındaki etkileşimi detaylı bir şekilde açıklamaktır. Bu belge, projenin mevcut ve gelecekteki geliştiricileri için bir referans kaynağı olarak hizmet edecek, kodun sürdürülebilirliğini ve genişletilebilirliğini sağlamak için bir yol haritası sunacaktır.</p>
+<h3 id="12-projenin-kapsam">1.2. Projenin Kapsamı</h3>
+<p>Bu doküman, yazılımın aşağıdaki çekirdek işlevselliklerini ve planlanan modüllerini kapsar:
+-   <strong>Mevcut Özellikler:</strong>
+    -   STL formatında 3D model yükleme ve görselleştirme.
+    -   Çoklu pencerede (multi-view) anatomik hizalama.
+    -   2D seçimle 3D gürültü temizleme.
+-   <strong>Planlanan Özellikler:</strong>
+    -   Model yüzeyindeki deliklerin otomatik doldurulması.
+    -   Etkileşimli kesit bantları ile radyal deformasyon.
+    -   "Bulge/Smooth" fırçaları ile serbest form modelleme.
+    -   Geri Al/İleri Al (Undo/Redo) yeteneği.</p>
+<h3 id="13-tanmlar-ve-ksaltmalar">1.3. Tanımlar ve Kısaltmalar</h3>
+<ul>
+<li><strong>GUI:</strong> Grafiksel Kullanıcı Arayüzü (Graphical User Interface)</li>
+<li><strong>VTK:</strong> The Visualization Toolkit</li>
+<li><strong>STL:</strong> Stereolithography (3D dosya formatı)</li>
+<li><strong>PolyData:</strong> VTK'da poligon ağını (noktalar, hücreler) temsil eden temel veri yapısı.</li>
+<li><strong>Pipeline:</strong> Veri akış hattı. VTK'da verinin bir dizi filtreden geçerek işlenmesi.</li>
+<li><strong>Frustum:</strong> Kesik piramit. 3D'de bir kamera görüş alanını tanımlayan geometrik hacim.</li>
+</ul>
+<hr />
+<h2 id="bolum-2-sistem-mimarisi">Bölüm 2: Sistem Mimarisi</h2>
+<h3 id="21-mimari-yaklasm-katmanl-mimari">2.1. Mimari Yaklaşım: Katmanlı Mimari</h3>
+<p>Yazılım, kodun yönetilebilirliğini ve modülerliğini sağlamak amacıyla, görevleri net bir şekilde ayrıştıran <strong>üç katmanlı bir mimari</strong> üzerine inşa edilmiştir. Bu yapı, Model-View-Controller (MVC) tasarım deseninden güçlü bir şekilde ilham almıştır.</p>
+<h3 id="22-katmanlarn-detayl-analizi">2.2. Katmanların Detaylı Analizi</h3>
+<ul>
+<li><strong>Arayüz Katmanı (View):</strong> <code>PyQt5</code> ile oluşturulmuştur. Sadece görsel elemanları barındırır ve kullanıcı etkileşimlerini sinyallere dönüştürür. <code>main.py</code>'deki veriyi görselleştirir ancak kendi içinde mantık veya durum barındırmaz.</li>
+<li><strong>Kontrol/Mantık Katmanı (Controller):</strong> <code>main.py</code> dosyasındaki <code>MainWindow</code> sınıfıdır. Uygulamanın beyni olarak çalışır. Arayüzden gelen sinyalleri işler, uygulama durumunu (<code>state</code>) yönetir ve 3D Araçlar katmanına komutlar gönderir.</li>
+<li><strong>3D Çekirdek ve Araçlar Katmanı (Model):</strong> VTK ve <code>tools</code> klasöründeki sınıflardan oluşur. Tüm 3D veri işleme, filtreleme ve karmaşık etkileşim mantığı bu katmanda yer alır. Bu katmandaki araçlar, Kontrol Katmanı'ndan bağımsız, yeniden kullanılabilir bileşenlerdir.</li>
+</ul>
+<hr />
+<h2 id="bolum-3-kullanlan-teknolojiler-ve-kutuphaneler">Bölüm 3: Kullanılan Teknolojiler ve Kütüphaneler</h2>
+<p>Projenin geliştirilmesinde, açık kaynak kodlu, endüstri standardı, yüksek performanslı ve geniş topluluk desteğine sahip teknolojiler tercih edilmiştir. Bu seçimler, projenin hem hızlı bir şekilde geliştirilmesini hem de gelecekteki bakım ve genişletme süreçlerinin verimli olmasını sağlamayı amaçlamaktadır.</p>
+<h3 id="31-ana-programlama-dili-python-3x">3.1. Ana Programlama Dili: Python 3.x</h3>
+<p>Python, hızlı prototipleme yeteneği, temiz ve okunabilir sözdizimi (syntax) ve zengin standart kütüphanesi sayesinde projenin ana geliştirme dili olarak seçilmiştir. Özellikle bilimsel hesaplama, veri analizi ve yapay zeka alanlarındaki gücü, projenin medikal veri işleme doğasıyla mükemmel bir şekilde örtüşmektedir. Python'un "glue language" (yapıştırıcı dil) özelliği, C++ gibi yüksek performanslı dillerle yazılmış VTK gibi kütüphanelerin kolayca entegre edilmesini sağlamıştır.</p>
+<h3 id="32-grafiksel-kullanc-arayuzu-gui-pyqt5">3.2. Grafiksel Kullanıcı Arayüzü (GUI): PyQt5</h3>
+<p>PyQt5, platformdan bağımsız (Windows, macOS, Linux) masaüstü uygulamaları geliştirmek için kullanılan, endüstri standardı Qt C++ kütüphanesinin Python versiyonudur. 
+-   <strong>Seçim nedenleri şunlardır:</strong>
+- <strong>Olgunluk ve Kararlılık:</strong> Qt, yıllardır geliştirilen, son derece kararlı ve güvenilir bir arayüz çatısıdır.
+-   <strong>Sinyal ve Slot Mekanizması:</strong> Arayüz elemanları (View) ile program mantığı (Controller) arasında esnek, güvenli ve ayrıştırılmış (decoupled) bir iletişim sağlar. Bu, mimarimizin temel taşlarından biridir.
+-   <strong>Geniş Widget Seti:</strong> Butonlar, listeler, paneller, menüler ve QDockWidget gibi gelişmiş yerleşim araçları, karmaşık ve profesyonel bir kullanıcı arayüzünün hızlıca oluşturulmasına olanak tanır.
+-   <strong>VTK Entegrasyonu:</strong> QVTKRenderWindowInteractor widget'ı sayesinde, VTK'nın yüksek performanslı 3D render pencerelerinin bir Qt uygulaması içine sorunsuz bir şekilde gömülmesini ve olay döngülerinin (event loop) entegre çalışmasını sağlar.</p>
+<h3 id="33-3d-gorsellestirme-ve-isleme-motoru">3.3. 3D Görselleştirme ve İşleme Motoru:**</h3>
+<p>VTK (The Visualization Toolkit)
+VTK, bilimsel ve medikal verilerin 3 boyutlu olarak işlenmesi, görselleştirilmesi ve analizi için tasarlanmış, C++ tabanlı, yüksek performanslı bir kütüphanedir. Projenin 3D ile ilgili tüm ağır işlerini VTK üstlenir.
+- <strong>Veri Akış Hattı Mimarisi (Pipeline Architecture):</strong> VTK'nın temel gücü, <code>Source -&gt; Filter -&gt; Mapper -&gt; Actor</code> şeklindeki veri akış modelidir. Bu yapı, karmaşık 3D veri işleme zincirlerinin modüler ve verimli bir şekilde oluşturulmasını sağlar. Bellek yönetimi ve güncellemeler bu pipeline üzerinden otomatik olarak yönetilir.
+-    <strong>Zengin Filtre Kütüphanesi:</strong> Projemizde aktif olarak kullandığımız vtkClipPolyData (kesme), vtkTransformPolyDataFilter (döndürme/taşıma) ve vtkSTLReader gibi yüzlerce hazır algoritma içerir. Gelecekteki modüller için vtkFillHolesFilter, vtkSmoothPolyDataFilter gibi filtreler de kullanılacaktır.
+-   <strong>Gelişmiş Etkileşim Mekanizmaları:</strong> vtkRenderWindowInteractor ve vtkInteractorStyle alt sınıfları, fare ve klavye ile 3D sahne üzerinde, sadece kamera kontrolü değil, aynı zamanda nesne seçimi (vtkPointPicker), alan çizimi (vtkInteractorStyleRubberBand2D) ve özel araç davranışları gibi karmaşık etkileşimler oluşturmak için güçlü bir altyapı sunar.</p>
+<h3 id="34-matematiksel-ve-bilimsel-hesaplama">3.4. Matematiksel ve Bilimsel Hesaplama:**</h3>
+<p>NumPy
+NumPy, Python'da bilimsel hesaplamalar için temel pakettir. Özellikle çok boyutlu diziler (array) üzerinde yüksek performanslı matematiksel işlemler için kullanılır.
+-   <strong>Performans:</strong> Vektör ve matris gibi veri yapıları üzerinde yapılan işlemler, derlenmiş C koduna yakın bir hızda gerçekleştirilir. Bu, binlerce noktadan oluşan 3D modellerin deformasyonu gibi hesaplama-yoğun işlemlerde kritik öneme sahiptir.
+- <strong>Vektör Matematiği:</strong> Anatomik hizalama algoritmasında, normal vektörlerin ve eksenlerin hesaplanması için np.cross (çapraz çarpım) ve np.linalg.norm (vektör uzunluğu) gibi fonksiyonlar vazgeçilmezdir.
+-   <strong>VTK Uyumluluğu:</strong> vtk.util.numpy_support modülü, NumPy dizileri ile VTK'nın kendi veri dizileri arasında sıfır-kopya (zero-copy) veya minimum-kopya ile veri alışverişi yapılmasını sağlar. Bu, on binlerce noktanın koordinatlarını Python'da işleyip tekrar VTK'ya verimli bir şekilde geri göndermemize olanak tanır.</p>
+<hr />
+<h2 id="bolum-4-ana-bilesenlerin-tasarm-ve-sorumluluklar">Bölüm 4: Ana Bileşenlerin Tasarımı ve Sorumlulukları</h2>
+<h3 id="41-kontrol-katman-controller">4.1. Kontrol Katmanı (Controller)</h3>
+<p>Uygulamanın ana pencere sınıfı bu rolü üstlenir.
+-   <strong>Sorumluluklar:</strong>
+    -   Uygulamanın genel durumunu (state) yönetmek.
+    -   Arayüzden gelen sinyalleri işleyip Model katmanına komut göndermek.
+    -   Model'den gelen güncellemeleri alıp arayüzün yenilenmesini sağlamak.
+    -   Hangi aracın aktif olduğunu yönetmek ve kullanıcı etkileşim modlarını değiştirmek.</p>
+<h3 id="42-gorunum-katman-view">4.2. Görünüm Katmanı (View)</h3>
+<p>Tüm <code>PyQt</code> widget'ları ve pencerelerinden oluşur.
+-   <strong>Sorumluluklar:</strong>
+    -   Görsel elemanları ekranda çizmek.
+    -   Kullanıcı girdilerini (tıklama, sürükleme vb.) sinyallere dönüştürmek.
+    -   Controller'dan gelen veriyle 3D sahneyi ve diğer arayüz elemanlarını güncellemek.</p>
+<h3 id="43-model-katman">4.3. Model Katmanı</h3>
+<p>Veri yapıları ve bu veriler üzerinde çalışan fonksiyon/sınıf koleksiyonlarından oluşur.
+-   <strong>Sorumluluklar:</strong>
+    -   3D geometriyi <code>PolyData</code> olarak saklamak.
+    -   Controller'dan gelen komutlara göre 3D veri üzerinde algoritmik işlemler (kesme, döndürme vb.) gerçekleştirmek.
+    -   İşlem sonucunda oluşan yeni veri durumunu oluşturmak.</p>
+<hr />
+<h2 id="bolum-5-veri-yonetimi-mimarisi">Bölüm 5: Veri Yönetimi Mimarisi</h2>
+<h3 id="51-ana-veri-yaps">5.1. Ana Veri Yapısı</h3>
+<p>Uygulama içindeki tüm 3D geometrik veriler, VTK'nın <code>PolyData</code> nesnesi ile temsil edilir. Bu yapı, bir 3D modeli oluşturan noktaları, bu noktaları birleştiren poligonları ve bu geometrik elemanlara atanmış ek verileri (renk, normal vektörleri vb.) bir arada tutar.</p>
+<h3 id="52-durum-yonetimi-state-management">5.2. Durum Yönetimi (State Management)</h3>
+<p>Uygulamanın kararlılığı ve geri alma (Undo) gibi özelliklerin çalışabilmesi için merkezi ve reaktif bir durum yönetimi benimsenmiştir. Controller, uygulamanın tüm geçmişini ve mevcut durumunu yönetir.
+-   <strong>Orijinal Veri:</strong> Yüklenen 3D modelin değiştirilmemiş bir kopyası her zaman saklanır.
+-   <strong>Aktif Veri:</strong> Ekranda gösterilen ve üzerinde anlık olarak çalışılan model verisi.
+-   <strong>İşlem Yığını (Undo/Redo Stack):</strong> Kullanıcının yaptığı her geri alınabilir değişiklik, bir işlem olarak yığına eklenir. Geri alma istendiğinde, yığından son işlem çıkarılır ve önceki duruma dönülür. Bu yapı, veri tutarlılığını garanti eder.</p>
+<hr />
+<h2 id="bolum-6-cekirdek-fonksiyonlarn-mantksal-aks">Bölüm 6: Çekirdek Fonksiyonların Mantıksal Akışı</h2>
+<h3 id="61-fonksiyon-tarama-temizleme">6.1. Fonksiyon: Tarama Temizleme</h3>
+<ul>
+<li><strong>Amaç:</strong> Kullanıcının 2D bir seçimle 3D modelin istenmeyen kısımlarını silmesi.</li>
+<li><strong>Mantıksal Akış:</strong><ol>
+<li>Kullanıcı, 2D ekranda bir alan seçer.</li>
+<li>Sistem, bu 2D alanı 3D uzayda bir seçim hacmine (frustum) dönüştürür.</li>
+<li>Bu hacmin içinde veya dışında kalan tüm 3D geometri, modelden çıkarılır.</li>
+<li>Modelin temizlenmiş hali, yeni "Aktif Veri" olarak ayarlanır.</li>
+</ol>
+</li>
+</ul>
+<h3 id="62-fonksiyon-anatomik-hizalama">6.2. Fonksiyon: Anatomik Hizalama</h3>
+<ul>
+<li><strong>Amaç:</strong> Modeli, standart bir anatomik koordinat sistemine göre yeniden yönlendirmek.</li>
+<li><strong>Mantıksal Akış:</strong><ol>
+<li>Kullanıcı, model üzerinde stratejik anatomik referans noktaları işaretler.</li>
+<li>Sistem, bu noktalardan yola çıkarak yeni bir koordinat sistemi (yeni X, Y, Z eksenleri) hesaplar.</li>
+<li>Modelin mevcut koordinat sisteminden bu yeni sisteme geçişini sağlayacak bir rotasyon matrisi oluşturulur.</li>
+<li>Tüm model, bu matris kullanılarak döndürülür ve hizalanmış olur.</li>
+</ol>
+</li>
+</ul>
+<h3 id="63-fonksiyon-hacimsel-deformasyon">6.3. Fonksiyon: Hacimsel Deformasyon</h3>
+<ul>
+<li><strong>Amaç:</strong> Modelin belirli bölgelerinde, ölçüleri hassas bir şekilde artırıp azaltmak (rektifikasyon).</li>
+<li><strong>Mantıksal Akış:</strong><ol>
+<li>Kullanıcı, model üzerinde çalışmak istediği bir bölgeyi ve etki alanını tanımlar (örn: bir "kesit bandı" ile).</li>
+<li>Sistem, bu etki alanındaki tüm 3D noktaları belirler.</li>
+<li>Kullanıcı bir deformasyon değeri (+/- mm) girdiğinde, sistem bu bölgedeki noktaları, bölgenin merkezinden uzağa veya merkeze doğru, belirlenen miktar kadar kaydırır.</li>
+<li>Bu kaydırma işlemi, yumuşak ve organik bir geçiş sağlamak için etki alanının kenarlarına doğru azalır.</li>
+</ol>
+</li>
+</ul>
+<hr />
+<h2 id="bolum-7-kullanc-etkilesim-tasarm">Bölüm 7: Kullanıcı Etkileşim Tasarımı</h2>
+<h3 id="71-moduler-etkilesim-stilleri">7.1. Modüler Etkileşim Stilleri</h3>
+<p>Uygulama, farklı görevler için farklı fare ve klavye davranışları gerektirir. Bu, monolitik bir yapı yerine, "Etkileşim Stilleri" adı verilen değiştirilebilir modüllerle yönetilir.
+-   <strong>Kamera Stili:</strong> Varsayılan mod. Sahneyi döndürme, kaydırma.
+-   <strong>Seçim Stili:</strong> Temizleme aracı aktifken, 2D alan seçimi yapmayı sağlar.
+-   <strong>İşaretleme Stili:</strong> Hizalama aracı aktifken, model üzerinde 3D nokta seçmeyi sağlar.
+Controller, kullanıcının seçtiği araca göre bu stiller arasında dinamik olarak geçiş yapar.</p>
+<h3 id="72-iletisim-desenleri">7.2. İletişim Desenleri</h3>
+<ul>
+<li><strong>Sinyal/Slot (View -&gt; Controller):</strong> Arayüzden gelen kullanıcı eylemlerini Controller'a bildirmek için kullanılır. Bu, arayüzün iş mantığından tamamen habersiz olmasını sağlar.</li>
+<li><strong>Gözlemci Deseni (Model/VTK -&gt; Controller):</strong> 3D sahnedeki olayları (fare tıklaması vb.) yakalamak için kullanılır. Controller, 3D motorundaki olayları "dinler" ve bunlara tepki verir.</li>
+</ul>
+<hr />
+<h2 id="bolum-8-gelecek-gelistirmeler-icin-mimari-hazrlk">Bölüm 8: Gelecek Geliştirmeler için Mimari Hazırlık</h2>
+<p>Mevcut MVC mimarisi, gelecekte eklenecek yeni özellikler için sağlam ve genişletilebilir bir temel sunmaktadır.
+-   <strong>Yapay Zeka Entegrasyonu:</strong> Eğitilmiş bir model, "Model" katmanına yeni bir algoritma olarak kolayca eklenebilir ve Controller tarafından çağrılabilir. Örneğin, anatomik noktaları otomatik bulan bir yapay zeka modülü.
+-   <strong>Basınç Analizi (FEA):</strong> Bir sonlu elemanlar analizi çözücüsü, yine "Model" katmanında, deforme edilmiş bir geometriyi girdi olarak alıp bir basınç haritası üreten bir fonksiyon olarak entegre edilebilir.
+-   <strong>Proje Kaydetme/Yükleme:</strong> Controller, "Durum Yönetimi" bölümünde tanımlanan tüm durumu (aktif veri, bant parametreleri vb.) tek bir dosyaya serileştirip (serialize) daha sonra bu dosyadan durumu geri yükleyebilir. Mimari bu özelliğe tamamen hazırdır.</p>
+<h2 id="9-modifikasyon-araclar-mimarisi-rectification-tools-architecture">9. Modifikasyon Araçları Mimarisi (Rectification Tools Architecture)</h2>
+<p>Bu bölüm, protez soketinin dijital olarak şekillendirildiği, klinik olarak en önemli adımları içeren araç setinin mimarisini tanımlar. Bu araçlar, kullanıcının adım adım ilerlediği bir iş akışı (<code>workflow</code>) içinde sunulur. Tüm modifikasyon araçları, merkezi bir <code>ModificationEngine</code> tarafından yönetilir ve aynı temel prensipleri paylaşır:
+-   <strong>Tahribatsız İşlem:</strong> Tüm modifikasyonlar, <code>active_poly_data</code> üzerinde yapılır ve <code>HistoryStack</code>'e kaydedilir.
+-   <strong>Merkezi Kontrol:</strong> <code>MainWindow</code> (Controller), hangi aracın aktif olduğunu, aracın parametrelerini (fırça boyutu, azaltma yüzdesi vb.) ve Arayüz ile Araçlar (Model) katmanı arasındaki veri akışını yönetir.
+-   <strong>Modüler Araç Tasarımı:</strong> Her bir modifikasyon aracı (<code>Réduction</code>, <code>Lissage</code> vb.), <code>tools</code> klasöründe kendi sınıfına sahip olacak şekilde tasarlanacaktır.</p>
+<hr />
+<h3 id="91-arac-1-reduction-hacim-azaltma">9.1. Araç 1: Réduction (Hacim Azaltma)</h3>
+<ul>
+<li><strong>Amaç:</strong> Protez soketinin genel hacmini küçülterek veya belirli bölgelerde lokal baskı oluşturarak daha sıkı bir uyum (fit) sağlamak.</li>
+<li><strong>Arayüz Bileşenleri (View):</strong><ul>
+<li>"Global Azaltma" ve "Lokal Azaltma" modlarını seçmek için <code>QRadioButton</code> veya <code>QPushButton</code> grubu.</li>
+<li>Global azaltma için yüzde (%) değerinin girileceği bir <code>QSlider</code> veya <code>QSpinBox</code>.</li>
+<li>Lokal azaltma için fırça boyutunu ve etki gücünü ayarlayan <code>QSlider</code>'lar.</li>
+</ul>
+</li>
+<li><strong>Kontrol Mantığı (<code>MainWindow</code>):</strong><ul>
+<li><code>current_mode</code>'u <code>'REDUCTION_GLOBAL'</code> veya <code>'REDUCTION_LOCAL'</code> olarak ayarlar.</li>
+<li>Slider'lardan gelen yüzde veya fırça parametrelerini yakalar.</li>
+<li>Global modda "Uygula" butonuna basıldığında veya lokal modda fare sürüklenirken <code>ReductionTool</code> üzerindeki ilgili metotları çağırır.</li>
+</ul>
+</li>
+<li><strong>Araç Tasarımı (<code>tools/ReductionTool.py</code>):</strong>
+    ```python
+    class ReductionTool:
+        def apply_global_reduction(self, poly_data, percentage):
+            # 1. Modelin ağırlık merkezini (centroid) hesapla.
+            # 2. 'vtkTransform' kullanarak modeli merkeze doğru 'percentage' oranında ölçekle.
+            # 3. Değiştirilmiş poly_data'yı geri döndür.
+            ...<pre><code>def apply_local_reduction(self, poly_data, brush_center, radius, strength):
+    # 1. Fırça merkezine 'radius' mesafesindeki noktaları (vertices) bul.
+    # 2. Her bir nokta için, kendi normal vektörü yönünde içeri doğru hareket ettir.
+    # 3. Hareket mesafesi, 'strength' ve merkeze olan uzaklığa göre (falloff) belirlenir.
+    ...
+</code></pre>
+<p>```</p>
+</li>
+</ul>
+<hr />
+<h3 id="92-arac-2-creuser-recharger-oyma-ekleme-sculpting">9.2. Araç 2: Creuser / Recharger (Oyma / Ekleme - Sculpting)</h3>
+<ul>
+<li><strong>Amaç:</strong> Serbest formda, hassas bölgelerdeki (örn: kemik çıkıntıları) basıncı azaltmak için materyal oymak (Creuser) veya zayıf doku alanlarını desteklemek için materyal eklemek (Recharger).</li>
+<li><strong>Arayüz Bileşenleri (View):</strong><ul>
+<li>"Oy" (Dig) ve "Ekle" (Bulge) modları arasında geçiş yapan butonlar.</li>
+<li>Fırça Boyutu ve Etki Gücü için <code>QSlider</code>'lar.</li>
+<li>Fare imlecinin model üzerindeki izdüşümünü gösteren anlık bir fırça göstergesi.</li>
+</ul>
+</li>
+<li><strong>Kontrol Mantığı (<code>MainWindow</code>):</strong><ul>
+<li>Aktif fırça modunu (<code>'DIG'</code> veya <code>'BULGE'</code>) ve fırça parametrelerini <code>SculptingTool</code>'a iletir.</li>
+<li>Fare model üzerinde sürüklendiği sürece, <code>mouseMoveEvent</code> olayından elde edilen 3D koordinatları anlık olarak <code>SculptingTool</code>'a gönderir.</li>
+</ul>
+</li>
+<li><strong>Araç Tasarımı (<code>tools/SculptingTool.py</code>):</strong>
+    <code>python
+    class SculptingTool:
+        def deform(self, poly_data, brush_center, radius, strength, mode):
+            # 1. Fırça etki alanındaki noktaları bul.
+            # 2. Her nokta için, normal vektörünü al.
+            # 3. if mode == 'BULGE': Noktayı normal yönünde dışarı taşı.
+            # 4. if mode == 'DIG': Noktayı normal yönünde içeri taşı.
+            # 5. Taşıma miktarını 'strength' ve yumuşak bir geçiş için 'falloff' fonksiyonu ile ayarla.
+            ...</code></li>
+</ul>
+<hr />
+<h3 id="93-arac-3-lissage-yumusatma">9.3. Araç 3: Lissage (Yumuşatma)</h3>
+<ul>
+<li><strong>Amaç:</strong> Önceki adımlarda oluşan pürüzlü veya keskin yüzeyleri yumuşatarak daha pürüzsüz ve konforlu bir iç yüzey elde etmek.</li>
+<li><strong>Arayüz Bileşenleri (View):</strong> Fırça Boyutu ve Yumuşatma Miktarı için <code>QSlider</code>'lar.</li>
+<li><strong>Kontrol Mantığı (<code>MainWindow</code>):</strong> <code>SculptingTool</code>'a benzer şekilde, fare hareketlerini <code>SmoothingTool</code>'a yönlendirir.</li>
+<li><strong>Araç Tasarımı (<code>tools/SmoothingTool.py</code>):</strong>
+    ```python
+    class SmoothingTool:
+        def <strong>init</strong>(self):
+            # VTK'nın yerleşik yumuşatma filtresi kullanılır.
+            self.smoother = vtk.vtkSmoothPolyDataFilter()<pre><code>def smooth_area(self, poly_data, brush_center, radius, iterations):
+    # 1. Fırça alanındaki noktaları belirle.
+    # 2. Yalnızca bu noktaları etkileyecek şekilde 'vtkSmoothPolyDataFilter'ı çalıştır.
+    # 3. 'iterations' (döngü sayısı), arayüzdeki yumuşatma miktarına bağlanır.
+    ...
+</code></pre>
+<h2 id="_1">```</h2>
+<h1 id="protez-soketi-modifikasyon-araclar">Protez Soketi Modifikasyon Araçları</h1>
+</li>
+</ul>
+<h2 id="epaisseur-kalnlk">Épaisseur (Kalınlık)</h2>
+<p><strong>Amaç:</strong><br />
+Protez soketinin üretim için gerekli olan duvar kalınlığını ayarlamak. Genellikle tüm sokete tek tip bir kalınlık uygulanır.</p>
+<p><strong>Teknoloji:</strong><br />
+- <code>vtkPolyDataNormals</code> ile normal vektörleri hesaplanır.<br />
+- Noktalar, normal yönleri boyunca belirli bir mesafede kaydırılarak yeni bir dış yüzey oluşturulur.<br />
+- <code>vtkBooleanOperationPolyDataFilter</code> ile iç ve dış yüzey birleştirilebilir.</p>
+<hr />
+<h2 id="evases-kenar-sekillendirme-flare">Évasés (Kenar Şekillendirme / Flare)</h2>
+<p><strong>Amaç:</strong><br />
+Protez soketinin üst kenarlarını, hastanın uzvuna daha iyi oturacak ve kenar tahrişini önleyecek şekilde içeri veya dışarı doğru şekillendirmek.<br />
+Görüntüdeki renk çarkı, bölgesel kontrolün önemini vurgular.</p>
+<p><strong>Teknoloji:</strong><br />
+- Soketin üst kenarındaki poligon halkaları (edge loops) seçilir.<br />
+- Bu halkaların noktaları, yüzey normali veya kenar normali boyunca, bölgesel olarak belirlenen miktarlarda hareket ettirilir.<br />
+- Geçişleri yumuşatmak için <code>vtkSmoothPolyDataFilter</code> veya özel deformasyon algoritmaları kullanılabilir.</p>
+<hr />
+<h2 id="prise-distale-distal-tutus-arayuz">Prise Distale (Distal Tutuş / Arayüz)</h2>
+<p><strong>Amaç:</strong><br />
+Ampute uzvun distal ucu ile protez soketi arasındaki bağlantı noktasını şekillendirmek ve buraya uygun bağlantı elemanlarını (adaptör, kilit mekanizması) dijital olarak yerleştirmek.</p>
+<p><strong>Teknoloji:</strong><br />
+- Distal uç bölgesinde özel bir deformasyon ve/veya kesme işlemi yapılır.<br />
+- Kullanıcı, STL formatında önceden yüklenmiş distal bağlantı elemanı modellerinden birini seçebilir ve bunu soketin distal ucuna yerleştirebilir.<br />
+- Konumlandırma ve yönlendirme için <code>vtkTransformWidget</code> gibi manipülatörler kullanılır.</p>
+<hr />
+<h2 id="alignement-hizalama">Alignement (Hizalama)</h2>
+<p><strong>Amaç:</strong><br />
+Protez soketinin, tüm protez sisteminin (diz eklemi, ayak, pelvik bölge) anatomik ve biyomekanik olarak doğru hizalanmasını sağlamak.</p>
+<p><strong>Teknoloji:</strong><br />
+- <code>vtkAssembly</code> veya <code>vtkProp</code> ile sanal bir hizalama standı oluşturulur.<br />
+- Soket, diz eklemi ve ayak gibi bileşenler bu stand üzerinde konumlandırılır.<br />
+- Kullanıcı, rotasyon (ön-arka, iç-dış) ve translasyon (yükseklik, yanlara kaydırma) ayarlamaları yapabilir.<br />
+- <code>vtkTransform</code> ve <code>vtkMatrix4x4</code> bu dönüşümleri yönetir.</p>
+<hr />
+<h2 id="finalisation-sonlandrma">Finalisation (Sonlandırma)</h2>
+<p><strong>Amaç:</strong><br />
+Tüm modelleme ve rektifikasyon adımları tamamlandıktan sonra, protez kalıbını üretime hazır hale getirmek ve çıktı almak.</p>
+<p><strong>Teknoloji:</strong>
+- <strong>Model Doğrulama:</strong> Son <code>vtkPolyData</code> üzerinde topolojik kontroller (delik kontrolü, kesişen üçgenler).<br />
+- <strong>Dışa Aktarma:</strong> <code>vtkSTLWriter</code> ile nihai model STL formatında kaydedilir.<br />
+- </p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
